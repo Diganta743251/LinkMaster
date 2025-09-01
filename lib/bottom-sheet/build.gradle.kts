@@ -1,4 +1,4 @@
-import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
+
 import fe.buildlogic.Version
 
 plugins {
@@ -12,10 +12,10 @@ group = "fe.linksheet.bottom.sheet"
 
 android {
     namespace = group.toString()
-    compileSdk = AndroidSdk.COMPILE_SDK
+    compileSdk = 36
 
     defaultConfig {
-        minSdk = AndroidSdk.MIN_SDK
+        minSdk = 25
     }
 
     buildFeatures {
@@ -24,7 +24,7 @@ android {
 }
 
 kotlin {
-    jvmToolchain(Version.JVM)
+    jvmToolchain(21)
 }
 
 dependencies {

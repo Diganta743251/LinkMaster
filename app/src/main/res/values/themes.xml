@@ -42,4 +42,61 @@
     </style>
 
     <style name="DialogTheme" parent="BaseDialogTheme" />
+
+    <!-- LinkMaster 2025 Immersive Theme -->
+    <style name="AppTheme.Immersive" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/neon_purple</item>
+        <item name="colorOnPrimary">@color/neon_background</item>
+        <item name="colorPrimaryContainer">@color/neon_surface_variant</item>
+        <item name="colorOnPrimaryContainer">@color/neon_cyan</item>
+        <item name="colorSecondary">@color/neon_cyan</item>
+        <item name="colorOnSecondary">@color/neon_background</item>
+        <item name="colorSecondaryContainer">@color/glass_surface</item>
+        <item name="colorOnSecondaryContainer">@color/neon_pink</item>
+        <item name="colorTertiary">@color/neon_pink</item>
+        <item name="colorOnTertiary">@color/neon_background</item>
+        <item name="colorTertiaryContainer">@color/glass_surface_light</item>
+        <item name="colorOnTertiaryContainer">@color/neon_green</item>
+        <item name="colorError">@color/neon_orange</item>
+        <item name="colorOnError">@color/neon_background</item>
+        <item name="colorErrorContainer">@color/glass_shadow</item>
+        <item name="colorOnErrorContainer">@color/neon_orange</item>
+        <item name="colorOutline">@color/glass_border</item>
+        <item name="android:colorBackground">@color/neon_background</item>
+        <item name="colorOnBackground">@color/neon_cyan</item>
+        <item name="colorSurface">@color/glass_surface</item>
+        <item name="colorOnSurface">@color/neon_purple</item>
+        <item name="colorSurfaceVariant">@color/neon_surface_variant</item>
+        <item name="colorOnSurfaceVariant">@color/neon_cyan</item>
+        <item name="colorSurfaceInverse">@color/neon_cyan</item>
+        <item name="colorOnSurfaceInverse">@color/neon_background</item>
+        <item name="colorPrimaryInverse">@color/neon_background</item>
+        
+        <!-- Enhanced 3D and glassmorphism effects -->
+        <item name="elevationOverlayEnabled">true</item>
+        <item name="elevationOverlayColor">@color/neon_purple</item>
+        <item name="android:windowBlurBehindEnabled">true</item>
+        <item name="android:windowBlurBehindRadius">20dp</item>
+    </style>
+    
+    <!-- LinkMaster Glassmorphism Theme -->
+    <style name="AppTheme.Glass" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/gradient_start</item>
+        <item name="colorOnPrimary">@color/md_theme_dark_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/glass_surface_light</item>
+        <item name="colorOnPrimaryContainer">@color/md_theme_dark_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/gradient_accent_start</item>
+        <item name="colorOnSecondary">@color/md_theme_dark_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/glass_surface</item>
+        <item name="colorOnSecondaryContainer">@color/md_theme_dark_onSecondaryContainer</item>
+        <item name="android:colorBackground">@color/glass_shadow</item>
+        <item name="colorOnBackground">@color/md_theme_dark_onBackground</item>
+        <item name="colorSurface">@color/glass_surface</item>
+        <item name="colorOnSurface">@color/md_theme_dark_onSurface</item>
+        <item name="colorOutline">@color/glass_border</item>
+        
+        <!-- Glassmorphism specific properties -->
+        <item name="elevationOverlayEnabled">true</item>
+        <item name="elevationOverlayColor">@color/glass_border</item>
+    </style>
 </resources>

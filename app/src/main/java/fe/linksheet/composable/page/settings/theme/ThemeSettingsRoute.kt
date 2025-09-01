@@ -11,7 +11,7 @@ import fe.linksheet.R
 import fe.linksheet.composable.component.list.item.type.PreferenceRadioButtonListItem
 import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
+import fe.linksheet.viewmodel.ThemeSettingsViewModel
 import fe.linksheet.composable.ui.ThemeV2
 import fe.composekit.core.AndroidVersion
 import fe.composekit.preference.collectAsStateWithLifecycle
@@ -22,11 +22,15 @@ private val themes = arrayOf(ThemeV2.Light, ThemeV2.Dark, ThemeV2.System)
 
 @Composable
 fun ThemeSettingsRoute(onBackPressed: () -> Unit, viewModel: ThemeSettingsViewModel = koinViewModel()) {
+    val themeMaterialYou by viewModel.themeMaterialYou.collectAsStateWithLifecycle()
+    val themeV2 by viewModel.themeV2.collectAsStateWithLifecycle()
+    val themeAmoled by viewModel.themeAmoled.collectAsStateWithLifecycle()
+    
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.theme), onBackPressed = onBackPressed) {
         if (AndroidVersion.isAtLeastApi31S()) {
             item(key = R.string.theme_enable_material_you, contentType = ContentType.SingleGroupItem) {
                 PreferenceSwitchListItem(
-                    statePreference = viewModel.themeMaterialYou,
+                    statePreference = themeMaterialYou,
                     headlineContent = textContent(R.string.theme_enable_material_you),
                     supportingContent = textContent(R.string.theme_enable_material_you_explainer)
                 )
@@ -41,20 +45,18 @@ fun ThemeSettingsRoute(onBackPressed: () -> Unit, viewModel: ThemeSettingsViewMo
                     shape = shape,
                     padding = padding,
                     value = item,
-                    statePreference = viewModel.themeV2,
+                    statePreference = themeV2,
                     position = ContentPosition.Trailing,
                     headlineContent = textContent(item.id)
                 )
             }
 
             item(key = R.string.theme_enable_amoled) { padding, shape ->
-                val themeV2 by viewModel.themeV2.collectAsStateWithLifecycle()
-
                 PreferenceSwitchListItem(
                     enabled = (themeV2 == ThemeV2.System || themeV2 == ThemeV2.Dark).toEnabledContentSet(),
                     shape = shape,
                     padding = padding,
-                    statePreference = viewModel.themeAmoled,
+                    statePreference = themeAmoled,
                     headlineContent = textContent(R.string.theme_enable_amoled),
                     supportingContent = textContent(R.string.theme_enable_amoled_explainer)
                 )

@@ -11,16 +11,13 @@ import fe.composekit.component.list.item.type.DividedSwitchListItem
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.composekit.route.Route
 import fe.linksheet.*
-import fe.linksheet.composable.page.settings.link.downloader.downloaderPermissionState
-import fe.linksheet.composable.page.settings.link.downloader.requestDownloadPermission
+// Downloader imports removed - violates Play Store policies
 import fe.linksheet.composable.component.list.item.type.PreferenceDividedSwitchListItem
 import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.module.viewmodel.LinksSettingsViewModel
-import fe.linksheet.navigation.LibRedirectRoute
+// URL processing navigation imports removed - violates Play Store policies
 import fe.linksheet.navigation.PreviewUrlRoute
-import fe.linksheet.navigation.amp2HtmlSettingsRoute
-import fe.linksheet.navigation.downloaderSettingsRoute
 import fe.linksheet.navigation.followRedirectsSettingsRoute
 import org.koin.androidx.compose.koinViewModel
 
@@ -32,7 +29,7 @@ fun LinksSettingsRoute(
     navigateNew: (Route) -> Unit,
     viewModel: LinksSettingsViewModel = koinViewModel()
 ) {
-    val writeExternalStoragePermissionState = downloaderPermissionState()
+    // Downloader permission removed - violates Play Store policies
 
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.links), onBackPressed = onBackPressed) {
         group(size = 8) {

@@ -2,39 +2,56 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERACT_ACROSS_PROFILES"
-                     tools:ignore="ProtectedPermissions"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!-- Essential LinkMaster permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
                      android:maxSdkVersion="32"
-                     tools:ignore="ScopedStorage"/>
-    <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER"/>
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+                     tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+                     android:maxSdkVersion="32" />
+    
+    <!-- For QR code camera scanning (optional) -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
+    
+    <!-- For notifications -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    
+    <!-- For billing -->
+    <uses-permission android:name="com.android.vending.BILLING" />
+    
+    <!-- Play Store friendly permissions only -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE"/>
-    <uses-permission
-            android:name="android.permission.QUERY_ALL_PACKAGES"
-            tools:ignore="QueryAllPackagesPermission"/>
-    <uses-permission
-            android:name="android.permission.PACKAGE_USAGE_STATS"
-            tools:ignore="ProtectedPermissions"/>
-    <uses-permission android:name="moe.shizuku.manager.permission.API_V23"/>
-    <uses-permission android:name="moe.shizuku.manager.permission.API"/>
-    <uses-permission android:name="moe.shizuku.manager.permission.Manager"/>
+    
+    <!-- Removed for Play Store compliance:
+    - INTERACT_ACROSS_PROFILES (protected permission)
+    - QUERY_ALL_PACKAGES (requires special approval)
+    - PACKAGE_USAGE_STATS (protected permission)
+    - Shizuku permissions (system-level access)
+    - SYSTEM_ALERT_WINDOW (overlay permission)
+    -->
 
     <application
-            android:name=".LinkSheetApp"
-            android:allowBackup="true"
+            android:name="fe.linksheet.LinkSheetApp"
+            android:allowBackup="false"
+            android:fullBackupContent="@xml/backup_rules"
+            android:dataExtractionRules="@xml/data_extraction_rules"
             android:enableOnBackInvokedCallback="true"
+            android:hardwareAccelerated="true"
+            android:largeHeap="false"
+            android:usesCleartextTraffic="false"
+            android:networkSecurityConfig="@xml/network_security_config"
+            android:requestLegacyExternalStorage="false"
+            android:preserveLegacyExternalStorage="false"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:localeConfig="@xml/locales_config"
             android:logo="@mipmap/ic_launcher"
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
-            android:usesCleartextTraffic="true"
             tools:targetApi="tiramisu">
         <profileable
                 android:shell="true"/>
@@ -44,13 +61,7 @@
                 android:exported="true"
                 android:theme="@style/AppTheme"/>
 
-        <provider
-                android:name="rikka.shizuku.ShizukuProvider"
-                android:authorities="${applicationId}.shizuku"
-                android:enabled="true"
-                android:exported="true"
-                android:multiprocess="false"
-                android:permission="android.permission.INTERACT_ACROSS_USERS_FULL"/>
+        <!-- Shizuku provider removed for Play Store compliance -->
 
         <activity
                 android:name=".activity.main.MainActivity"
@@ -72,7 +83,7 @@
 
                 <data
                         android:host="experiment"
-                        android:scheme="linksheet"/>
+                        android:scheme="linkmaster"/>
             </intent-filter>
         </activity>
         <activity
@@ -215,5 +226,27 @@
                     android:value="androidx.startup"
                     tools:node="remove" />
         </provider>
+        
+        <!-- LinkMaster Home Widget -->
+        <receiver android:name="fe.linksheet.widget.LinkMasterWidget"
+                  android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                       android:resource="@xml/linkmaster_widget_info" />
+        </receiver>
+        
+        <!-- FileProvider for sharing QR codes -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider_paths" />
+        </provider>
+        
     </application>
 </manifest>

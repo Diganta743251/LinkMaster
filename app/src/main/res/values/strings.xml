@@ -578,4 +578,47 @@
     <string name="settings_links_preview__subtitle_preview">Attempt to load and show OpenGraph preview in bottom sheet. This may have <annotation url-id="github.linksheet.wiki.privacy.preview">privacy-related implications</annotation></string>
     <string name="settings_links_preview__title_preview_skip_browser">Disable browser preview</string>
     <string name="settings_links_preview__subtitle_preview_skip_browser">Disable preview if referrer is browser</string>
+    
+    <!-- Link history dialog strings -->
+    <string name="link_history_duration_dialog_title">Link history duration</string>
+    <string name="custom_days">Custom days</string>
+    <string name="enter_days">Enter days</string>
+    <string name="link_history_limit_dialog_title">Link history limit</string>
+    <string name="custom_count">Custom count</string>
+    <string name="enter_count">Enter count</string>
+    <string name="clear_history_dialog_title">Clear link history?</string>
+    <string name="clear_history_dialog_message">This will permanently delete your saved link history. Continue?</string>
+    
+    <!-- Link history duration strings -->
+    <string name="one_day">1 day</string>
+    <string name="seven_days">7 days</string>
+    <string name="fourteen_days">14 days</string>
+    <string name="thirty_days">30 days</string>
+    
+    <!-- Link history limit strings -->
+    <string name="no_limit">No limit</string>
+    <string name="one_hundred">100</string>
+    <string name="five_hundred">500</string>
+    <string name="one_thousand">1,000</string>
+    <string name="five_thousand">5,000</string>
+    <string name="ten_thousand">10,000</string>
+    
+    <!-- Link history management strings -->
+    <string name="link_history_management">Link History Management</string>
+    <string name="enable_link_history">Enable link history</string>
+    <string name="enable_link_history_explainer">Save clicked links for future reference</string>
+    <string name="link_history_duration">Link history duration</string>
+    <string name="link_history_limit">Link history limit</string>
+    <string name="view_link_history">View link history</string>
+    <string name="view_link_history_explainer">Browse your saved link history</string>
+    <string name="link_history_clear">Clear link history</string>
+    <string name="link_history_clear_explainer">Permanently delete all saved link history</string>
+    
+    <!-- Widget strings -->
+    <string name="widget_description">Quickly open links with your chosen app</string>
+    
+    <!-- Telemetry strings -->
+    <string name="telemetry_basic">Basic</string>
+    <string name="telemetry_enhanced">Enhanced</string>
+    <string name="telemetry_full">Full</string>
 </resources>

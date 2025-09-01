@@ -49,8 +49,9 @@ const val creditsSettingsRoute = "credits_settings_route"
 const val donateSettingsRoute = "donate_settings_route"
 
 const val themeSettingsRoute = "theme_settings_route"
+const val linkMasterSettingsRoute = "linkmaster_settings_route"
 
-const val shizukuSettingsRoute = "shizuku_settings_route"
+// Shizuku settings route removed - system API access violates Play Store policies
 
 
 //const val debugSettingsRoute = "debug_settings_route"
@@ -70,8 +71,8 @@ const val loadDumpedPreferences = "log_dumped_reference_settings_route"
 const val linksSettingsRoute = "link_settings_route"
 
 const val followRedirectsSettingsRoute = "follow_redirects_settings_route"
-const val downloaderSettingsRoute = "downloader_settings_route"
-const val amp2HtmlSettingsRoute = "amp2html_settings_route"
+// Downloader settings route removed - external network access
+// AMP2HTML settings route removed - URL processing violates Play Store policies
 
 
 const val generalSettingsRoute = "general_settings_route"
@@ -82,7 +83,7 @@ const val preferredBrowserSettingsRoute = "preferred_browser_settings_route"
 const val inAppBrowserSettingsRoute = "in_app_browser_settings_route"
 const val appsWhichCanOpenLinksSettingsRoute = "apps_which_can_open_links_settings_route"
 const val pretendToBeAppRoute = "pretend_to_be_app"
-const val devModeRoute = "dev_mode"
+// Dev mode route removed - violates Play Store policies
 
 @Keep
 @Serializable
@@ -99,15 +100,7 @@ data class MarkdownViewerRoute(
     constructor(wikiPage: WikiPage) : this(wikiPage.page, wikiPage.url, wikiPage.rawUrl, wikiPage.customTitle)
 }
 
-@Keep
-@Serializable
-data class ExperimentRoute(
-    val experiment: String? = null,
-) : Route {
-    companion object {
-        val Empty = ExperimentRoute()
-    }
-}
+// Experiment route removed - violates Play Store policies
 
 @Keep
 @Serializable
@@ -125,17 +118,13 @@ data object DebugRoute : Route
 @Serializable
 data class LogTextViewerRoute(val id: String?, val name: String) : Route
 
-@Keep
-@Serializable
-data class LibRedirectServiceRoute(val serviceKey: String) : Route
+// LibRedirect service route removed - URL processing violates Play Store policies
 
 @Keep
 @Serializable
 data class VlhAppRoute(val packageName: String) : Route
 
-@Keep
-@Serializable
-data object LibRedirectRoute : Route
+// LibRedirect route removed - URL processing violates Play Store policies
 
 @Keep
 @Serializable
@@ -148,6 +137,10 @@ data object LanguageRoute : Route
 @Keep
 @Serializable
 data object SqlRoute : Route
+
+@Keep
+@Serializable
+data object HistoryRoute : Route
 
 //@Keep
 //data class ExperimentSettingsRouteArg(val experiment: String?) : RouteData {

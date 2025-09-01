@@ -11,12 +11,12 @@ class LinkSheetCustomTabsService : CustomTabsService(), KoinComponent {
     private val logger by injectLogger<LinkSheetCustomTabsService>()
 
     override fun warmup(flags: Long): Boolean {
-        logger.debug("⇢ warmup($flags)")
+        logger.debug("LinkSheetCustomTabsService", "⇢ warmup($flags)")
         return true
     }
 
     override fun newSession(sessionToken: CustomTabsSessionToken): Boolean {
-        logger.debug("⇢ newSession($sessionToken)")
+        logger.debug("LinkSheetCustomTabsService", "⇢ newSession($sessionToken)")
         return true
     }
 
@@ -26,21 +26,21 @@ class LinkSheetCustomTabsService : CustomTabsService(), KoinComponent {
         extras: Bundle?,
         otherLikelyBundles: MutableList<Bundle>?,
     ): Boolean {
-        logger.debug("⇢ mayLaunchUrl($sessionToken, $url, $extras, $otherLikelyBundles)")
+        logger.debug("LinkSheetCustomTabsService", "⇢ mayLaunchUrl($sessionToken, $url, $extras, $otherLikelyBundles)")
         return true
     }
 
     override fun extraCommand(commandName: String, args: Bundle?): Bundle? {
-        logger.debug("⇢ extraCommand($commandName, $args)")
+        logger.debug("LinkSheetCustomTabsService", "⇢ extraCommand($commandName, $args)")
         return null
     }
     override fun requestPostMessageChannel(sessionToken: CustomTabsSessionToken, postMessageOrigin: Uri): Boolean {
-        logger.debug("⇢ requestPostMessageChannel($sessionToken, $postMessageOrigin)")
+        logger.debug("LinkSheetCustomTabsService", "⇢ requestPostMessageChannel($sessionToken, $postMessageOrigin)")
         return true
     }
 
     override fun postMessage(sessionToken: CustomTabsSessionToken, message: String, extras: Bundle?): Int {
-        logger.debug("⇢ postMessage($sessionToken, $message, $extras)")
+        logger.debug("LinkSheetCustomTabsService", "⇢ postMessage($sessionToken, $message, $extras)")
         return RESULT_SUCCESS
     }
 
@@ -50,17 +50,17 @@ class LinkSheetCustomTabsService : CustomTabsService(), KoinComponent {
         origin: Uri,
         extras: Bundle?,
     ): Boolean {
-        logger.debug("⇢ validateRelationship($sessionToken, $relation, $origin, $extras)")
+        logger.debug("LinkSheetCustomTabsService", "⇢ validateRelationship($sessionToken, $relation, $origin, $extras)")
         return true
     }
 
     override fun updateVisuals(sessionToken: CustomTabsSessionToken, bundle: Bundle?): Boolean {
-        logger.debug("⇢ updateVisuals($sessionToken, $bundle)")
+        logger.debug("LinkSheetCustomTabsService", "⇢ updateVisuals($sessionToken, $bundle)")
         return true
     }
 
     override fun receiveFile(sessionToken: CustomTabsSessionToken, uri: Uri, purpose: Int, extras: Bundle?): Boolean {
-        logger.debug("⇢ updateVisuals($sessionToken, $uri, $purpose, $extras)")
+        logger.debug("LinkSheetCustomTabsService", "⇢ receiveFile($sessionToken, $uri, $purpose, $extras)")
         return true
     }
 }

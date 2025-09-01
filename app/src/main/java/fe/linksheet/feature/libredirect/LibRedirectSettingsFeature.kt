@@ -3,7 +3,7 @@ package fe.linksheet.feature.libredirect
 import fe.libredirectkt.LibRedirectInstance
 import fe.libredirectkt.LibRedirectLoader
 import fe.libredirectkt.LibRedirectService
-import fe.linksheet.module.database.entity.LibRedirectDefault
+import fe.linksheet.database.entity.LibRedirectDefault
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

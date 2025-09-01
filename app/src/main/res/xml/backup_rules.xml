@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<full-backup-content>
+    <!-- LinkMaster Backup Rules - Security-focused configuration -->
+    
+    <!-- Include only non-sensitive data -->
+    <include domain="sharedpref" path="app_preferences.xml" />
+    <include domain="sharedpref" path="ui_preferences.xml" />
+    <include domain="sharedpref" path="theme_preferences.xml" />
+    
+    <!-- Exclude all sensitive data -->
+    <exclude domain="sharedpref" path="linkmaster_secure_prefs.xml" />
+    <exclude domain="sharedpref" path="linkmaster_secure_prefs_fallback.xml" />
+    <exclude domain="sharedpref" path="encrypted_prefs.xml" />
+    <exclude domain="sharedpref" path="keystore_prefs.xml" />
+    
+    <!-- Exclude database files containing history -->
+    <exclude domain="database" path="app_selection_history.db" />
+    <exclude domain="database" path="app_selection_history.db-shm" />
+    <exclude domain="database" path="app_selection_history.db-wal" />
+    <exclude domain="database" path="linkmaster.db" />
+    <exclude domain="database" path="linkmaster.db-shm" />
+    <exclude domain="database" path="linkmaster.db-wal" />
+    
+    <!-- Exclude cache and temporary files -->
+    <exclude domain="cache" />
+    <exclude domain="external" />
+    
+    <!-- Exclude files containing sensitive data -->
+    <exclude domain="file" path="sensitive/" />
+    <exclude domain="file" path="temp/" />
+    <exclude domain="file" path="qr_codes/" />
+    <exclude domain="file" path="exports/" />
+    
+    <!-- Exclude any keystore or certificate files -->
+    <exclude domain="file" path="*.keystore" />
+    <exclude domain="file" path="*.jks" />
+    <exclude domain="file" path="*.p12" />
+    <exclude domain="file" path="*.pem" />
+    <exclude domain="file" path="*.key" />
+    
+</full-backup-content>

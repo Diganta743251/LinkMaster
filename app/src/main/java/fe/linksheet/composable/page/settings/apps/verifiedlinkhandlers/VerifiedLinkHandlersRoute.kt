@@ -14,8 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import dev.zwander.shared.ShizukuUtil
-import dev.zwander.shared.ShizukuUtil.rememberHasShizukuPermissionAsState
+// Shizuku imports removed - violates Play Store policies
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.appbar.SearchTopAppBar
 import fe.composekit.component.list.column.SaneLazyColumnLayout
@@ -52,10 +51,10 @@ fun VerifiedLinkHandlersRoute(
     val lastEmitted by viewModel.lastEmitted.collectOnIO()
 
     val context = LocalContext.current
-    val shizukuInstalled by remember { mutableStateOf(ShizukuUtil.isShizukuInstalled(context)) }
-    val shizukuRunning by remember { mutableStateOf(ShizukuUtil.isShizukuRunning()) }
-
-    val shizukuPermission by rememberHasShizukuPermissionAsState()
+    // Shizuku functionality removed - violates Play Store policies
+    val shizukuInstalled = false
+    val shizukuRunning = false
+    val shizukuPermission = false
 
     val shizukuMode = shizukuInstalled && shizukuRunning && shizukuPermission
     val state = rememberPullToRefreshState()
@@ -73,10 +72,11 @@ fun VerifiedLinkHandlersRoute(
 //        state.startRefresh()
         viewModel.postShizukuCommand(if (linkHandlingAllowed) 0 else 500) {
             val newState = !linkHandlingAllowed
-            val result = setDomainState(packageName, "all", newState)
+            // Play Store friendly stub - no system operations
+            val result = -1 // setDomainState(packageName, "all", newState)
             if (packageName == allPackages) {
                 // TODO: Revert previous state instead of always setting to !newState
-                setDomainState(PretendToBeAppSettingsViewModel.linksheetCompatPackage, "all", !newState)
+                // setDomainState(PretendToBeAppSettingsViewModel.linksheetCompatPackage, "all", !newState)
             }
 
             result

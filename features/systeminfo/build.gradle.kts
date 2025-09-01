@@ -1,4 +1,4 @@
-import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
+
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies._1fexd
 import fe.buildlogic.Version
@@ -15,14 +15,14 @@ plugins {
 
 android {
     namespace = "fe.linksheet.feature.systeminfo"
-    compileSdk = AndroidSdk.COMPILE_SDK
+    compileSdk = 36
 
     defaultConfig {
-        minSdk = AndroidSdk.MIN_SDK
+        minSdk = 25
     }
 
     kotlin {
-        jvmToolchain(Version.JVM)
+        jvmToolchain(21)
     }
 
     packaging {

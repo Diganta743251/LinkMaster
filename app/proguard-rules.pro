@@ -118,5 +118,34 @@
 -dontwarn io.ktor.utils.io.CoroutinesKt
 -dontwarn org.slf4j.impl.StaticLoggerBinder
 
+# AdMob ProGuard rules
+-keep class com.google.android.gms.ads.** { *; }
+-keep class com.google.ads.** { *; }
+-dontwarn com.google.android.gms.ads.**
+
+# Google Play Billing ProGuard rules
+-keep class com.android.billingclient.api.** { *; }
+-dontwarn com.android.billingclient.api.**
+
+# ZXing ProGuard rules
+-keep class com.google.zxing.** { *; }
+-keep class com.journeyapps.barcodescanner.** { *; }
+-dontwarn com.google.zxing.**
+-dontwarn com.journeyapps.barcodescanner.**
+
+# LinkMaster specific classes
+-keep class fe.linksheet.ads.** { *; }
+-keep class fe.linksheet.feature.analytics.** { *; }
+
+# Keep all data classes and their fields
+-keepclassmembers class * {
+    @kotlinx.serialization.SerialName <fields>;
+}
+
+# Keep Room database classes
+-keep class * extends androidx.room.RoomDatabase
+-keep @androidx.room.Entity class *
+-keep @androidx.room.Dao class *
+
 -printmapping mapping.txt
 -printusage usage.txt

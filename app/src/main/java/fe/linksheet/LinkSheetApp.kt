@@ -7,61 +7,59 @@ import android.util.Log
 import androidx.work.WorkManager
 import app.linksheet.testing.Testing
 import com.google.android.material.color.DynamicColors
+import fe.linksheet.ads.AdManager
+import fe.linksheet.ads.ConsentManager
 import fe.android.lifecycle.CurrentActivityObserver
 import fe.android.lifecycle.ProcessServiceRegistry
 import fe.android.lifecycle.koin.extension.applicationLifecycle
 import fe.composekit.core.AndroidVersion
 import fe.droidkit.koin.androidApplicationContext
-import fe.gson.GlobalGsonModule
-import fe.gson.context.GlobalGsonContext
+import fe.linksheet.module.gson.GlobalGsonModule
+import fe.linksheet.module.gson.GlobalGsonContext
 import fe.linksheet.activity.CrashHandlerActivity
 import fe.linksheet.log.AndroidLogSink
 import fe.linksheet.log.LLog
-import fe.linksheet.module.analytics.AnalyticsServiceModule
-import fe.linksheet.module.analytics.client.DebugLogAnalyticsClient
+// Analytics modules removed - no backend connectivity needed
 import fe.linksheet.module.app.PackageModule
 import fe.linksheet.module.clock.ClockModule
 import fe.linksheet.module.database.dao.module.DaoModule
 import fe.linksheet.module.database.DatabaseModule
-import fe.linksheet.module.debug.DebugMenuSlotProvider
-import fe.linksheet.module.debug.DebugPreferenceProvider
-import fe.linksheet.module.debug.NoOpDebugMenuSlotProvider
-import fe.linksheet.module.debug.NoOpDebugPreferenceProvider
+// Debug modules removed - not needed for production
 import fe.linksheet.module.devicecompat.CompatModule
 import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
 import fe.linksheet.module.devicecompat.miui.RealMiuiCompatProvider
 import fe.linksheet.module.devicecompat.oneui.OneUiCompatProvider
 import fe.linksheet.module.devicecompat.oneui.RealOneUiCompatProvider
-import fe.linksheet.module.downloader.DownloaderModule
+// Downloader module removed - external network access
 import fe.linksheet.module.language.AppLocaleModule
-import fe.linksheet.module.http.HttpModule
+// HTTP and network modules removed - no backend connectivity needed
 import fe.linksheet.module.log.DefaultLogModule
 import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.log.file.entry.LogEntryDeserializer
-import fe.linksheet.module.paste.PasteServiceModule
+// Paste service module removed - no backend connectivity needed
 import fe.linksheet.module.preference.PreferenceRepositoryModule
 import fe.linksheet.module.preference.state.AppStateServiceModule
 import fe.linksheet.module.profile.ProfileSwitcherModule
-import fe.linksheet.module.remoteconfig.RemoteConfigClientModule
+// Remote config modules removed - no backend connectivity needed
 import fe.linksheet.module.repository.module.RepositoryModule
 import fe.linksheet.module.resolver.module.ResolverModule
-import fe.linksheet.module.resolver.urlresolver.UrlResolverModule
-import fe.linksheet.module.shizuku.ShizukuHandlerModule
-import fe.linksheet.module.statistic.StatisticsModule
+// UrlResolverModule removed - no backend connectivity needed
+// import fe.linksheet.module.resolver.urlresolver.UrlResolverModule
+// Shizuku and statistics modules removed
 import fe.linksheet.module.systeminfo.SystemInfoServiceModule
-import fe.linksheet.module.versiontracker.VersionTrackerModule
+// Version tracker and work manager modules removed
 import fe.linksheet.module.viewmodel.module.ViewModelModule
-import fe.linksheet.module.workmanager.WorkDelegatorServiceModule
 import fe.linksheet.util.serialization.HttpUrlTypeAdapter
 import fe.linksheet.util.serialization.UriTypeAdapter
-import fe.composekit.lifecycle.network.koin.NetworkStateServiceModule
+// NetworkStateServiceModule removed - no backend connectivity needed
+// import fe.composekit.lifecycle.network.koin.NetworkStateServiceModule
 import kotlinx.coroutines.flow.StateFlow
 import org.koin.android.ext.koin.androidLogger
-import org.koin.androidx.workmanager.koin.workManagerFactory
+
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
 import org.koin.dsl.module
-import org.lsposed.hiddenapibypass.HiddenApiBypass
+// import org.lsposed.hiddenapibypass.HiddenApiBypass // Removed for Play Store compliance
 import java.time.LocalDateTime
 import kotlin.system.exitProcess
 
@@ -94,25 +92,28 @@ open class LinkSheetApp : Application(), DependencyProvider {
             HttpUrlTypeAdapter.register(this)
         }
 
-        if (AndroidVersion.isAtLeastApi28P() && !Testing.IsTestRunner) {
-            HiddenApiBypass.addHiddenApiExemptions("")
-        }
+        // Hidden API bypass removed for Play Store compliance
+        // if (AndroidVersion.isAtLeastApi28P() && !Testing.IsTestRunner) {
+        //     HiddenApiBypass.addHiddenApiExemptions("")
+        // }
 
         DynamicColors.applyToActivitiesIfAvailable(this)
+        
+        // Analytics and ads removed - violates Play Store policies
 
         val koinModules = provideKoinModules()
         val koinApplication = startKoin {
             androidLogger()
             androidApplicationContext(this@LinkSheetApp)
             applicationLifecycle(lifecycleObserver)
-            if (!WorkManager.isInitialized()) {
-                workManagerFactory()
-            }
+
             modules(koinModules)
         }
 
         lifecycleObserver.onAppInitialized()
     }
+
+    // AdMob initialization removed - violates Play Store policies
 
     override fun provideKoinModules(): List<Module> {
         return listOf(
@@ -120,8 +121,8 @@ open class LinkSheetApp : Application(), DependencyProvider {
             SystemInfoServiceModule,
             PackageModule,
             AppLocaleModule,
-            NetworkStateServiceModule,
-            ShizukuHandlerModule,
+            // Network service module removed - no backend connectivity needed
+            // Shizuku module removed - system API access violates Play Store policies
             GlobalGsonModule,
             PreferenceRepositoryModule,
             DefaultLogModule,
@@ -130,21 +131,22 @@ open class LinkSheetApp : Application(), DependencyProvider {
             DatabaseModule,
             DaoModule,
             RepositoryModule,
-            HttpModule,
-            RemoteConfigClientModule,
-            UrlResolverModule,
+            // HTTP and remote config modules removed - no backend connectivity needed
+            // UrlResolverModule removed - no backend connectivity needed
             ResolverModule,
             ViewModelModule,
-            DownloaderModule,
-            provideAnalyticsClient(),
-            AnalyticsServiceModule,
-            StatisticsModule,
-            VersionTrackerModule,
-            PasteServiceModule,
+            // Downloader module removed - external network access
+            // Analytics modules removed - no backend connectivity needed
+            // Statistics module removed - privacy concerns
+            // Version tracker module removed - uses analytics
+            // Paste service module removed - no backend connectivity needed
             ProfileSwitcherModule,
             AppStateServiceModule,
-            provideDebugModule(),
-            WorkDelegatorServiceModule
+            // Enhanced modules for better user experience
+            fe.linksheet.module.app.PlayStoreModule,
+            fe.linksheet.module.app.EnhancedUIModule,
+            // Debug module removed - not needed for production
+            // Work delegator service removed - background processing
         )
     }
 
@@ -155,16 +157,9 @@ open class LinkSheetApp : Application(), DependencyProvider {
         }
     }
 
-    override fun provideAnalyticsClient(): Module {
-        return DebugLogAnalyticsClient.module
-    }
+    // Analytics client removed - no backend connectivity needed
 
-    override fun provideDebugModule(): Module {
-        return module {
-            single<DebugMenuSlotProvider> { NoOpDebugMenuSlotProvider }
-            single<DebugPreferenceProvider> { NoOpDebugPreferenceProvider }
-        }
-    }
+    // Debug module removed - not needed for production
 
     fun currentActivity(): StateFlow<Activity?> {
         return currentActivityObserver.current

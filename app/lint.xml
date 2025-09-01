@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <!-- Production-ready lint configuration for LinkMaster -->
+    
+    <!-- Security Issues - These should be errors in production -->
+    <issue id="HardcodedDebugMode" severity="error" />
+    <issue id="SecureRandom" severity="error" />
+    <issue id="TrustAllX509TrustManager" severity="error" />
+    <issue id="BadHostnameVerifier" severity="error" />
+    <issue id="SSLCertificateSocketFactoryCreateSocket" severity="error" />
+    <issue id="SSLCertificateSocketFactoryGetInsecure" severity="error" />
+    <issue id="UnsafeDynamicallyLoadedCode" severity="error" />
+    <issue id="UnsafeNativeCodeLocation" severity="error" />
+    <issue id="UnsafeProtectedBroadcastReceiver" severity="error" />
+    <issue id="WorldReadableFiles" severity="error" />
+    <issue id="WorldWriteableFiles" severity="error" />
+    <issue id="ExportedPreferenceActivity" severity="error" />
+    <issue id="ExportedReceiver" severity="error" />
+    <issue id="ExportedService" severity="error" />
+    <issue id="GrantAllUris" severity="error" />
+    <issue id="AllowBackup" severity="error" />
+    <issue id="AllowAllHostnameVerifier" severity="error" />
+    
+    <!-- Privacy and Data Protection -->
+    <issue id="HardcodedText" severity="warning" />
+    <issue id="LogConditional" severity="error" />
+    <issue id="LogTagMismatch" severity="error" />
+    <issue id="LongLogTag" severity="error" />
+    <issue id="StopShip" severity="error" />
+    <issue id="PrivateResource" severity="error" />
+    <issue id="PackageManagerGetSignatures" severity="warning" />
+    
+    <!-- Performance Issues -->
+    <issue id="UselessParent" severity="warning" />
+    <issue id="UnusedResources" severity="warning" />
+    <issue id="UnusedIds" severity="warning" />
+    <issue id="IconDuplicates" severity="warning" />
+    <issue id="IconDensities" severity="warning" />
+    <issue id="IconMissingDensityFolder" severity="warning" />
+    <issue id="Overdraw" severity="warning" />
+    <issue id="TooManyViews" severity="warning" />
+    <issue id="TooDeepLayout" severity="warning" />
+    <issue id="ViewHolder" severity="warning" />
+    <issue id="RecyclerView" severity="warning" />
+    <issue id="WakelockTimeout" severity="error" />
+    <issue id="DrawAllocation" severity="warning" />
+    <issue id="Wakelock" severity="warning" />
+    
+    <!-- Code Quality -->
+    <issue id="DefaultLocale" severity="warning" />
+    <issue id="SimpleDateFormat" severity="warning" />
+    <issue id="SetTextI18n" severity="warning" />
+    <issue id="StringFormatInvalid" severity="error" />
+    <issue id="StringFormatMatches" severity="error" />
+    <issue id="PluralsCandidate" severity="warning" />
+    <issue id="TypographyFractions" severity="warning" />
+    <issue id="TypographyDashes" severity="warning" />
+    <issue id="TypographyQuotes" severity="warning" />
+    <issue id="TypographyEllipsis" severity="warning" />
+    <issue id="SpUsage" severity="warning" />
+    
+    <!-- Accessibility -->
+    <issue id="ContentDescription" severity="warning" />
+    <issue id="ClickableViewAccessibility" severity="warning" />
+    <issue id="LabelFor" severity="warning" />
+    <issue id="TouchTargetSizeCheck" severity="warning" />
+    <issue id="KeyboardInaccessibleWidget" severity="warning" />
+    
+    <!-- Internationalization -->
+    <issue id="MissingTranslation" severity="warning" />
+    <issue id="ExtraTranslation" severity="warning" />
+    <issue id="ImpliedQuantity" severity="warning" />
+    <issue id="MissingQuantity" severity="warning" />
+    <issue id="UnusedQuantity" severity="warning" />
+    
+    <!-- API Usage -->
+    <issue id="NewApi" severity="error" />
+    <issue id="InlinedApi" severity="warning" />
+    <issue id="Override" severity="error" />
+    <issue id="ObsoleteSdkInt" severity="warning" />
+    <issue id="OldTargetApi" severity="warning" />
+    <issue id="UnusedAttribute" severity="warning" />
+    
+    <!-- Manifest Issues -->
+    <issue id="MissingApplicationIcon" severity="warning" />
+    <issue id="DuplicateActivity" severity="error" />
+    <issue id="DuplicatePermission" severity="error" />
+    <issue id="DuplicateUsesFeature" severity="error" />
+    <issue id="IllegalResourceRef" severity="error" />
+    <issue id="MissingVersion" severity="warning" />
+    <issue id="GradleCompatible" severity="error" />
+    <issue id="GradleDependency" severity="warning" />
+    <issue id="GradleIdeError" severity="error" />
+    <issue id="GradlePath" severity="warning" />
+    
+    <!-- Compose-specific issues -->
+    <issue id="ComposeViewModelInjection" severity="warning" />
+    <issue id="ComposeModifierMissing" severity="warning" />
+    <issue id="ComposeModifierReused" severity="warning" />
+    <issue id="ComposeParameterOrder" severity="warning" />
+    <issue id="ComposePreviewNaming" severity="warning" />
+    <issue id="ComposePreviewPublic" severity="warning" />
+    <issue id="ComposeUnstableReceiver" severity="warning" />
+    <issue id="ComposableNaming" severity="warning" />
+    <issue id="ComposableLambdaParameterNaming" severity="warning" />
+    <issue id="ComposableLambdaParameterPosition" severity="warning" />
+    
+    <!-- Custom suppressions for specific cases -->
+    
+    <!-- Allow some flexibility in test code -->
+    <issue id="HardcodedText">
+        <ignore path="**/test/**" />
+        <ignore path="**/androidTest/**" />
+        <ignore path="**/demo/**" />
+    </issue>
+    
+    <!-- Allow logging in debug builds -->
+    <issue id="LogConditional">
+        <ignore path="**/debug/**" />
+    </issue>
+    
+    <!-- Suppress some issues for generated code -->
+    <issue id="UnusedResources">
+        <ignore path="**/build/**" />
+    </issue>
+    
+    <!-- Allow missing translations for now (can be enabled later) -->
+    <issue id="MissingTranslation" severity="informational" />
+    
+    <!-- Suppress content description for decorative elements -->
+    <issue id="ContentDescription">
+        <ignore regexp=".*decorative.*" />
+        <ignore regexp=".*background.*" />
+        <ignore regexp=".*divider.*" />
+    </issue>
+    
+    <!-- Allow some performance trade-offs for better UX -->
+    <issue id="DrawAllocation" severity="informational" />
+    
+    <!-- Custom rules for LinkMaster -->
+    
+    <!-- Ensure all URLs are validated -->
+    <issue id="StringFormatInvalid">
+        <ignore regexp=".*url.*" />
+    </issue>
+    
+    <!-- Ensure proper error handling -->
+    <issue id="RethrowException" severity="error" />
+    <issue id="UnknownNullness" severity="warning" />
+    
+    <!-- Ensure proper resource management -->
+    <issue id="Recycle" severity="error" />
+    <issue id="CommitTransaction" severity="error" />
+    <issue id="MissingPermission" severity="error" />
+    
+    <!-- Network security -->
+    <issue id="UnprotectedSMSBroadcastReceiver" severity="error" />
+    <issue id="UnsafeImplicitIntentLaunch" severity="error" />
+    <issue id="IntentFilterExportedReceiver" severity="error" />
+    
+    <!-- Data validation -->
+    <issue id="ValidFragment" severity="error" />
+    <issue id="WrongConstant" severity="error" />
+    <issue id="ResourceType" severity="error" />
+    
+    <!-- Memory leaks -->
+    <issue id="StaticFieldLeak" severity="error" />
+    <issue id="HandlerLeak" severity="error" />
+    <issue id="ServiceCast" severity="error" />
+    
+    <!-- Threading issues -->
+    <issue id="MainThread" severity="error" />
+    <issue id="WorkerThread" severity="error" />
+    
+    <!-- Proguard/R8 compatibility -->
+    <issue id="ProguardSplit" severity="warning" />
+    <issue id="Proguard" severity="warning" />
+    
+</lint>

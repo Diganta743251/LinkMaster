@@ -6,7 +6,7 @@ import android.graphics.drawable.Drawable
 import android.os.UserHandle
 import android.os.UserHandleHidden
 import android.os.UserManager
-import dev.rikka.tools.refine.Refine
+// import dev.rikka.tools.refine.Refine // Removed for Play Store compliance
 import fe.composekit.core.AndroidVersion
 import androidx.core.net.toUri
 import kotlin.collections.iterator
@@ -72,22 +72,12 @@ internal class RealProfileSwitcher(
         val crossProfiles = getProfiles(status)
         if (crossProfiles == null) return null
 
-        val profiles = userManagerCompat.getUserProfiles().associateWith { Refine.unsafeCast<UserHandleHidden>(it) }
+        // Play Store friendly stub - no hidden API access
+        val profiles = emptyMap<UserHandle, UserHandleHidden>() // userManagerCompat.getUserProfiles().associateWith { Refine.unsafeCast<UserHandleHidden>(it) }
         val myUserId = userManagerCompat.getMyUserId()
 
-        var myUserHandle: UserHandleHidden? = null
-        val otherHandles = mutableListOf<Pair<Int, CrossProfile?>>()
-
-        for ((_, hiddenUserHandle) in profiles) {
-            if (hiddenUserHandle.identifier == myUserId) {
-                myUserHandle = hiddenUserHandle
-            } else {
-                val crossProfile = crossProfiles.firstOrNull { it.id == hiddenUserHandle.identifier }
-                otherHandles.add(hiddenUserHandle.identifier to crossProfile)
-            }
-        }
-
-        return UserProfileInfo(myUserHandle!!.identifier, otherHandles)
+        // Play Store friendly stub - return null for profile info
+        return null
     }
 
     override fun launchCrossProfileInteractSettings(activity: Activity): Boolean {
@@ -135,8 +125,9 @@ internal class RealProfileSwitcher(
     }
 
     private fun toCrossProfile(handle: UserHandle): CrossProfile? {
-        val userHandle = Refine.unsafeCast<UserHandleHidden>(handle)
-        return toCrossProfile(handle, userHandle.identifier)
+        // Play Store friendly stub - no hidden API access
+        return null // val userHandle = Refine.unsafeCast<UserHandleHidden>(handle)
+        // return toCrossProfile(handle, userHandle.identifier)
     }
 }
 

@@ -1,7 +1,7 @@
 package fe.linksheet.intent.engine
 
 import android.content.Context
-import fe.composekit.lifecycle.network.core.NetworkStateService
+import fe.linksheet.module.network.StubNetworkStateService
 import fe.linksheet.experiment.engine.EngineTrack
 import fe.linksheet.experiment.engine.LinkEngine
 import fe.linksheet.experiment.engine.TrackSelector
@@ -51,7 +51,7 @@ fun DefaultLinkEngineIntentResolver(
     inAppBrowserHandler: InAppBrowserHandler,
     libRedirectResolver: LibRedirectResolver,
     cacheRepository: CacheRepository,
-    networkStateService: NetworkStateService,
+    networkStateService: StubNetworkStateService,
     settings: IntentResolverSettings,
 ): IntentResolver {
     val dispatcher = Dispatchers.IO

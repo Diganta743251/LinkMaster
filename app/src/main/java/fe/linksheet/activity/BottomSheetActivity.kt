@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.animation.*
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.*
@@ -170,6 +172,8 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
         val themeAmoled by viewModel.themeAmoled.collectAsStateWithLifecycle()
         val interceptAccidentalTaps by viewModel.interceptAccidentalTaps.collectAsStateWithLifecycle()
         val debug by LocalUiDebug.current.drawBorders.collectAsStateWithLifecycle()
+        
+        // Enhanced 2025 Bottom Sheet with modern styling
         M3FixModalBottomSheet(
             contentModifier = Modifier
                 .interceptTaps(sheetState, interceptAccidentalTaps)
@@ -179,8 +183,8 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
             isBlackTheme = themeAmoled,
             sheetState = sheetState,
             shape = RoundedCornerShape(
-                topStart = 22.0.dp,
-                topEnd = 22.0.dp,
+                topStart = 28.0.dp,  // Increased for modern look
+                topEnd = 28.0.dp,
                 bottomEnd = 0.0.dp,
                 bottomStart = 0.0.dp
             ),
@@ -188,7 +192,32 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                 finish()
             },
             sheetContent = { modifier ->
-                SheetContent(resolveResult, modifier, event, interaction, coroutineScope, sheetState, controller)
+                // Enhanced sheet content with modern animations
+                AnimatedVisibility(
+                    visible = resolveResult != IntentResolveResult.Pending,
+                    enter = slideInVertically(
+                        initialOffsetY = { it / 2 },
+                        animationSpec = spring(
+                            dampingRatio = Spring.DampingRatioMediumBouncy,
+                            stiffness = Spring.StiffnessLow
+                        )
+                    ) + fadeIn(animationSpec = tween(300)),
+                    exit = slideOutVertically(
+                        targetOffsetY = { it / 2 },
+                        animationSpec = tween(200)
+                    ) + fadeOut(animationSpec = tween(200))
+                ) {
+                    SheetContent(resolveResult, modifier, event, interaction, coroutineScope, sheetState, controller)
+                }
+                
+                // Show loading with modern animation when pending
+                AnimatedVisibility(
+                    visible = resolveResult == IntentResolveResult.Pending,
+                    enter = fadeIn(animationSpec = tween(200)),
+                    exit = fadeOut(animationSpec = tween(200))
+                ) {
+                    SheetContent(resolveResult, modifier, event, interaction, coroutineScope, sheetState, controller)
+                }
             }
         )
     }

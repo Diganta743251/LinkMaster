@@ -3,7 +3,7 @@ package fe.linksheet.intent.engine
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import fe.composekit.lifecycle.network.core.NetworkStateService
+import fe.linksheet.module.network.StubNetworkStateService
 import fe.kotlin.extension.iterable.mapToSet
 import fe.linksheet.experiment.engine.EngineTrackInput
 import fe.linksheet.experiment.engine.ForwardOtherProfileResult
@@ -71,7 +71,7 @@ class LinkEngineIntentResolver(
     private val appSorter: AppSorter,
     private val browserHandler: ImprovedBrowserHandler,
     private val inAppBrowserHandler: InAppBrowserHandler,
-    private val networkStateService: NetworkStateService,
+    private val networkStateService: StubNetworkStateService,
     private val selector: TrackSelector,
     private val settings: IntentResolverSettings,
 ) : IntentResolver {

@@ -87,4 +87,4 @@ class WikiPage(
 }
 
 
-const val ShizukuDownload = "https://shizuku.rikka.app/download"
+// Shizuku download link removed - violates Play Store policies

@@ -19,8 +19,8 @@ import fe.linksheet.activity.util.DebugStatePublisher
 import fe.linksheet.activity.util.NavGraphDebugState
 import fe.linksheet.activity.util.UiEvent
 import fe.linksheet.activity.UiEventReceiverBaseComponentActivity
-import fe.linksheet.composable.page.settings.privacy.analytics.rememberAnalyticDialog
-import fe.linksheet.composable.page.settings.privacy.remoteconfig.rememberRemoteConfigDialog
+// Analytics dialog import removed - violates Play Store policies
+// Remote config dialog import removed - violates Play Store policies
 import fe.linksheet.composable.ui.BoxAppHost
 import fe.linksheet.extension.compose.AddIntentDeepLinkHandler
 import fe.linksheet.extension.compose.ObserveDestination
@@ -52,38 +52,14 @@ class MainActivity : UiEventReceiverBaseComponentActivity() {
 
                 AddIntentDeepLinkHandler(navController = navController)
 
-                val remoteConfigDialogDismissed by viewModel.remoteConfigDialogDismissed.collectAsStateWithLifecycle(
-                    // Assume true to avoid having to show, then quickly dismiss the dialog, once the actual state is emitted to the flow
-                    initialValue = true
-                )
-                val remoteConfigDialog = rememberRemoteConfigDialog(
-                    onChanged = { viewModel.setRemoteConfig(it) }
-                )
-
-                LaunchedEffect(key1 = remoteConfigDialogDismissed) {
-                    if (!remoteConfigDialogDismissed) {
-                        remoteConfigDialog.open()
-                    }
-                }
+                // Remote config dialog removed - violates Play Store policies
 
                 if (Build.IsDebug) {
                     navController.ObserveDestination { _, destination, args ->
                         viewModel.enqueueNavEvent(destination, args)
                     }
 
-                    val telemetryLevel by viewModel.telemetryLevel.collectAsStateWithLifecycle()
-                    val telemetryShowInfoDialog by viewModel.telemetryShowInfoDialog.collectAsStateWithLifecycle()
-
-                    val analyticsDialog = rememberAnalyticDialog(
-                        telemetryLevel = telemetryLevel,
-                        onChanged = { viewModel.updateTelemetryLevel(it) }
-                    )
-
-                    LaunchedEffect(key1 = Unit) {
-                        if (telemetryShowInfoDialog) {
-                            analyticsDialog.open()
-                        }
-                    }
+                    // Analytics dialog removed - violates Play Store policies
                 }
 
                 MainNavHost(

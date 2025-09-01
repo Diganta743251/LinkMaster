@@ -7,4 +7,5 @@ plugins {
     id("androidx.room") apply false
     id("com.google.devtools.ksp") apply false
     id("com.gitlab.grrfe.new-build-logic-plugin") apply false
+    id("com.google.gms.google-services") version "4.4.0" apply false
 }

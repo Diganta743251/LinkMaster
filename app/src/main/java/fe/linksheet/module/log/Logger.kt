@@ -1,147 +1,21 @@
 package fe.linksheet.module.log
 
-import fe.linksheet.module.log.internal.LoggerDelegate
-import fe.linksheet.module.log.internal.ProduceMessage
-import fe.linksheet.module.redactor.HashProcessor
+import android.util.Log
 
-class Logger(private val delegate: LoggerDelegate) {
-    fun fatal(stacktrace: String) {
-        delegate.fatal(stacktrace)
+object Logger {
+    fun debug(tag: String, message: String) {
+        Log.d(tag, message)
     }
-
-    fun <T> createContext(param: T, processor: HashProcessor<T>): LoggerDelegate.RedactedParameter {
-        return delegate.createContext(param, processor)
+    
+    fun info(tag: String, message: String) {
+        Log.i(tag, message)
     }
-
-    /**
-     * Verbose facades
-     */
-    fun verbose(param: LoggerDelegate.RedactedParameter, msg: ProduceMessage) {
-        delegate.log(LoggerDelegate.Level.Verbose, param, msg, null)
+    
+    fun warning(tag: String, message: String) {
+        Log.w(tag, message)
     }
-
-    fun <T> verbose(param: T, processor: HashProcessor<T>, msg: ProduceMessage) {
-        delegate.log(LoggerDelegate.Level.Verbose, param, processor, msg, null)
-    }
-
-    fun <T> verbose(param: T, processor: HashProcessor<T>, msg: ProduceMessage, subPrefix: String? = null) {
-        delegate.log(LoggerDelegate.Level.Verbose, param, processor, msg, subPrefix)
-    }
-
-    fun verbose(msg: String? = null, throwable: Throwable? = null, subPrefix: String? = null) {
-        delegate.log(LoggerDelegate.Level.Verbose, msg, throwable, subPrefix)
-    }
-
-    fun verbose(throwable: Throwable, subPrefix: String? = null) {
-        delegate.log(LoggerDelegate.Level.Verbose, throwable = throwable, subPrefix = subPrefix)
-    }
-
-    /**
-     * Info facades
-     */
-    fun info(param: LoggerDelegate.RedactedParameter, msg: ProduceMessage) {
-        delegate.log(LoggerDelegate.Level.Info, param, msg, null)
-    }
-
-    fun <T : Any> info(`return`: T?, param: LoggerDelegate.RedactedParameter, msg: ProduceMessage): T? {
-        delegate.log(LoggerDelegate.Level.Info, param, msg, null)
-        return `return`
-    }
-
-    fun <T> info(param: T, processor: HashProcessor<T>, msg: ProduceMessage) {
-        delegate.log(LoggerDelegate.Level.Info, param, processor, msg, null)
-    }
-
-    fun <T> info(param: T, processor: HashProcessor<T>, msg: ProduceMessage, subPrefix: String? = null) {
-        delegate.log(LoggerDelegate.Level.Info, param, processor, msg, subPrefix)
-    }
-
-    fun info(msg: String? = null, throwable: Throwable? = null, subPrefix: String? = null) {
-        delegate.log(LoggerDelegate.Level.Info, msg, throwable, subPrefix)
-    }
-
-    fun info(throwable: Throwable, subPrefix: String? = null) {
-        delegate.log(LoggerDelegate.Level.Info, throwable = throwable, subPrefix = subPrefix)
-    }
-
-    /**
-     * Debug facades
-     */
-    fun debug(param: LoggerDelegate.RedactedParameter, msg: ProduceMessage) {
-        delegate.log(LoggerDelegate.Level.Debug, param, msg, null)
-    }
-
-    fun <T> debug(param: T, processor: HashProcessor<T>, msg: ProduceMessage) {
-        delegate.log(LoggerDelegate.Level.Debug, param, processor, msg, null)
-    }
-
-    fun <T> debug(param: T?, processor: HashProcessor<T>, msg: ProduceMessage, subPrefix: String? = null) {
-        if (param != null) {
-            delegate.log(LoggerDelegate.Level.Debug, param, processor, msg, subPrefix)
-        } else {
-            delegate.log(LoggerDelegate.Level.Debug, msg("<null>"), subPrefix = subPrefix)
-        }
-    }
-
-    fun debug(msg: String? = null, throwable: Throwable? = null, subPrefix: String? = null) {
-        delegate.log(LoggerDelegate.Level.Debug, msg, throwable, subPrefix)
-    }
-
-    fun debug(throwable: Throwable, subPrefix: String? = null) {
-        delegate.log(LoggerDelegate.Level.Debug, throwable = throwable, subPrefix = subPrefix)
-    }
-
-    /**
-     * Error facades
-     */
-    fun error(param: LoggerDelegate.RedactedParameter, msg: ProduceMessage) {
-        delegate.log(LoggerDelegate.Level.Error, param, msg, null)
-    }
-
-    fun <T> error(param: T, processor: HashProcessor<T>, msg: ProduceMessage) {
-        delegate.log(LoggerDelegate.Level.Error, param, processor, msg)
-    }
-
-    fun <T> error(param: T, processor: HashProcessor<T>, msg: ProduceMessage, subPrefix: String? = null) {
-        delegate.log(LoggerDelegate.Level.Error, param, processor, msg, subPrefix)
-    }
-
-    fun error(msg: String? = null, throwable: Throwable? = null, subPrefix: String? = null) {
-        delegate.log(LoggerDelegate.Level.Error, msg, throwable, subPrefix)
-    }
-
-    fun error(throwable: Throwable, subPrefix: String? = null) {
-        delegate.log(LoggerDelegate.Level.Error, throwable = throwable, subPrefix = subPrefix)
-    }
-
-    inline fun <T, R, C : MutableCollection<in R>> mapNoException(
-        iterable: Iterable<T>,
-        destination: C,
-        transform: (T) -> R,
-    ): C {
-        for (item in iterable) {
-            try {
-                destination.add(transform(item))
-            } catch (e: Exception) {
-                error(e)
-            }
-        }
-
-        return destination
-    }
-
-    inline operator fun <R> invoke(
-        `return`: R,
-        param: LoggerDelegate.RedactedParameter,
-        fn: (Logger, LoggerDelegate.RedactedParameter) -> Unit,
-    ): R {
-        fn(this, param)
-        return `return`
-    }
-
-    inline operator fun <R> invoke(`return`: R, fn: (Logger) -> Unit): R {
-        fn(this)
-        return `return`
+    
+    fun error(tag: String, message: String, throwable: Throwable? = null) {
+        Log.e(tag, message, throwable)
     }
 }
-

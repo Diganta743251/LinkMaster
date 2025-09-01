@@ -2,7 +2,7 @@ package fe.linksheet.composable.page.settings.advanced
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ImportExport
-import androidx.compose.material.icons.outlined.Science
+
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import fe.android.compose.icon.iconPainter
@@ -13,17 +13,10 @@ import fe.composekit.route.RouteNavItemNew
 import fe.composekit.route.RouteNavigateListItemNew
 import fe.linksheet.R
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.navigation.ExperimentRoute
 import fe.linksheet.navigation.ExportImportRoute
 
 private object AdvancedSettingsRouteData {
     val items = arrayOf(
-        RouteNavItemNew(
-            ExperimentRoute.Empty,
-            Icons.Outlined.Science.iconPainter,
-            textContent(R.string.experiments),
-            textContent(R.string.experiments_explainer),
-        ),
         RouteNavItemNew(
             ExportImportRoute,
             Icons.Outlined.ImportExport.iconPainter,

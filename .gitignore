@@ -6,3 +6,28 @@ app/release
 .ignored
 app/*.txt
 .kotlin/
+<<<<<<< Current (Your changes)
+
+# LinkMaster specific
+keystore.properties
+linkmaster.keystore
+*.jks
+*.p12
+app/google-services.json
+google-services.json
+
+# Sensitive files
+firebase-adminsdk-*.json
+service-account.json
+
+# Release files
+*.aab
+*.apk
+app/build/outputs/
+
+# Backup files
+*.backup
+*.bak
+=======
+android-sdk
+>>>>>>> Incoming (Background Agent changes)

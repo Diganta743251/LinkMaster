@@ -1,12 +1,18 @@
 package fe.linksheet.composable.page.settings
 
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.animation.*
+import androidx.compose.animation.core.*
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import fe.linksheet.composable.ui.*
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import fe.android.compose.icon.iconPainter
@@ -75,6 +81,12 @@ internal object SettingsRouteData {
             Icons.Outlined.Palette.iconPainter,
             textContent(R.string.theme),
             textContent(R.string.theme_explainer),
+        ),
+        RouteNavItem(
+            linkMasterSettingsRoute,
+            Icons.Outlined.QrCode.iconPainter,
+            textContent(R.string.linkmaster_settings),
+            textContent(R.string.linkmaster_settings_explainer),
         )
     )
 
@@ -98,21 +110,11 @@ internal object SettingsRouteData {
             Icons.Outlined.Terminal.iconPainter,
             textContent(R.string.advanced),
             textContent(R.string.settings__subtitle_advanced),
-        ),
-        RouteNavItemNew(
-            DebugRoute,
-            Icons.Outlined.BugReport.iconPainter,
-            textContent(R.string.debug),
-            textContent(R.string.debug_explainer),
         )
+        // Debug route removed - violates Play Store policies
     )
 
-    val dev = RouteNavItem(
-        devModeRoute,
-        Icons.Outlined.DeveloperMode.iconPainter,
-        textContent(R.string.dev),
-        textContent(R.string.dev_explainer)
-    )
+    // Dev mode removed - violates Play Store policies
 
     val about = arrayOf(
 //        RouteNavItem(
@@ -156,14 +158,71 @@ fun SettingsRoute(
         headline = stringResource(id = R.string.settings),
         onBackPressed = onBackPressed
     ) {
+        // Modern hero section for settings
+        item(key = "settings_hero", contentType = ContentType.SingleGroupItem) {
+            AnimatedVisibility(
+                visible = true,
+                enter = ModernAnimations.SlideInFromBottom,
+                exit = ModernAnimations.SlideOutToBottom
+            ) {
+                Modern2025HeroSection(
+                    title = "Settings",
+                    subtitle = "Customize your LinkMaster experience",
+                    onActionClick = { /* Quick setup action */ },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 8.dp)
+                )
+            }
+        }
+        
         item(key = R.string.verified_link_handlers, contentType = ContentType.SingleGroupItem) {
-            RouteNavigateListItem(data = SettingsRouteData.verifiedApps, navigate = navigate)
+            AnimatedVisibility(
+                visible = true,
+                enter = ModernAnimations.SlideInFromRight + fadeIn(
+                    animationSpec = tween(300, delayMillis = 100)
+                ),
+                exit = ModernAnimations.SlideOutToRight
+            ) {
+                ModernSettingsItem(
+                    title = stringResource(R.string.verified_link_handlers),
+                    subtitle = stringResource(R.string.verified_link_handlers_subtitle),
+                    icon = Icons.Outlined.DomainVerification,
+                    onClick = { navigate(SettingsRouteData.verifiedApps.route) },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 4.dp)
+                )
+            }
         }
 
         divider(id = R.string.customization)
 
-        group(array = SettingsRouteData.customization) { data, padding, shape ->
-            RouteNavigateListItem(data = data, padding = padding, shape = shape, navigate = navigate)
+        // Enhanced customization section with modern cards
+        items(array = SettingsRouteData.customization) { data, index ->
+            AnimatedVisibility(
+                visible = true,
+                enter = ModernAnimations.SlideInFromRight + fadeIn(
+                    animationSpec = tween(300, delayMillis = 150 + (index * 50))
+                ),
+                exit = ModernAnimations.SlideOutToRight
+            ) {
+                ModernFeatureCard(
+                    title = data.headline.text(),
+                    description = data.subtitle.text(),
+                    icon = when (data.route) {
+                        browserSettingsRoute -> Icons.Outlined.Apps
+                        bottomSheetSettingsRoute -> Icons.Outlined.SwipeUp
+                        linksSettingsRoute -> Icons.Outlined.Link
+                        else -> Icons.Outlined.Settings
+                    },
+                    onClick = { navigate(data.route) },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 8.dp),
+                    isHighlighted = data.route == browserSettingsRoute // Highlight browser settings
+                )
+            }
         }
 
         divider(id = R.string.misc_settings)
@@ -199,7 +258,7 @@ fun SettingsRoute(
 
         divider(id = R.string.advanced)
 
-        group(size = SettingsRouteData.advanced.size + if (devMode) 1 else 0) {
+        group(size = SettingsRouteData.advanced.size) {
             items(array = SettingsRouteData.advanced) { data, padding, shape ->
                 fe.composekit.route.RouteNavigateListItemNew(
                     data = data,
@@ -208,17 +267,7 @@ fun SettingsRoute(
                     navigate = navigateNew
                 )
             }
-
-            if (devMode) {
-                item(key = SettingsRouteData.dev.route) { padding, shape ->
-                    RouteNavigateListItem(
-                        data = SettingsRouteData.dev,
-                        padding = padding,
-                        shape = shape,
-                        navigate = navigate
-                    )
-                }
-            }
+            // Dev mode section removed - violates Play Store policies
         }
 
         divider(id = R.string.about)

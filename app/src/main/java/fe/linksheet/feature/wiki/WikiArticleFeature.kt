@@ -1,24 +1,19 @@
 package fe.linksheet.feature.wiki
 
-import fe.httpkt.Request
-import fe.httpkt.ext.isHttpSuccess
-import fe.httpkt.ext.readToString
-import fe.linksheet.module.repository.WikiCacheRepository
+import fe.linksheet.repository.WikiCacheRepository
 import fe.linksheet.util.CacheResult
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class WikiArticleFeature(
-    val request: Request,
     val repository: WikiCacheRepository,
     val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) {
+    // Stub implementation - no backend connectivity needed
     private fun fetchText(url: String): String? {
-        val response = request.get(url = url)
-        if (!response.isHttpSuccess()) return null
-
-        return response.readToString()
+        // Return null since we can't fetch from network
+        return null
     }
 
     suspend fun getWikiText(url: String): String? = withContext(ioDispatcher) {
@@ -27,15 +22,7 @@ class WikiArticleFeature(
             return@withContext cacheResult.value.text
         }
 
-        val text = fetchText(url)
-        if (text != null) {
-            if (cacheResult is CacheResult.Stale) {
-                repository.update(cacheResult.value, text)
-            } else {
-                repository.insert(url, text)
-            }
-        }
-
-        return@withContext text
+        // No network fetching - only return cached content
+        return@withContext null
     }
 }

@@ -1,4 +1,4 @@
-import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
+
 
 plugins {
     id("com.android.library")
@@ -8,15 +8,15 @@ group = "fe.linksheet.hiddenapi"
 
 android {
     namespace = group.toString()
-    compileSdk = AndroidSdk.COMPILE_SDK
+    compileSdk = 36
 
     defaultConfig {
-        minSdk = AndroidSdk.MIN_SDK
+        minSdk = 25
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 }
 

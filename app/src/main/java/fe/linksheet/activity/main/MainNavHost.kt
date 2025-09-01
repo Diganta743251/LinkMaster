@@ -26,36 +26,30 @@ import fe.linksheet.composable.page.settings.browser.inapp.InAppBrowserSettingsD
 import fe.linksheet.composable.page.settings.browser.inapp.InAppBrowserSettingsRoute
 import fe.linksheet.composable.page.settings.browser.mode.PreferredBrowserSettingsRoute
 import fe.linksheet.composable.page.settings.browser.mode.WhitelistedBrowsersSettingsRoute
-import fe.linksheet.composable.page.settings.debug.DebugSettingsRoute
-import fe.linksheet.composable.page.settings.debug.loadpreferences.LoadDumpedPreferences
-import fe.linksheet.composable.page.settings.debug.log.LogSettingsRoute
-import fe.linksheet.composable.page.settings.debug.log.LogTextSettingsRoute
-import fe.linksheet.composable.page.settings.dev.DevSettingsRoute
+// Debug imports removed - violates Play Store policies
+// Dev settings import removed - violates Play Store policies
 import fe.linksheet.composable.page.settings.link.LinksSettingsRoute
-import fe.linksheet.composable.page.settings.link.amp2html.Amp2HtmlSettingsRoute
-import fe.linksheet.composable.page.settings.link.downloader.DownloaderSettingsRoute
-import fe.linksheet.composable.page.settings.link.libredirect.LibRedirectServiceSettingsRoute
-import fe.linksheet.composable.page.settings.link.libredirect.LibRedirectSettingsRoute
+// URL processing imports removed - violates Play Store policies
 import fe.linksheet.composable.page.settings.link.redirect.FollowRedirectsSettingsRoute
 import fe.linksheet.composable.page.settings.misc.MiscSettingsRoute
 import fe.linksheet.composable.page.settings.notification.NotificationSettingsRoute
 import fe.linksheet.composable.page.settings.privacy.PrivacySettingsRoute
 import fe.linksheet.composable.page.settings.shortcuts.ShortcutsRoute
 import fe.linksheet.composable.page.settings.theme.ThemeSettingsRoute
+import fe.linksheet.composable.page.settings.linkmaster.LinkMasterSettingsRoute
+import fe.linksheet.composable.page.history.HistoryNavigationHost
 import fe.linksheet.composable.util.*
 import fe.linksheet.navigation.addPageRoute
 import fe.composekit.core.AndroidVersion
 import fe.composekit.route.Route
 import fe.linksheet.composable.page.mdviewer.MarkdownViewerWrapper
 import fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers.VlhAppRoute
-import fe.linksheet.composable.page.settings.debug.SqlRoute
+// SQL debug import removed - violates Play Store policies
 import fe.linksheet.composable.page.settings.link.preview.PreviewSettingsRoute
 import fe.linksheet.navigation.AdvancedRoute
-import fe.linksheet.navigation.DebugRoute
-import fe.linksheet.navigation.ExperimentRoute
+// Debug and experiment navigation imports removed - violates Play Store policies
 import fe.linksheet.navigation.ExportImportRoute
-import fe.linksheet.navigation.LibRedirectRoute
-import fe.linksheet.navigation.LibRedirectServiceRoute
+// LibRedirect navigation imports removed - violates Play Store policies
 import fe.linksheet.navigation.LogTextViewerRoute
 import fe.linksheet.navigation.MarkdownViewerRoute
 import fe.linksheet.navigation.PreviewUrlRoute
@@ -69,7 +63,7 @@ import fe.linksheet.navigation.appsWhichCanOpenLinksSettingsRoute
 import fe.linksheet.navigation.bottomSheetSettingsRoute
 import fe.linksheet.navigation.browserSettingsRoute
 import fe.linksheet.navigation.creditsSettingsRoute
-import fe.linksheet.navigation.devModeRoute
+// Dev mode route import removed - violates Play Store policies
 import fe.linksheet.navigation.donateSettingsRoute
 import fe.linksheet.navigation.downloaderSettingsRoute
 import fe.linksheet.navigation.followRedirectsSettingsRoute
@@ -84,8 +78,9 @@ import fe.linksheet.navigation.preferredBrowserSettingsRoute
 import fe.linksheet.navigation.pretendToBeAppRoute
 import fe.linksheet.navigation.privacySettingsRoute
 import fe.linksheet.navigation.settingsRoute
-import fe.linksheet.navigation.shizukuSettingsRoute
+// Shizuku settings route import removed - violates Play Store policies
 import fe.linksheet.navigation.themeSettingsRoute
+import fe.linksheet.navigation.linkMasterSettingsRoute
 import fe.linksheet.navigation.whitelistedBrowsersSettingsRoute
 
 @Composable
@@ -113,9 +108,7 @@ fun MainNavHost(
             )
         }
 
-        animatedComposable<ExperimentRoute> { _, route ->
-            ExperimentsSettingsRoute(onBackPressed = onBackPressed, experiment = route.experiment)
-        }
+        // Experiment route removed - violates Play Store policies
 
         animatedComposable<ExportImportRoute> { _, _ ->
             ExportImportSettingsRoute(onBackPressed = onBackPressed)
@@ -125,32 +118,19 @@ fun MainNavHost(
             AdvancedSettingsRoute(onBackPressed = onBackPressed, navigate = navigateNew)
         }
 
-        animatedComposable<DebugRoute> { _, _ ->
-            DebugSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
-        }
+        // Debug route removed - violates Play Store policies
 
         animatedComposable<LogTextViewerRoute> { _, route ->
             LogTextSettingsRoute(onBackPressed = onBackPressed, sessionId = route.id, sessionName = route.name)
         }
 
-        animatedComposable<LibRedirectRoute> { _, route ->
-            LibRedirectSettingsRoute(
-                onBackPressed = onBackPressed,
-                navigate = navigateNew,
-            )
-        }
-
-        animatedComposable<LibRedirectServiceRoute> { _, route ->
-            LibRedirectServiceSettingsRoute(onBackPressed = onBackPressed, serviceKey = route.serviceKey)
-        }
+        // LibRedirect routes removed - violates Play Store policies
 
         animatedComposable<VlhAppRoute> { _, route ->
             VlhAppRoute(onBackPressed = onBackPressed, packageName = route.packageName)
         }
 
-        animatedComposable<SqlRoute> { _, route ->
-            SqlRoute(onBackPressed = onBackPressed)
-        }
+        // SQL debug route removed - violates Play Store policies
 
         animatedComposable<PreviewUrlRoute> { _, route ->
             PreviewSettingsRoute(onBackPressed = onBackPressed)
@@ -191,7 +171,13 @@ fun MainNavHost(
         }
 
         animatedComposable(route = privacySettingsRoute) {
-            PrivacySettingsRoute(onBackPressed = onBackPressed)
+            PrivacySettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
+        }
+
+        animatedComposable(route = "history") {
+            HistoryNavigationHost(
+                onBackToMain = onBackPressed
+            )
         }
 
         animatedComposable(route = bottomSheetSettingsRoute) {
@@ -228,11 +214,11 @@ fun MainNavHost(
             ThemeSettingsRoute(onBackPressed = onBackPressed)
         }
 
-        animatedComposable(route = shizukuSettingsRoute) {
-            ShizukuSettingsRoute(
-                navController = navController, onBackPressed = onBackPressed
-            )
+        animatedComposable(route = linkMasterSettingsRoute) {
+            LinkMasterSettingsRoute(onBackPressed = onBackPressed)
         }
+
+        // Shizuku settings route removed - violates Play Store policies
 
         animatedComposable(route = logViewerSettingsRoute) {
             LogSettingsRoute(onBackPressed = onBackPressed, navigate = navigateNew)
@@ -290,9 +276,7 @@ fun MainNavHost(
             }
         }
 
-        animatedComposable(route = devModeRoute) {
-            DevSettingsRoute(onBackPressed = onBackPressed)
-        }
+        // Dev mode route removed - violates Play Store policies
 
         animatedComposable(route = Routes.Help) {
 //            DevBottomSheetSettingsRoute(onBackPressed = onBackPressed)

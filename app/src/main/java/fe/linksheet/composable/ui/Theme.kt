@@ -25,9 +25,11 @@ import fe.android.span.helper.LocalLinkTags
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.activity.BaseComponentActivity
 import fe.linksheet.module.debug.DebugPreferenceProvider
-import fe.linksheet.module.debug.LocalUiDebug
-import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
+import fe.linksheet.module.viewmodel.LocalUiDebug
+import fe.linksheet.viewmodel.ThemeSettingsViewModel
 import fe.linksheet.util.LinkSheetLinkTags
+import fe.linksheet.composable.ui.ThemeV2
+import fe.linksheet.composable.ui.theme.Modern3DTheme
 import org.koin.androidx.compose.KoinAndroidContext
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
@@ -108,8 +110,16 @@ fun AppTheme(
     val materialYou by themeSettingsViewModel.themeMaterialYou.collectAsStateWithLifecycle()
     val amoled by themeSettingsViewModel.themeAmoled.collectAsStateWithLifecycle()
 
+    // Enhanced color scheme selection with modern 2025 themes
     val colorScheme = remember(themeV2, systemDarkTheme, materialYou, amoled) {
-        themeV2.getColorScheme(context, systemDarkTheme, materialYou, amoled)
+        when {
+            // Use modern neon theme for dark mode with enhanced effects
+            themeV2 == ThemeV2.Dark && !materialYou -> Modern3DTheme.NeonColorScheme
+            // Use glassmorphism theme for light mode
+            themeV2 == ThemeV2.Light && !materialYou -> Modern3DTheme.GlassColorScheme
+            // Fallback to standard Material You or default themes
+            else -> themeV2.getColorScheme(context, systemDarkTheme, materialYou, amoled)
+        }
     }
 
     if (edgeToEdge && updateEdgeToEdge != null) {
@@ -130,16 +140,22 @@ fun AppTheme(
     val hapticFeedbackInteraction = rememberHapticFeedbackInteraction(context = context)
 
     val linkAssets by themeSettingsViewModel.linkAssets.collectAsStateWithLifecycle()
+    
+    // Enhanced theme with modern typography
+    val typography = remember(themeV2) {
+        if (themeV2 == ThemeV2.Dark) Modern2025Typography else NewTypography
+    }
+    
     KoinAndroidContext {
         CompositionLocalProvider(
             LocalHapticFeedbackInteraction provides hapticFeedbackInteraction,
             LocalLinkAnnotationStyle provides linkAnnotationStyle,
-            LocalLinkTags provides LinkSheetLinkTags(urlIds = linkAssets),
+            LocalLinkTags provides linkAssets,
             LocalUiDebug provides debugPreferenceProvider
         ) {
             MaterialTheme(
                 colorScheme = colorScheme,
-                typography = NewTypography,
+                typography = typography,
                 content = content
             )
         }

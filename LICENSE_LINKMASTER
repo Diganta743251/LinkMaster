@@ -1,0 +1,42 @@
+MIT License
+
+Copyright (c) 2025 Diganta
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+## Attribution
+
+LinkMaster is based on LinkSheet by 1fexd and contributors.
+Original repository: https://github.com/LinkSheet/LinkSheet
+Original license: LinkSheet Public License Version 1.0 (see LICENSE file)
+
+LinkMaster includes modifications and new features developed by Diganta:
+- New branding and UI/UX improvements
+- Link Analytics system
+- QR Code generation
+- Encrypted backup functionality
+- Social sharing integration
+- Google Play Billing integration
+- AdMob integration
+- Cloud sync functionality
+
+All new code and features added to create LinkMaster are licensed under MIT License.
+The original LinkSheet codebase remains under its original license terms.

@@ -10,13 +10,13 @@ group = "fe.linksheet.config"
 
 android {
     namespace = group.toString()
-    compileSdk = Version.COMPILE_SDK
+    compileSdk = 36
 
     defaultConfig {
-        minSdk = Version.MIN_SDK
+        minSdk = 25
     }
 }
 
 kotlin {
-    jvmToolchain(Version.JVM)
+    jvmToolchain(21)
 }

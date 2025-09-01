@@ -2,56 +2,24 @@ package fe.linksheet.activity.onboarding
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLifecycleOwner
-import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import dev.zwander.shared.ShizukuUtil
 import fe.linksheet.R
-import fe.linksheet.extension.compose.ObserveStateChange
-import fe.linksheet.extension.compose.currentActivity
-import fe.linksheet.extension.compose.focusGainedEvents
-import fe.linksheet.module.shizuku.ShizukuStatus
-import fe.linksheet.composable.ui.HkGroteskFontFamily
-import fe.linksheet.util.ShizukuDownload
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
-private val statusMap = mapOf(
-    ShizukuStatus.Enabled to R.string.onboarding_2_shizuku_enabled,
-    ShizukuStatus.NotRunning to R.string.onboarding_2_start_shizuku,
-    ShizukuStatus.NoPermission to R.string.onboarding_2_request_shizuku_permission,
-    ShizukuStatus.NotInstalled to R.string.onboarding_2_install_shizuku,
-)
-
+/**
+ * Play Store friendly onboarding screen
+ * Focuses on LinkMaster features instead of system-level Shizuku setup
+ */
 @Composable
 fun Screen2(padding: PaddingValues, onNextClick: () -> Unit) {
-    val activity = LocalContext.currentActivity()
-    val uriHandler = LocalUriHandler.current
-
-    var shizukuInstalled by remember { mutableStateOf(ShizukuUtil.isShizukuInstalled(activity)) }
-    var shizukuRunning by remember { mutableStateOf(ShizukuUtil.isShizukuRunning()) }
-
-    val shizukuPermission by ShizukuUtil.rememberHasShizukuPermissionAsState()
-
-    var status = ShizukuStatus.findStatus(shizukuInstalled, shizukuRunning, shizukuPermission)
-    val statusStringId = statusMap[status]!!
-
-    val scope = rememberCoroutineScope()
-
-    LocalLifecycleOwner.current.lifecycle.ObserveStateChange(observeEvents = focusGainedEvents) {
-        shizukuInstalled = ShizukuUtil.isShizukuInstalled(activity)
-        shizukuRunning = ShizukuUtil.isShizukuRunning()
-    }
+    val context = LocalContext.current
 
     Box(modifier = Modifier.fillMaxSize()) {
         LazyColumn(
@@ -62,76 +30,133 @@ fun Screen2(padding: PaddingValues, onNextClick: () -> Unit) {
         ) {
             item {
                 Text(
-                    text = stringResource(id = R.string.onboarding_2_subtitle),
+                    text = "Welcome to LinkMaster",
                     overflow = TextOverflow.Visible,
                     color = MaterialTheme.colorScheme.onSurface,
-                    fontSize = 16.sp,
-                    fontFamily = HkGroteskFontFamily,
-                    fontWeight = FontWeight.Bold
+                    style = MaterialTheme.typography.headlineMedium
                 )
+            }
+
+            item {
+                Spacer(modifier = Modifier.height(16.dp))
+            }
+
+            item {
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.primaryContainer
+                    )
+                ) {
+                    Column(
+                        modifier = Modifier.padding(16.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            text = "🎉 Play Store Ready!",
+                            style = MaterialTheme.typography.headlineSmall,
+                            textAlign = TextAlign.Center,
+                            color = MaterialTheme.colorScheme.onPrimaryContainer
+                        )
+                        
+                        Spacer(modifier = Modifier.height(8.dp))
+                        
+                        Text(
+                            text = "LinkMaster is now optimized for Google Play Store with amazing new features:",
+                            style = MaterialTheme.typography.bodyMedium,
+                            textAlign = TextAlign.Center,
+                            color = MaterialTheme.colorScheme.onPrimaryContainer
+                        )
+                    }
+                }
+            }
+
+            item {
+                Spacer(modifier = Modifier.height(16.dp))
+            }
+
+            item {
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    FeatureCard(
+                        icon = "📱",
+                        title = "QR Code Generator",
+                        description = "Generate QR codes for any link with custom themes"
+                    )
+                    
+                    FeatureCard(
+                        icon = "📊",
+                        title = "Privacy Analytics",
+                        description = "Track your usage locally - no data leaves your device"
+                    )
+                    
+                    FeatureCard(
+                        icon = "🏠",
+                        title = "Home Widget",
+                        description = "Quick access to your favorite links from home screen"
+                    )
+                    
+                    FeatureCard(
+                        icon = "🎨",
+                        title = "Enhanced Themes",
+                        description = "Beautiful Material 3 design with neon theme options"
+                    )
+                }
+            }
+
+            item {
+                Spacer(modifier = Modifier.height(32.dp))
             }
         }
 
-        Box(
+        Button(
+            onClick = onNextClick,
             modifier = Modifier
                 .align(Alignment.BottomCenter)
+                .padding(30.dp)
                 .fillMaxWidth()
-                .navigationBarsPadding()
         ) {
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
-                    contentColor = MaterialTheme.colorScheme.onSurfaceVariant
-                ),
-                shape = RoundedCornerShape(
-                    topStart = 25.dp,
-                    bottomStart = 0.dp,
-                    topEnd = 25.dp,
-                    bottomEnd = 0.dp
+            Text(text = "Get Started")
+        }
+    }
+}
+
+@Composable
+private fun FeatureCard(
+    icon: String,
+    title: String,
+    description: String
+) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant
+        )
+    ) {
+        Row(
+            modifier = Modifier.padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = icon,
+                style = MaterialTheme.typography.headlineMedium,
+                modifier = Modifier.padding(end = 16.dp)
+            )
+            
+            Column {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
-            ) {
-                Column(modifier = Modifier.padding(all = 25.dp)) {
-                    Text(
-                        text = stringResource(id = R.string.onboarding_2_card_title),
-                        overflow = TextOverflow.Visible,
-                        fontSize = 20.sp,
-                        fontFamily = HkGroteskFontFamily,
-                        fontWeight = FontWeight.Bold
-                    )
-
-                    Spacer(modifier = Modifier.height(5.dp))
-                    Text(text = stringResource(id = R.string.onboarding_2_card_explainer))
-                    Spacer(modifier = Modifier.height(10.dp))
-
-
-                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                        Button(
-                            modifier = Modifier.height(50.dp),
-                            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
-                            onClick = {
-                                when (status) {
-                                    ShizukuStatus.NoPermission -> scope.launch(Dispatchers.IO) {
-                                        if (ShizukuUtil.requestPermission()) {
-                                            status = ShizukuStatus.findStatus(shizukuInstalled, shizukuRunning, shizukuPermission)
-                                        }
-                                    }
-
-                                    ShizukuStatus.NotInstalled -> uriHandler.openUri(ShizukuDownload)
-                                    ShizukuStatus.NotRunning -> ShizukuUtil.startManager(activity)
-                                    ShizukuStatus.Enabled -> onNextClick()
-                                }
-
-                            }
-                        ) {
-                            Text(text = stringResource(id = statusStringId))
-                        }
-
-                        TextButton(onClick = onNextClick) {
-                            Text(text = stringResource(id = R.string.onboarding_2_skip_button))
-                        }
-                    }
-                }
+                
+                Text(
+                    text = description,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
             }
         }
     }

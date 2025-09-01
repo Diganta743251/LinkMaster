@@ -14,7 +14,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import dev.zwander.shared.ShizukuUtil
+
 import fe.android.compose.feedback.FeedbackType
 import fe.android.compose.feedback.LocalHapticFeedbackInteraction
 import fe.android.compose.icon.iconPainter
@@ -40,10 +40,10 @@ fun DebugSettingsRoute(
     val context = LocalContext.current
     val activity = LocalActivity.current
     val coroutineScope = rememberCoroutineScope()
-    val shizukuInstalled by remember { mutableStateOf(ShizukuUtil.isShizukuInstalled(context)) }
-    val shizukuRunning by remember { mutableStateOf(ShizukuUtil.isShizukuRunning()) }
-
-    val shizukuPermission by ShizukuUtil.rememberHasShizukuPermissionAsState()
+    // Play Store friendly stub - no Shizuku integration
+    val shizukuInstalled = false
+    val shizukuRunning = false
+    val shizukuPermission = false
 
     val feedback = LocalHapticFeedbackInteraction.current
 
