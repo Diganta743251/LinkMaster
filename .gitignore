@@ -6,7 +6,6 @@ app/release
 .ignored
 app/*.txt
 .kotlin/
-<<<<<<< Current (Your changes)
 
 # LinkMaster specific
 keystore.properties
@@ -28,6 +27,9 @@ app/build/outputs/
 # Backup files
 *.backup
 *.bak
-=======
+
+# From incoming changes
 android-sdk
->>>>>>> Incoming (Background Agent changes)
+
+# To ignore buildSrc
+buildSrc/
