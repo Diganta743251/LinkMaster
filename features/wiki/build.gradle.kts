@@ -7,7 +7,7 @@ import fe.buildlogic.common.extension.addOptIn
 plugins {
     id("com.android.library")
     kotlin("android")
-    id("com.gitlab.grrfe.new-build-logic-plugin")
+    // id("com.gitlab.grrfe.new-build-logic-plugin")  // Custom plugin not available
 }
 
 android {

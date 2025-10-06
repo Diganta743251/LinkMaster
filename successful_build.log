@@ -1,0 +1,294 @@
+Starting a Gradle Daemon, 1 incompatible and 13 stopped Daemons could not be reused, use --status for details
+> Task :buildSrc:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :buildSrc:compileKotlin FROM-CACHE
+> Task :buildSrc:compileJava NO-SOURCE
+> Task :buildSrc:compileGroovy NO-SOURCE
+> Task :buildSrc:pluginDescriptors UP-TO-DATE
+> Task :buildSrc:processResources NO-SOURCE
+> Task :buildSrc:classes UP-TO-DATE
+
+> Task :buildSrc:jar
+:jar: No valid plugin descriptors were found in META-INF/gradle-plugins
+
+> Configure project :app
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:103:94: Expecting an expression
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:103:94: Expecting ')'
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:103:95: Expecting '}'
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:103:141: Expecting '}'
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:109:36: Expecting ')'
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:109:48: Expecting '}'
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:109:59: Expecting '}'
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:111:38: Expecting ')'
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:111:48: Expecting '}'
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:111:65: Expecting '}'
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:113:38: Expecting ')'
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:113:64: Expecting '}'
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:113:120: Expecting '}'
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:116:26: Expecting ')'
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:117:38: Expecting '}'
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:118:109: Expecting '}'
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:124:10: Expecting '"'
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:126:35: Expecting an element
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:126:36: Expecting ','
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:128:20: Expecting an element
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:128:30: Expecting an element
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:128:57: Expecting an element
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:128:58: Expecting ','
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:132:10: Expecting ')'
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:673:2: Expecting '}'
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:1:37: Unresolved reference: android
+w: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:68:26: Variable 'commit' is never used
+w: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:68:34: Variable 'branch' is never used
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:2:37: Unresolved reference: common
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:3:37: Unresolved reference: common
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:4:37: Unresolved reference: common
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:5:37: Unresolved reference: common
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:10:11: Unresolved reference: buildlogic
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:11:11: Unresolved reference: buildlogic
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:12:11: Unresolved reference: buildlogic
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:13:11: Unresolved reference: buildlogic
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:14:11: Unresolved reference: buildlogic
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:15:11: Unresolved reference: buildlogic
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:16:11: Unresolved reference: buildlogic
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:17:11: Unresolved reference: buildlogic
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:18:11: Unresolved reference: buildlogic
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:19:11: Unresolved reference: buildlogic
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:48:19: Unresolved reference: CurrentTagMode
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:49:21: Unresolved reference: TagReleaseParser
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:57:18: Unresolved reference: AndroidSdk
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:61:18: Unresolved reference: AndroidSdk
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:62:21: Unresolved reference: AndroidSdk
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:65:24: Unresolved reference: AndroidVersionStrategy
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:67:42: Unresolved reference: asProvider
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:77:68: Unresolved reference: readPropertiesOrNull
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:78:81: Unresolved reference: readPropertiesOrNull
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:80:105: Not enough information to infer type variable T
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:90:44: Unresolved reference: it
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:101:9: Unresolved reference: buildConfig
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:126:9: Unresolved reference: testInstrumentationRunner
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:127:9: Unresolved reference: testInstrumentationRunnerArguments
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:127:43: Unsupported [Collection literals outside of annotations]
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:128:9: Unresolved reference: testOptions
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:128:59: Too many arguments for public abstract fun buildConfigField(type: String, name: String, value: String): Unit defined in com.android.build.api.dsl.ApplicationDefaultConfig
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:130:9: Unresolved reference: vectorDrawables
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:131:13: Unresolved reference: useSupportLibrary
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:217:79: Unresolved reference: readPropertiesOrNull
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:219:97: Unresolved reference: it
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:227:78: Unresolved reference: readPropertiesOrNull
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:230:111: Unresolved reference: it
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:257:78: Unresolved reference: readPropertiesOrNull
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:259:118: Unresolved reference: it
+
+FAILURE: Build failed with an exception.
+
+* Where:
+Build file 'C:\Users\Diganta1\AndroidStudioProjects\LinkSheet\app\build.gradle.kts' line: 1
+
+* What went wrong:
+Script compilation errors:
+
+  Line 001: import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
+                                                ^ Unresolved reference: android
+
+  Line 002: import com.gitlab.grrfe.gradlebuild.common.version.CurrentTagMode
+                                                ^ Unresolved reference: common
+
+  Line 003: import com.gitlab.grrfe.gradlebuild.common.version.TagReleaseParser
+                                                ^ Unresolved reference: common
+
+  Line 004: import com.gitlab.grrfe.gradlebuild.common.version.asProvider
+                                                ^ Unresolved reference: common
+
+  Line 005: import com.gitlab.grrfe.gradlebuild.common.version.closure
+                                                ^ Unresolved reference: common
+
+  Line 010: import fe.buildlogic.Version
+                      ^ Unresolved reference: buildlogic
+
+  Line 011: import fe.buildlogic.common.extension.addCompilerOptions
+                      ^ Unresolved reference: buildlogic
+
+  Line 012: import fe.buildlogic.common.extension.addPluginOptions
+                      ^ Unresolved reference: buildlogic
+
+  Line 013: import fe.buildlogic.extension.buildConfig
+                      ^ Unresolved reference: buildlogic
+
+  Line 014: import fe.buildlogic.extension.buildStringConfigField
+                      ^ Unresolved reference: buildlogic
+
+  Line 015: import fe.buildlogic.extension.getOrSystemEnv
+                      ^ Unresolved reference: buildlogic
+
+  Line 016: import fe.buildlogic.extension.readPropertiesOrNull
+                      ^ Unresolved reference: buildlogic
+
+  Line 017: import fe.buildlogic.common.CompilerOption
+                      ^ Unresolved reference: buildlogic
+
+  Line 018: import fe.buildlogic.common.PluginOption
+                      ^ Unresolved reference: buildlogic
+
+  Line 019: import fe.buildlogic.version.AndroidVersionStrategy
+                      ^ Unresolved reference: buildlogic
+
+  Line 048:     releaseMode = CurrentTagMode.closure
+                              ^ Unresolved reference: CurrentTagMode
+
+  Line 049:     releaseParser = TagReleaseParser.closure
+                                ^ Unresolved reference: TagReleaseParser
+
+  Line 057:     compileSdk = AndroidSdk.COMPILE_SDK
+                             ^ Unresolved reference: AndroidSdk
+
+  Line 061:         minSdk = AndroidSdk.MIN_SDK
+                             ^ Unresolved reference: AndroidSdk
+
+  Line 062:         targetSdk = AndroidSdk.COMPILE_SDK
+                                ^ Unresolved reference: AndroidSdk
+
+  Line 065:         val provider = AndroidVersionStrategy(now)
+                                   ^ Unresolved reference: AndroidVersionStrategy
+
+  Line 067:         val versionProvider = versioning.asProvider(project, provider)
+                                                     ^ Unresolved reference: asProvider
+
+  Line 077:         val localProperties = rootProject.file("local.properties").readPropertiesOrNull()
+                                                                               ^ Unresolved reference: readPropertiesOrNull
+
+  Line 078:         val publicLocalProperties = rootProject.file("public.local.properties").readPropertiesOrNull()
+                                                                                            ^ Unresolved reference: readPropertiesOrNull
+
+  Line 080:         val supportedLocales = publicLocalProperties.getOrSystemEnv("SUPPORTED_LOCALES")?.split(",") ?: emptyList()
+                                                                                                                    ^ Not enough information to infer type variable T
+
+  Line 090:             ) { "\t<locale android:name=\"$it\" />" }
+                                                       ^ Unresolved reference: it
+
+  Line 101:         buildConfig {
+                    ^ Unresolved reference: buildConfig
+
+  Line 103:             buildConfigField("int", "DONATION_BANNER_MIN", "${localProperties.getOrSystemEnv(\"DONATION_BANNER_MIN\")?.toIntOrNull() ?: 20}")
+                                                                                                         ^ Expecting an expression
+
+  Line 103:             buildConfigField("int", "DONATION_BANNER_MIN", "${localProperties.getOrSystemEnv(\"DONATION_BANNER_MIN\")?.toIntOrNull() ?: 20}")
+                                                                                                         ^ Expecting ')'
+
+  Line 103:             buildConfigField("int", "DONATION_BANNER_MIN", "${localProperties.getOrSystemEnv(\"DONATION_BANNER_MIN\")?.toIntOrNull() ?: 20}")
+                                                                                                          ^ Expecting '}'
+
+  Line 103:             buildConfigField("int", "DONATION_BANNER_MIN", "${localProperties.getOrSystemEnv(\"DONATION_BANNER_MIN\")?.toIntOrNull() ?: 20}")
+                                                                                                                                                        ^ Expecting '}'
+
+  Line 109:             buildConfigField("long", "BUILT_AT", "${now}L")
+                                               ^ Expecting ')'
+
+  Line 109:             buildConfigField("long", "BUILT_AT", "${now}L")
+                                                           ^ Expecting '}'
+
+  Line 109:             buildConfigField("long", "BUILT_AT", "${now}L")
+                                                                      ^ Expecting '}'
+
+  Line 111:             buildConfigField("String", "BRANCH", "\"${branch}\"")
+                                                 ^ Expecting ')'
+
+  Line 111:             buildConfigField("String", "BRANCH", "\"${branch}\"")
+                                                           ^ Expecting '}'
+
+  Line 111:             buildConfigField("String", "BRANCH", "\"${branch}\"")
+                                                                            ^ Expecting '}'
+
+  Line 113:             buildConfigField("String", "GITHUB_WORKFLOW_RUN_ID", "\"${System.getenv("GITHUB_WORKFLOW_RUN_ID") ?: ""}\"")
+                                                 ^ Expecting ')'
+
+  Line 113:             buildConfigField("String", "GITHUB_WORKFLOW_RUN_ID", "\"${System.getenv("GITHUB_WORKFLOW_RUN_ID") ?: ""}\"")
+                                                                           ^ Expecting '}'
+
+  Line 113:             buildConfigField("String", "GITHUB_WORKFLOW_RUN_ID", "\"${System.getenv("GITHUB_WORKFLOW_RUN_ID") ?: ""}\"")
+                                                                                                                                   ^ Expecting '}'
+
+  Line 116:                 "boolean",
+                                     ^ Expecting ')'
+
+  Line 117:                 "ANALYTICS_SUPPORTED",
+                                                 ^ Expecting '}'
+
+  Line 118:                 "${localProperties.getOrSystemEnv("ANALYTICS_SUPPORTED")?.toBooleanStrictOrNull() != false}"
+                                                                                                                        ^ Expecting '}'
+
+  Line 124:         }
+                     ^ Expecting '"'
+
+  Line 126:         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+                                              ^ Expecting an element
+
+  Line 126:         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+                                               ^ Expecting ','
+
+  Line 126:         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+                    ^ Unresolved reference: testInstrumentationRunner
+
+  Line 127:         testInstrumentationRunnerArguments["runnerBuilder"] = "de.mannodermaus.junit5.AndroidJUnit5Builder"
+                    ^ Unresolved reference: testInstrumentationRunnerArguments
+
+  Line 127:         testInstrumentationRunnerArguments["runnerBuilder"] = "de.mannodermaus.junit5.AndroidJUnit5Builder"
+                                                      ^ Unsupported [Collection literals outside of annotations]
+
+  Line 128:         testOptions.unitTests.isIncludeAndroidResources = true
+                               ^ Expecting an element
+
+  Line 128:         testOptions.unitTests.isIncludeAndroidResources = true
+                                         ^ Expecting an element
+
+  Line 128:         testOptions.unitTests.isIncludeAndroidResources = true
+                                                                    ^ Expecting an element
+
+  Line 128:         testOptions.unitTests.isIncludeAndroidResources = true
+                                                                     ^ Expecting ','
+
+  Line 128:         testOptions.unitTests.isIncludeAndroidResources = true
+                    ^ Unresolved reference: testOptions
+
+  Line 128:         testOptions.unitTests.isIncludeAndroidResources = true
+                                                                      ^ Too many arguments for public abstract fun buildConfigField(type: String, name: String, value: String): Unit defined in com.android.build.api.dsl.ApplicationDefaultConfig
+
+  Line 130:         vectorDrawables {
+                    ^ Unresolved reference: vectorDrawables
+
+  Line 131:             useSupportLibrary = true
+                        ^ Unresolved reference: useSupportLibrary
+
+  Line 132:         }
+                     ^ Expecting ')'
+
+  Line 217:             val properties = rootProject.file(".ignored/keystore.properties").readPropertiesOrNull()
+                                                                                          ^ Unresolved reference: readPropertiesOrNull
+
+  Line 219:             storeFile = properties.getOrSystemEnv("KEYSTORE_FILE_PATH")?.let { rootProject.file(it) }
+                                                                                                            ^ Unresolved reference: it
+
+  Line 227:             val keystoreProperties = rootProject.file("keystore.properties").readPropertiesOrNull()
+                                                                                         ^ Unresolved reference: readPropertiesOrNull
+
+  Line 230:             storeFile = keystoreProperties.getOrSystemEnv("LINKMASTER_KEYSTORE_FILE")?.let { rootProject.file(it) }
+                                                                                                                          ^ Unresolved reference: it
+
+  Line 257:             val keystoreProperties = rootProject.file("keystore.properties").readPropertiesOrNull()
+                                                                                         ^ Unresolved reference: readPropertiesOrNull
+
+  Line 259:             storeFile = keystoreProperties.getOrSystemEnv("LINKMASTER_UPLOAD_KEYSTORE_FILE")?.let { rootProject.file(it) }
+                                                                                                                                 ^ Unresolved reference: it
+
+  Line 673: }
+             ^ Expecting '}'
+
+65 errors
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 36s
+3 actionable tasks: 1 executed, 1 from cache, 1 up-to-date

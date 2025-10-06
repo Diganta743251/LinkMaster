@@ -1,106 +1,476 @@
-import java.io.File
+import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
+import com.gitlab.grrfe.gradlebuild.common.version.CurrentTagMode
+import com.gitlab.grrfe.gradlebuild.common.version.TagReleaseParser
+import com.gitlab.grrfe.gradlebuild.common.version.asProvider
+import com.gitlab.grrfe.gradlebuild.common.version.closure
+import fe.build.dependencies.Grrfe
+import fe.build.dependencies.LinkSheet
+import fe.build.dependencies.MozillaComponents
+import fe.build.dependencies._1fexd
+import fe.buildlogic.Version
+import fe.buildlogic.common.extension.addCompilerOptions
+import fe.buildlogic.common.extension.addPluginOptions
+import fe.buildlogic.extension.buildConfig
+import fe.buildlogic.extension.buildStringConfigField
+import fe.buildlogic.extension.getOrSystemEnv
+import fe.buildlogic.extension.readPropertiesOrNull
+import fe.buildlogic.common.CompilerOption
+import fe.buildlogic.common.PluginOption
+import fe.buildlogic.version.AndroidVersionStrategy
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 
 plugins {
-    id("com.android.application")
     kotlin("android")
     kotlin("plugin.compose")
+    kotlin("plugin.serialization")
+    id("com.android.application")
+    id("androidx.navigation.safeargs.kotlin")
     id("kotlin-parcelize")
+    id("net.nemerosa.versioning")
+    // id("androidx.room")  // Temporarily disabled
+    // id("com.google.devtools.ksp")  // Temporarily disabled
+    id("dev.rikka.tools.refine")
+    // id("com.gitlab.grrfe.new-build-logic-plugin")  // Custom plugin not available
+    id("de.mannodermaus.android-junit5")
+    // Firebase integration
+    // To enable Firebase:
+    // 1. Copy google-services.json.template to google-services.json
+    // 2. Update the values in google-services.json with your Firebase project details
+    // 3. Uncomment the line below and the Firebase dependencies
+    // id("com.google.gms.google-services")
+}
+
+// Must be defined before the android block, or else it won't work
+versioning {
+    releaseMode = CurrentTagMode.closure
+    releaseParser = TagReleaseParser.closure
+}
+
+val appName = "LinkMaster"
+val dtf: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH_mm_ss")
+
+android {
+    namespace = "fe.linksheet"
+    compileSdk = AndroidSdk.COMPILE_SDK
+
+    defaultConfig {
+        applicationId = "fe.linksheet"
+        minSdk = AndroidSdk.MIN_SDK
+        targetSdk = AndroidSdk.COMPILE_SDK
+
+        val now = System.currentTimeMillis()
+        val provider = AndroidVersionStrategy(now)
+
+        val versionProvider = versioning.asProvider(project, provider)
+        val (name, code, commit, branch) = versionProvider.get()
+
+        val localDateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(now), ZoneId.of("UTC"))
+
+        versionCode = code
+        versionName = name
+
+        setProperty("archivesBaseName", "$appName-${dtf.format(localDateTime)}-$versionName")
+
+        val localProperties = rootProject.file("local.properties").readPropertiesOrNull()
+        val publicLocalProperties = rootProject.file("public.local.properties").readPropertiesOrNull()
+
+        val supportedLocales = publicLocalProperties.getOrSystemEnv("SUPPORTED_LOCALES")?.split(",") ?: emptyList()
+        // Use androidResources.localeFilters for locale filtering (new API)
+        if (supportedLocales.isNotEmpty()) {
+            androidResources {
+                localeFilters.addAll(supportedLocales)
+            }
+        }
+        tasks.register("createLocaleConfig") {
+            val localeString = supportedLocales.joinToString(
+                separator = System.lineSeparator(),
+            ) { "\t<locale android:name=\"$it\" />" }
+
+            val xml = """<?xml version="1.0" encoding="utf-8"?>
+            |<locale-config xmlns:android="http://schemas.android.com/apk/res/android">
+            |$localeString 
+            |</locale-config>
+            """.trimMargin()
+
+            file("src/main/res/xml/locales_config.xml").writeText(xml)
+        }
+
+        buildConfig {
+            // stringArray("SUPPORTED_LOCALES", supportedLocales)  // Custom function - temporarily disabled
+            buildConfigField("int", "DONATION_BANNER_MIN", "${localProperties.getOrSystemEnv(\"DONATION_BANNER_MIN\")?.toIntOrNull() ?: 20}")
+
+            arrayOf("LINK_DISCORD", "LINK_BUY_ME_A_COFFEE", "LINK_CRYPTO").forEach {
+                buildConfigField("String", it, "\"${publicLocalProperties.getOrSystemEnv(it) ?: ""}\"")
+            }
+
+            buildConfigField("long", "BUILT_AT", "${now}L")
+            buildConfigField("String", "COMMIT", "\"${commit}\"")
+            buildConfigField("String", "BRANCH", "\"${branch}\"")
+            buildConfigField("boolean", "IS_CI", "${System.getenv("CI")?.toBooleanStrictOrNull() == true}")
+            buildConfigField("String", "GITHUB_WORKFLOW_RUN_ID", "\"${System.getenv("GITHUB_WORKFLOW_RUN_ID") ?: ""}\"")
+            buildConfigField("String", "APTABASE_API_KEY", "\"${localProperties.getOrSystemEnv("APTABASE_API_KEY") ?: ""}\"")
+            buildConfigField(
+                "boolean",
+                "ANALYTICS_SUPPORTED",
+                "${localProperties.getOrSystemEnv("ANALYTICS_SUPPORTED")?.toBooleanStrictOrNull() != false}"
+            )
+
+            buildConfigField("String", "FLAVOR_CONFIG", "\"${System.getenv("FLAVOR_CONFIG") ?: ""}\"")
+            // API_HOST removed - no backend connectivity needed
+            // buildConfigField("String", "API_HOST", "\"" + (localProperties.getOrSystemEnv("API_HOST" ?: "") + "\""))
+        }
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArguments["runnerBuilder"] = "de.mannodermaus.junit5.AndroidJUnit5Builder"
+        testOptions.unitTests.isIncludeAndroidResources = true
+
+        vectorDrawables {
+            useSupportLibrary = true
+        }
+
+        // Room configuration moved to ksp block
+    }
+
+    buildFeatures {
+        compose = true
+        buildConfig = true
+        resValues = true
+    }
+
+    lint {
+        // Production-ready lint configuration
+        abortOnError = true
+        checkReleaseBuilds = true
+        checkDependencies = true
+        checkGeneratedSources = false
+        checkTestSources = true
+        
+        // Enable all security and performance checks
+        enable += setOf(
+            "SecureRandom",
+            "TrustAllX509TrustManager", 
+            "BadHostnameVerifier",
+            "SSLCertificateSocketFactoryCreateSocket",
+            "UnsafeDynamicallyLoadedCode",
+            "WorldReadableFiles",
+            "WorldWriteableFiles",
+            "AllowBackup",
+            "HardcodedDebugMode",
+            "LogConditional",
+            "StopShip",
+            "StaticFieldLeak",
+            "HandlerLeak",
+            "Wakelock",
+            "WakelockTimeout"
+        )
+        
+        // Treat security issues as errors
+        error += setOf(
+            "SecureRandom",
+            "TrustAllX509TrustManager",
+            "BadHostnameVerifier", 
+            "UnsafeDynamicallyLoadedCode",
+            "WorldReadableFiles",
+            "WorldWriteableFiles",
+            "HardcodedDebugMode",
+            "StopShip",
+            "StaticFieldLeak",
+            "HandlerLeak"
+        )
+        
+        // Performance warnings
+        warning += setOf(
+            "UnusedResources",
+            "IconDuplicates",
+            "Overdraw",
+            "TooManyViews",
+            "TooDeepLayout",
+            "DrawAllocation",
+            "Wakelock",
+            "WakelockTimeout"
+        )
+        
+        // Ignore some issues for specific paths
+        disable += setOf(
+            "MissingTranslation", // Allow missing translations for now
+            "ContentDescription" // Will be handled case by case
+        )
+        
+        // Output configuration
+        htmlReport = true
+        xmlReport = true
+        textReport = true
+        absolutePaths = false
+        
+        // Custom lint rules file
+        lintConfig = file("lint.xml")
+        
+        // Baseline file for existing issues
+        baseline = file("lint-baseline.xml")
+    }
+
+    signingConfigs {
+        register("env") {
+            val properties = rootProject.file(".ignored/keystore.properties").readPropertiesOrNull()
+
+            storeFile = properties.getOrSystemEnv("KEYSTORE_FILE_PATH")?.let { rootProject.file(it) }
+            storePassword = properties.getOrSystemEnv("KEYSTORE_PASSWORD")
+            keyAlias = properties.getOrSystemEnv("KEY_ALIAS")
+            keyPassword = properties.getOrSystemEnv("KEY_PASSWORD")
+        }
+        
+        register("linkmaster_release") {
+            // LinkMaster release signing config with enhanced security
+            val keystoreProperties = rootProject.file("keystore.properties").readPropertiesOrNull()
+            
+            // Primary signing configuration
+            storeFile = keystoreProperties.getOrSystemEnv("LINKMASTER_KEYSTORE_FILE")?.let { rootProject.file(it) }
+                ?: rootProject.file("linkmaster.keystore")
+            storePassword = keystoreProperties.getOrSystemEnv("LINKMASTER_KEYSTORE_PASSWORD")
+            keyAlias = keystoreProperties.getOrSystemEnv("LINKMASTER_KEY_ALIAS")
+            keyPassword = keystoreProperties.getOrSystemEnv("LINKMASTER_KEY_PASSWORD")
+            
+            // Security validation
+            if (storePassword == null || keyAlias == null || keyPassword == null) {
+                println("❌ ERROR: Signing configuration incomplete. Release builds will not be signed properly.")
+                println("Please set LINKMASTER_KEYSTORE_PASSWORD, LINKMASTER_KEY_ALIAS, and LINKMASTER_KEY_PASSWORD in keystore.properties")
+                println("Use keystore.properties.template as a reference.")
+            } else {
+                // Validate keystore file exists
+                val keystoreFile = storeFile
+                if (keystoreFile == null || !keystoreFile.exists()) {
+                    println("❌ ERROR: Keystore file not found: ${keystoreFile?.absolutePath}")
+                    println("Please ensure the keystore file exists and the path is correct.")
+                } else {
+                    println("✅ Release signing configuration loaded successfully")
+                    println("   Keystore: ${keystoreFile.name}")
+                    println("   Key Alias: $keyAlias")
+                }
+            }
+        }
+        
+        register("linkmaster_upload") {
+            // Upload keystore for Play Store (if different from signing keystore)
+            val keystoreProperties = rootProject.file("keystore.properties").readPropertiesOrNull()
+            
+            storeFile = keystoreProperties.getOrSystemEnv("LINKMASTER_UPLOAD_KEYSTORE_FILE")?.let { rootProject.file(it) }
+            storePassword = keystoreProperties.getOrSystemEnv("LINKMASTER_UPLOAD_KEYSTORE_PASSWORD")
+            keyAlias = keystoreProperties.getOrSystemEnv("LINKMASTER_UPLOAD_KEY_ALIAS")
+            keyPassword = keystoreProperties.getOrSystemEnv("LINKMASTER_UPLOAD_KEY_PASSWORD")
+            
+            // Only configure if upload keystore is specified
+            if (storeFile != null && storePassword != null && keyAlias != null && keyPassword != null) {
+                println("✅ Upload keystore configuration loaded")
+            }
+        }
+    }
+
+    flavorDimensions += listOf("type")
+
+    productFlavors {
+        register("foss") {
+            dimension = "type"
+            buildConfigField("String", "FLAVOR", "\"Foss\"")
+        }
+
+        register("pro") {
+            dimension = "type"
+
+            applicationIdSuffix = ".pro"
+            versionNameSuffix = "-pro"
+            buildConfigField("String", "FLAVOR", "\"Pro\"")
+        }
+    }
+
+    buildTypes {
+        debug {
+            applicationIdSuffix = ".debug"
+            versionNameSuffix = "-debug"
+
+            resValue("string", "app_name", "$appName Debug")
+        }
+
+        release {
+            isMinifyEnabled = true
+            isShrinkResources = true
+            isDebuggable = false
+            isJniDebuggable = false
+            // isRenderscriptDebuggable = false // Deprecated in AGP 8.9+
+            isPseudoLocalesEnabled = false
+            signingConfig = signingConfigs.getByName("linkmaster_release")
+            
+            // Enhanced ProGuard configuration for security
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro",
+                "proguard-rules-security.pro"
+            )
+            
+            // Additional security configurations
+            buildConfigField("boolean", "ENABLE_LOGGING", "false")
+            buildConfigField("boolean", "ENABLE_DEBUG_FEATURES", "false")
+            buildConfigField("boolean", "SECURITY_HARDENED", "true")
+            
+            resValue("string", "app_name", appName)
+            
+            // Optimize for Play Store
+            isDebuggable = false
+            isJniDebuggable = false
+            isPseudoLocalesEnabled = false
+            
+            // Additional optimizations
+            ndk {
+                debugSymbolLevel = "NONE"
+            }
+        }
+
+        register("nightly") {
+            initWith(buildTypes.getByName("release"))
+            matchingFallbacks.add("release")
+            signingConfig = signingConfigs.getByName("env")
+
+            applicationIdSuffix = ".nightly"
+            versionNameSuffix = "-nightly"
+
+            resValue("string", "app_name", "$appName Nightly")
+        }
+
+        register("releaseDebug") {
+            initWith(buildTypes.getByName("release"))
+            matchingFallbacks.add("release")
+            signingConfig = buildTypes.getByName("debug").signingConfig
+
+            applicationIdSuffix = ".release_debug"
+            versionNameSuffix = "-release_debug"
+
+            isDebuggable = true
+
+            resValue("string", "app_name", "$appName Release Debug")
+        }
+
+        register("migrate") {
+            initWith(buildTypes.getByName("release"))
+            matchingFallbacks.add("release")
+            signingConfig = signingConfigs.getByName("env")
+
+            resValue("string", "app_name", "$appName Migrate")
+        }
+
+        register("benchmark") {
+            initWith(buildTypes.getByName("release"))
+            signingConfig = signingConfigs.getByName("debug")
+            matchingFallbacks += listOf("release")
+            isDebuggable = false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+        isCoreLibraryDesugaringEnabled = true
+    }
+
+    kotlin {
+        jvmToolchain(21)  // Using Java 21
+        // Custom compiler options commented out - using defaults
+        // addCompilerOptions(CompilerOption.WhenGuards, CompilerOption.NestedTypeAliases)
+        // addPluginOptions(PluginOption.Parcelize.ExperimentalCodeGeneration to true)
+    }
+
+    buildFeatures {
+        aidl = true
+        buildConfig = true
+        compose = true
+    }
+
+    lint {
+        disable += arrayOf(
+            "AndroidGradlePluginVersion",
+            "MissingTranslation",
+            "Untranslatable",
+            "VectorPath",
+            "IconDensities"
+        )
+        baseline = file("lint-baseline.xml")
+        checkReleaseBuilds = true
+        abortOnError = false
+        warningsAsErrors = false
+    }
+
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+            isReturnDefaultValues = true
+            all { test ->
+                test.testLogging {
+                    test.outputs.upToDateWhen { false }
+                    events("passed", "skipped", "failed", "standardOut", "standardError")
+                    showCauses = true
+                    showExceptions = true
+                }
+                test.maxHeapSize = "2g"
+                test.systemProperty("robolectric.enabledSdks", "28,29,30,31,32,33,34")
+            }
+        }
+        animationsDisabled = true
+    }
+
+    val androidTest by sourceSets
+    androidTest.assets.srcDir("$projectDir/schemas")
+
+    packaging {
+        resources {
+            excludes += setOf("META-INF/{AL2.0,LGPL2.1}", "META-INF/atomicfu.kotlin_module", "META-INF/*.md")
+        }
+    }
+
+    val main by sourceSets
+    for (it in arrayOf("compat", "experiment", "testing")) {
+        main.java.srcDir("src/main/$it")
+    }
+}
+
+// Room configuration
+// room { schemaDirectory("$projectDir/schemas") }  // Temporarily disabled
+
+junitPlatform {
+    instrumentationTests {
+        includeExtensions.set(true)
+    }
 }
 
 dependencies {
-<<<<<<< HEAD
-    implementation("com.google.android.material:material:1.12.0")
-    implementation("androidx.appcompat:appcompat:1.7.0")
-    implementation("androidx.core:core-ktx:1.13.1")
-=======
     implementation(project(":feature-systeminfo"))
     implementation(project(":feature-app"))
-    implementation(project(":feature-wiki"))
->>>>>>> 77b99c2077b8dfa56f994c5d1087e74867e7da51
 
-    // Compose
-    implementation(platform("androidx.compose:compose-bom:_"))
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.material3:material3-android:_")
-    implementation("androidx.compose.foundation:foundation")
-    implementation("androidx.compose.animation:animation")
-    implementation("androidx.activity:activity-compose:_")
-    implementation("androidx.lifecycle:lifecycle-runtime-compose:_")
-    implementation("androidx.navigation:navigation-compose:_")
-    implementation("androidx.navigation:navigation-runtime-ktx:_")
-    // Icons
-    implementation("androidx.compose.material:material-icons-extended:_")
-    debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
-
-    // Koin DI
-    implementation("io.insert-koin:koin-core:_")
-    implementation("io.insert-koin:koin-android:_")
-    implementation("io.insert-koin:koin-androidx-compose:_")
-
-    // LinkSheet interconnect (AIDL/service interfaces)
-    implementation("com.github.LinkSheet:interconnect:_")
-
-    // Coil v3
-    implementation("io.coil-kt.coil3:coil:_")
-    implementation("io.coil-kt.coil3:coil-compose:_")
-    debugImplementation("io.coil-kt.coil3:coil-test:_")
-
-    // AndroidX Browser for CustomTabsService
-    implementation("androidx.browser:browser:_")
-
-    // AndroidX SQLite for SupportSQLiteOpenHelper
-    implementation("androidx.sqlite:sqlite:_")
-    implementation("androidx.sqlite:sqlite-framework:_")
-
-    // ComposeKit platform and prefs used by app sources
-    implementation(platform("com.github.1fexd.composekit:platform:_"))
-    implementation("com.github.1fexd.composekit:core")
-    implementation("com.github.1fexd.composekit:compose-core")
-    implementation("com.github.1fexd.composekit:preference-core")
-    implementation("com.github.1fexd.composekit:preference-compose-core")
-    // Additional ComposeKit modules used across app code
-    implementation("com.github.1fexd.composekit:compose-layout")
-    implementation("com.github.1fexd.composekit:compose-component")
-    implementation("com.github.1fexd.composekit:compose-app")
-    implementation("com.github.1fexd.composekit:compose-dialog")
-    implementation("com.github.1fexd.composekit:span-core")
-    implementation("com.github.1fexd.composekit:span-compose")
-
-    // Placeholder shimmer
-    implementation("io.github.fornewid:placeholder-material3:_")
-    // gson for GlobalGsonModule/Context
-    implementation("com.google.code.gson:gson:_")
-    implementation(project(":bottom-sheet"))
+    compileOnly(project(":hidden-api"))
     implementation(project(":config"))
     implementation(project(":util"))
-<<<<<<< HEAD
-    implementation(project(":feature-app"))
-    implementation(project(":feature-systeminfo"))
-    // ComposeKit routing API used by Route.kt
-    implementation("com.github.1fexd.composekit:compose-route:_")
-    debugImplementation(project(":test-fake"))
-=======
-    implementation(project(":common"))
->>>>>>> 77b99c2077b8dfa56f994c5d1087e74867e7da51
 
-    // ZXing for QR code generation
-    implementation("com.google.zxing:core:_")
+    implementation(project(":bottom-sheet"))
+    implementation(project(":bottom-sheet-new"))
+    implementation(project(":scaffold"))
+    implementation(project(":test-fake"))
 
-    // OkHttp for MediaType extensions
-    implementation("com.squareup.okhttp3:okhttp:_")
+    testImplementation(project(":test-core"))
+    androidTestImplementation(project(":test-instrument"))
 
-    // Mozilla Components used by IntentParser
-    implementation("org.mozilla.components:support-utils:_")
-    implementation("org.mozilla.components:lib-publicsuffixlist:_")
+//    implementation(platform(Square.okHttp3.bom))
+    // OkHttp removed - no backend connectivity needed
+    // implementation(Square.okHttp3.android)
+    // implementation(Square.okHttp3.coroutines)
+//    implementation(Square.okHttp3.mockWebServer3)
+    coreLibraryDesugaring(Android.tools.desugarJdkLibs)
+    implementation(platform("androidx.compose:compose-bom-alpha:_"))
+    implementation(AndroidX.compose.foundation)
+    implementation(AndroidX.compose.ui)
+    implementation(AndroidX.compose.ui.text)
+    implementation(AndroidX.compose.ui.toolingPreview)
+    implementation(AndroidX.compose.material3)
 
-<<<<<<< HEAD
-    // Grrfe kotlin-ext used by util and app sources (result/uri, etc.)
-    implementation(platform("com.gitlab.grrfe.kotlin-ext:platform:_"))
-    implementation("com.gitlab.grrfe.kotlin-ext:core")
-    implementation("com.gitlab.grrfe.kotlin-ext:result-core")
-    implementation("com.gitlab.grrfe.kotlin-ext:uri")
-=======
     implementation(AndroidX.compose.material.icons.core)
     implementation(AndroidX.compose.material.icons.extended)
     implementation(AndroidX.activity.compose)
@@ -123,10 +493,27 @@ dependencies {
 
     implementation(AndroidX.room.runtime)
     implementation(AndroidX.room.ktx)
-    ksp(AndroidX.room.compiler)
+    // ksp(AndroidX.room.compiler)  // KSP temporarily disabled
 
     implementation(Google.android.material)
     implementation(Google.accompanist.permissions)
+    
+    // LinkMaster specific dependencies
+    implementation("com.android.billingclient:billing-ktx:7.1.1") // Google Play Billing - Updated
+    implementation("com.google.zxing:core:3.5.3") // QR Code generation - Updated
+    implementation("com.journeyapps:zxing-android-embedded:4.3.0") // QR Code Android integration
+    
+    // Firebase dependencies - Uncomment after adding google-services.json
+    // To enable Firebase:
+    // 1. Copy google-services.json.template to google-services.json
+    // 2. Update the values in google-services.json with your Firebase project details
+    // 3. Uncomment these dependencies and the plugin above
+    // implementation(platform("com.google.firebase:firebase-bom:32.7.0")) // Firebase BOM
+    // implementation("com.google.firebase:firebase-auth-ktx") // Firebase Auth
+    // implementation("com.google.firebase:firebase-firestore-ktx") // Firestore
+    // implementation("com.google.firebase:firebase-analytics-ktx") // Analytics (optional)
+    
+    implementation("com.google.android.gms:play-services-ads:23.6.0") // AdMob - Updated
 
     implementation(Koin.android)
     implementation(Koin.compose)
@@ -135,36 +522,36 @@ dependencies {
 
     implementation("io.coil-kt.coil3:coil-compose:_")
     implementation("io.coil-kt.coil3:coil-core:_")
-    implementation("io.coil-kt.coil3:coil-compose:_")
-    implementation("io.coil-kt.coil3:coil-network-okhttp:_")
-    implementation("io.coil-kt.coil3:coil-network-okhttp:_")
-    implementation("io.coil-kt.coil3:coil-network-ktor3:_")
+    // Network-dependent Coil modules removed
+    // implementation("io.coil-kt.coil3:coil-network-okhttp:_")
+    // implementation("io.coil-kt.coil3:coil-network-ktor3:_")
     implementation("io.coil-kt.coil3:coil-test:_")
 
     implementation("com.github.seancfoley:ipaddress:_")
     implementation("io.github.fornewid:placeholder-material3:_")
     implementation("io.viascom.nanoid:nanoid:_")
 
-    implementation(platform(LinkSheet.flavors.bom))
+    // implementation(platform(LinkSheet.flavors.bom))  // Custom BOM not available
 //    implementation(LinkSheet.flavors.core)
     implementation("com.github.LinkSheet.flavors:core:_")
 
     implementation(LinkSheet.interconnect)
 
-    implementation(JetBrains.ktor.client.core)
-    implementation(JetBrains.ktor.client.gson)
-    implementation(JetBrains.ktor.client.okHttp)
-    implementation(JetBrains.ktor.client.android)
-    implementation(JetBrains.ktor.client.logging)
-    implementation(JetBrains.ktor.client.contentNegotiation)
-    implementation(JetBrains.ktor.client.json)
-    implementation(JetBrains.ktor.client.encoding)
-    implementation(JetBrains.ktor.plugins.serialization.gson)
-    implementation("io.ktor:ktor-client-okhttp-jvm:_")
-    testImplementation(JetBrains.ktor.client.mock)
+    // Ktor HTTP client removed - no backend connectivity needed
+    // implementation(JetBrains.ktor.client.core)
+    // implementation(JetBrains.ktor.client.gson)
+    // implementation(JetBrains.ktor.client.okHttp)
+    // implementation(JetBrains.ktor.client.android)
+    // implementation(JetBrains.ktor.client.logging)
+    // implementation(JetBrains.ktor.client.contentNegotiation)
+    // implementation(JetBrains.ktor.client.json)
+    // implementation(JetBrains.ktor.client.encoding)
+    // implementation(JetBrains.ktor.plugins.serialization.gson)
+    // implementation("io.ktor:ktor-client-okhttp-jvm:_")
+    // testImplementation(JetBrains.ktor.client.mock)
 
-    implementation(platform(Grrfe.std.bom))
-    androidTestImplementation(platform(Grrfe.std.bom))
+    // implementation(platform(Grrfe.std.bom))  // Using individual versions
+    // androidTestImplementation(platform(Grrfe.std.bom))
     implementation(Grrfe.std.core)
     implementation(Grrfe.std.time.core)
     implementation(Grrfe.std.time.java)
@@ -174,43 +561,114 @@ dependencies {
     implementation(Grrfe.std.test)
     implementation(Grrfe.std.process.core)
 
-    implementation(platform(Grrfe.httpkt.bom))
-    implementation(Grrfe.httpkt.core)
-    implementation(Grrfe.httpkt.serialization.gson)
+    // HTTP client libraries removed - no backend connectivity needed
+    // implementation(platform(Grrfe.httpkt.bom))
+    // implementation(Grrfe.httpkt.core)
+    // implementation(Grrfe.httpkt.serialization.gson)
 
-    implementation(platform(Grrfe.gsonExt.bom))
+    // implementation(platform(Grrfe.gsonExt.bom))  // Using individual versions
     implementation(Grrfe.gsonExt.core)
-    implementation(Grrfe.gsonExt.koin)
 
     implementation(_1fexd.clearUrl)
-    implementation(Grrfe.signify)
+    implementation(_1fexd.signify)
     implementation(_1fexd.fastForward)
->>>>>>> 77b99c2077b8dfa56f994c5d1087e74867e7da51
     implementation("com.github.1fexd.libredirectkt:lib:_")
-}
-android {
-    namespace = "fe.linksheet"
-    compileSdk = 36
+    implementation(_1fexd.amp2html)
+    implementation(_1fexd.embedResolve)
 
-    defaultConfig {
-        minSdk = 26
-        targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
-    }
-    buildFeatures {
-        compose = true
-        buildConfig = true
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
-    }
-    kotlinOptions {
-        jvmTarget = "21"
+    // implementation(platform(_1fexd.composeKit.bom))  // Using individual versions
+    implementation(_1fexd.composeKit.compose.core)
+    implementation(_1fexd.composeKit.compose.layout)
+    implementation(_1fexd.composeKit.compose.component)
+    implementation(_1fexd.composeKit.compose.app)
+    implementation(_1fexd.composeKit.compose.theme.core)
+    implementation(_1fexd.composeKit.compose.theme.preference)
+    implementation(_1fexd.composeKit.compose.dialog)
+    implementation(_1fexd.composeKit.compose.route)
+    implementation(_1fexd.composeKit.core)
+    testImplementation(_1fexd.composeKit.core)
+    implementation(_1fexd.composeKit.koin)
+    implementation(_1fexd.composeKit.process)
+    implementation(_1fexd.composeKit.lifecycle.core)
+    implementation(_1fexd.composeKit.lifecycle.koin)
+    // Network lifecycle modules removed - no backend connectivity needed
+    // implementation(_1fexd.composeKit.lifecycle.network.core)
+    // implementation(_1fexd.composeKit.lifecycle.network.koin)
+    implementation(_1fexd.composeKit.preference.core)
+    implementation(_1fexd.composeKit.preference.compose.core)
+    implementation(_1fexd.composeKit.preference.compose.core2)
+    implementation(_1fexd.composeKit.preference.compose.mock)
+    implementation(_1fexd.composeKit.span.core)
+    implementation(_1fexd.composeKit.span.compose)
+
+    runtimeOnly(AndroidX.annotation)
+
+    implementation("com.github.jeziellago:compose-markdown:_")
+
+    implementation("app.cash.zipline:zipline-android:_")
+    implementation("app.cash.zipline:zipline-loader-android:_")
+
+    implementation("me.saket.unfurl:unfurl:_")
+    implementation("com.github.nanihadesuka:LazyColumnScrollbar:_")
+
+    implementation("org.jsoup:jsoup:_")
+
+    // Hidden API and Shizuku dependencies removed for Play Store compatibility
+    // implementation("dev.rikka.shizuku:api:_")
+    // implementation("dev.rikka.shizuku:provider:_")
+    // implementation("org.lsposed.hiddenapibypass:hiddenapibypass:_")
+    // implementation("dev.rikka.tools.refine:runtime:_")
+
+    implementation(MozillaComponents.support.utils)
+    implementation(MozillaComponents.lib.publicSuffixList)
+    implementation(KotlinX.serialization.json)
+
+    val commonTestDependencies = arrayOf(
+        Koin.test,
+        Koin.junit4,
+        Koin.android,
+        KotlinX.coroutines.test,
+        Grrfe.std.test,
+        Grrfe.std.result.assert,
+        Testing.robolectric,
+        CashApp.turbine,
+        AndroidX.room.testing,
+        AndroidX.test.ext.junit.ktx,
+        AndroidX.compose.ui.test,
+        AndroidX.compose.ui.testJunit4,
+        "com.willowtreeapps.assertk:assertk:_",
+        AndroidX.test.espresso.core,
+    )
+
+    for (notation in commonTestDependencies) {
+        androidTestImplementation(notation)
+        testImplementation(notation)
     }
 
-    // Note: Source exclusions removed to fix build.
-    // The app will compile with all sources. 
-    // Missing dependencies will need to be resolved or stubbed.
+    testImplementation(CashApp.turbine)
+    testImplementation("org.mock-server:mockserver-client-java:_")
+    testImplementation("org.testcontainers:mockserver:_")
+    testImplementation("org.testcontainers:toxiproxy:_")
+
+    testRuntimeOnly(Testing.junit.jupiter.engine)
+    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:_")
+    testImplementation(Testing.junit4)
+
+    testImplementation(Testing.junit.jupiter.api)
+    testRuntimeOnly(Testing.junit.jupiter.engine)
+    testImplementation(Testing.junit.jupiter.params)
+
+    androidTestImplementation(Testing.junit.jupiter.api)
+    androidTestImplementation(AndroidX.test.uiAutomator)
+    androidTestImplementation(AndroidX.test.coreKtx)
+    androidTestImplementation(AndroidX.test.runner)
+    androidTestImplementation(AndroidX.test.rules)
+    androidTestImplementation(AndroidX.test.espresso.core)
+    androidTestImplementation(Testing.junit.jupiter.params)
+    androidTestImplementation("de.mannodermaus.junit5:android-test-compose:_")
+    testImplementation("com.github.gmazzo.okhttp.mock:mock-client:_")
+    debugImplementation(Square.leakCanary.android)
+    debugImplementation(AndroidX.compose.ui.tooling)
+    debugImplementation(AndroidX.compose.ui.testManifest)
 }
+
