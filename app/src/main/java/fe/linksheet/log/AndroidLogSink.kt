@@ -1,7 +1,5 @@
 package fe.linksheet.log
 
-import fe.kotlin.extension.asString
-
 class AndroidLogSink : LogSink {
     override fun log(
         level: LLog.Level,
@@ -9,11 +7,7 @@ class AndroidLogSink : LogSink {
         throwable: Throwable?,
         message: String
     ) {
-        val logMessage: String = if (throwable != null) {
-            "$message\n${throwable.asString()}"
-        } else {
-            message
-        }
+        val logMessage: String = throwable?.let { "$message\n${it.stackTraceToString()}" } ?: message
 
         android.util.Log.println(level.value, tag, logMessage)
     }

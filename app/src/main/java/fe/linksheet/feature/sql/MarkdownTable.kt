@@ -1,7 +1,6 @@
 package fe.linksheet.feature.sql
 
-import fe.kotlin.extension.iterator.withElementInfo
-import kotlin.collections.contains
+import fe.linksheet.feature.sql.Column
 
 class MarkdownTable {
     fun create(rows: List<SqlRow>): String {
@@ -70,14 +69,13 @@ class MarkdownTable {
     ): String {
         val (header, header2) = createTableHeader(uniqueColumns, widths)
         return buildString {
-            for ((row, _, isFirst, isLast) in rows.withElementInfo()) {
-                if (isFirst) {
+            rows.forEachIndexed { index, row ->
+                if (index == 0) {
                     appendLine(header)
                     appendLine(header2)
                 }
-
                 appendRow(uniqueColumns, row, widths)
-                if (!isLast) appendLine()
+                if (index != rows.lastIndex) appendLine()
             }
         }
     }

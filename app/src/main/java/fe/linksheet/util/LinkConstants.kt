@@ -3,7 +3,6 @@ package fe.linksheet.util
 import android.util.Log
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
-import fe.android.span.helper.LinkTags
 import fe.linksheet.R
 
 @Immutable
@@ -11,7 +10,7 @@ class LinkSheetLinkTags(
     val urlAnnotationKey: String = "url",
     val urlIdAnnotationKey: String = "url-id",
     private val urlIds: LinkAssets
-) : LinkTags {
+) {
     private val deprecated = mapOf(
         "fastforward-github" to "github.repository.fastforward",
         "clearurls-github" to "github.org.clearurls",
@@ -27,7 +26,7 @@ class LinkSheetLinkTags(
         "device-issues-xiaomi" to "github.linksheet.wiki.device-issues.xiaomi"
     )
 
-    override fun get(key: String, value: String): String? {
+    fun get(key: String, value: String): String? {
         Log.d("LinkSheetLinkTags", "Looking up $key, $value")
         val link = when (key) {
             urlAnnotationKey -> value
@@ -38,7 +37,7 @@ class LinkSheetLinkTags(
         return link
     }
 
-    override fun getById(id: String): String? {
+    fun getById(id: String): String? {
         val newId = deprecated[id]
         if (newId != null) return getById(newId)
         return urlIds[id]

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme" parent="Theme.Material3.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.Material3.Light">
+        <item name="windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
         <item name="colorPrimary">@color/md_theme_light_primary</item>
         <item name="colorOnPrimary">@color/md_theme_light_onPrimary</item>
         <item name="colorPrimaryContainer">@color/md_theme_light_primaryContainer</item>
@@ -29,7 +31,7 @@
         <item name="colorPrimaryInverse">@color/md_theme_light_inversePrimary</item>
     </style>
 
-    <style name="BaseDialogTheme" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="BaseDialogTheme" parent="Theme.Material3.DayNight">
         <item name="windowNoTitle">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowIsTranslucent">true</item>
@@ -44,7 +46,7 @@
     <style name="DialogTheme" parent="BaseDialogTheme" />
 
     <!-- LinkMaster 2025 Immersive Theme -->
-    <style name="AppTheme.Immersive" parent="Theme.Material3.Dark.NoActionBar">
+    <style name="AppTheme.Immersive" parent="Theme.Material3.Dark">
         <item name="colorPrimary">@color/neon_purple</item>
         <item name="colorOnPrimary">@color/neon_background</item>
         <item name="colorPrimaryContainer">@color/neon_surface_variant</item>
@@ -80,7 +82,7 @@
     </style>
     
     <!-- LinkMaster Glassmorphism Theme -->
-    <style name="AppTheme.Glass" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="AppTheme.Glass" parent="Theme.Material3.DayNight">
         <item name="colorPrimary">@color/gradient_start</item>
         <item name="colorOnPrimary">@color/md_theme_dark_onPrimary</item>
         <item name="colorPrimaryContainer">@color/glass_surface_light</item>

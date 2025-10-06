@@ -621,4 +621,8 @@
     <string name="telemetry_basic">Basic</string>
     <string name="telemetry_enhanced">Enhanced</string>
     <string name="telemetry_full">Full</string>
+
+    <!-- Play Store compliance strings -->
+    <string name="play_store_compliant">Play Store Compliant</string>
+    <string name="play_store_compliant_description">This version of LinkMaster is fully compliant with Google Play Store policies. Some advanced features have been removed or modified.</string>
 </resources>

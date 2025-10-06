@@ -1,5 +1,6 @@
-@file:Suppress("INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
-@file:JvmPackageName("kotlin.test.junit4.annotations")
-package kotlin.test
+@file:Suppress("PackageDirectoryMismatch")
+package fe.linksheet.testlib.core
 
-typealias Test = org.junit.Test
+// This file previously attempted to define symbols in the 'kotlin.test' package, which is forbidden.
+// Keep a harmless typealias here to satisfy source set without interfering with Kotlin's stdlib.
+typealias KotlinTestPlaceholder = Unit

@@ -2,8 +2,6 @@ package fe.linksheet.ads
 
 import android.content.Context
 import android.util.Log
-import com.google.android.gms.ads.MobileAds
-import com.google.android.gms.ads.RequestConfiguration
 import java.util.concurrent.atomic.AtomicBoolean
 
 /**

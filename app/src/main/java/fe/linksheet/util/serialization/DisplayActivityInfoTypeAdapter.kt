@@ -1,16 +1,14 @@
 package fe.linksheet.util.serialization
 
 import android.net.Uri
+import com.google.gson.TypeAdapter
 import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonWriter
-import fe.gson.typeadapter.ExtendedTypeAdapter
-import okhttp3.HttpUrl
-import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
 
-object UriTypeAdapter : ExtendedTypeAdapter<Uri>(Uri::class.java) {
-    override fun read(read: JsonReader): Uri {
-        return Uri.parse(read.nextString())
+object UriTypeAdapter : TypeAdapter<Uri>() {
+    override fun read(reader: JsonReader): Uri {
+        return Uri.parse(reader.nextString())
     }
 
     override fun write(out: JsonWriter, value: Uri) {
@@ -18,15 +16,7 @@ object UriTypeAdapter : ExtendedTypeAdapter<Uri>(Uri::class.java) {
     }
 }
 
-object HttpUrlTypeAdapter : ExtendedTypeAdapter<HttpUrl>(HttpUrl::class.java) {
-    override fun read(read: JsonReader): HttpUrl {
-        return read.nextString().toHttpUrlOrNull()!!
-    }
-
-    override fun write(out: JsonWriter, value: HttpUrl) {
-        out.value(value.toString())
-    }
-}
+// HttpUrl adapter removed to avoid okhttp dependency
 
 //class DisplayActivityInfoListSerializer(val resolveInfos: Map<String, Pair<ResolveInfo, String>>) :
 //    JsonSerializer<List<DisplayActivityInfo>>, JsonDeserializer<List<DisplayActivityInfo>> {

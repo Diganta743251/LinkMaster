@@ -66,9 +66,9 @@ import relocated.androidx.compose.material3.internal.PredictiveBack
 @ExperimentalMaterial3Api
 class ModalBottomSheetProperties(
     val securePolicy: SecureFlagPolicy = SecureFlagPolicy.Inherit,
-    actual val shouldDismissOnBackPress: Boolean = true,
-    actual val isAppearanceLightStatusBars: Boolean = true,
-    actual val isAppearanceLightNavigationBars: Boolean = true,
+    val shouldDismissOnBackPress: Boolean = true,
+    val isAppearanceLightStatusBars: Boolean = true,
+    val isAppearanceLightNavigationBars: Boolean = true,
 ) {
     constructor(
         shouldDismissOnBackPress: Boolean,

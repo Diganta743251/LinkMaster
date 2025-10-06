@@ -1,10 +1,8 @@
 
-import fe.buildlogic.Version
 
 plugins {
     id("com.android.library")
     kotlin("android")
-    id("com.gitlab.grrfe.new-build-logic-plugin")
     id("de.mannodermaus.android-junit5")
 }
 
@@ -21,18 +19,23 @@ android {
     buildFeatures {
         buildConfig = true
     }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
+    kotlinOptions {
+        jvmTarget = "21"
+    }
 }
 
-kotlin {
-    jvmToolchain(21)
-}
 
 dependencies {
-    api(AndroidX.test.runner)
-    api(AndroidX.test.coreKtx)
-    api(Testing.junit.jupiter.api)
-    api(Koin.test)
+    api("androidx.test:runner:_")
+    api("androidx.test:core-ktx:_")
+    api("org.junit.jupiter:junit-jupiter-api:_")
+    api("io.insert-koin:koin-test:_")
 
-    implementation(platform("androidx.compose:compose-bom-alpha:_"))
-    implementation(AndroidX.compose.ui)
+    implementation(platform("androidx.compose:compose-bom:_"))
+    implementation("androidx.compose.ui:ui:_")
 }

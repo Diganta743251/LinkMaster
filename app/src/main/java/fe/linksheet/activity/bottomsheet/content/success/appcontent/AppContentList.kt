@@ -23,9 +23,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import app.linksheet.testing.fake.PackageInfoFakes
-import fe.composekit.component.shape.CustomShapeDefaults
-import fe.kotlin.extension.iterable.getOrFirstOrNull
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.AppClickInteraction
 import fe.linksheet.activity.bottomsheet.ClickModifier
@@ -35,9 +32,7 @@ import fe.linksheet.composable.util.debugBorder
 import fe.linksheet.feature.app.ActivityAppInfo
 import fe.linksheet.module.debug.LocalUiDebug
 import fe.linksheet.module.resolver.KnownBrowser
-import androidx.core.net.toUri
-import app.linksheet.preview.PreviewDebugProvider
-import app.linksheet.testing.fake.toActivityAppInfo
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 fun AppContentList(
@@ -55,7 +50,7 @@ fun AppContentList(
     val debug by LocalUiDebug.current.drawBorders.collectAsStateWithLifecycle()
     val state = rememberLazyListState()
     AppContent(
-        info = apps.getOrFirstOrNull(appListSelectedIdx),
+        info = apps.getOrNull(appListSelectedIdx) ?: apps.firstOrNull(),
         appListSelectedIdx = appListSelectedIdx,
         hasPreferredApp = hasPreferredApp,
         hideChoiceButtons = hideChoiceButtons,
@@ -101,7 +96,7 @@ fun AppListItem(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 10.dp)
-            .clip(CustomShapeDefaults.SingleShape)
+            .clip(MaterialTheme.shapes.medium)
             .background(if (selected == true) MaterialTheme.colorScheme.secondaryContainer else Color.Transparent)
             .combinedClickable(
                 onClick = { onClick(ClickType.Single, ClickModifier.None) },
@@ -145,44 +140,4 @@ fun AppListItem(
     }
 }
 
-@Preview(group = "AppContentList", showBackground = true)
-@Composable
-private fun AppContentListPreview_Short() {
-    val apps = remember {
-        listOf(
-            PackageInfoFakes.Youtube.toActivityAppInfo(),
-            PackageInfoFakes.DuckDuckGoBrowser.toActivityAppInfo(),
-            PackageInfoFakes.ChromeBrowser.toActivityAppInfo()
-        )
-    }
-
-    AppContentListPreviewBase(apps = apps)
-}
-
-@Preview(group = "AppContentList", showBackground = true)
-@Composable
-private fun AppContentListPreview_Long() {
-    val apps = remember {
-        PackageInfoFakes.allResolved.map { it.toActivityAppInfo() }
-    }
-
-    AppContentListPreviewBase(apps = apps)
-}
-
-@Composable
-private fun AppContentListPreviewBase(apps: List<ActivityAppInfo>) {
-    CompositionLocalProvider(LocalUiDebug provides PreviewDebugProvider()) {
-        AppContentList(
-            apps = apps,
-            uri = "https://linksheet.app".toUri(),
-            appListSelectedIdx = -1,
-            hasPreferredApp = false,
-            hideChoiceButtons = false,
-            showNativeLabel = false,
-            showPackage = false,
-            dispatch = { },
-            isPrivateBrowser = { _, _ -> null },
-            showToast = { _, _, _ -> }
-        )
-    }
-}
+// Previews removed to avoid test-only dependencies

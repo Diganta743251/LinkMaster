@@ -1,13 +1,5 @@
 @file:Suppress("UnstableApiUsage")
 
-import fe.build.dependencies.Grrfe
-import fe.build.dependencies.LinkSheet
-import fe.build.dependencies._1fexd
-import fe.buildsettings.config.GradlePluginPortalRepository
-import fe.buildsettings.config.MavenRepository
-import fe.buildsettings.config.configureRepositories
-import fe.buildsettings.extension.includeProject
-
 rootProject.name = "LinkSheet"
 
 pluginManagement {
@@ -18,73 +10,73 @@ pluginManagement {
         maven { url = uri("https://jitpack.io") }
     }
 
+    resolutionStrategy {
+        eachPlugin {
+            when (requested.id.id) {
+                "com.google.devtools.ksp" -> useVersion("2.2.20-1.0.29")
+                // Gradle plugin portal marker id
+                "com.google.devtools.ksp.gradle.plugin" -> useVersion("2.2.20-1.0.29")
+            }
+        }
+    }
+
     plugins {
         id("de.fayard.refreshVersions") version "0.60.5"
         id("org.gradle.toolchains.foojay-resolver-convention") version "0.10.0"
-        id("com.android.library")
-        id("org.jetbrains.kotlin.android")
+        // Do not declare AGP versions here; AGP is already on the classpath via external build logic.
+        // Kotlin and KSP plugin versions are resolved from the classpath to avoid
+        // "already on the classpath with an unknown version" conflicts.
+        // Explicitly set Kotlin versions to align with dependencies
+        kotlin("android") version "2.2.20"
+        kotlin("plugin.serialization") version "2.2.20"
+        kotlin("plugin.compose") version "2.2.20"
         id("net.nemerosa.versioning")
-        id("androidx.navigation.safeargs") version "2.8.2"
     }
-
-    when (val gradleBuildDir = extra.properties["gradle.build.dir"]) {
-        null -> {
-            val gradleBuildVersion = extra.properties["gradle.build.version"]
-            val plugins = extra.properties["gradle.build.plugins"]
-                .toString().trim().split(",")
-                .map { it.trim().split("=") }
-                .filter { it.size == 2 }
-                .associate { it[0] to it[1] }
-            resolutionStrategy {
-                eachPlugin {
-                    plugins[requested.id.id]?.let { useModule("$it:$gradleBuildVersion") }
-                }
-            }
-        }
-
-        else -> includeBuild(gradleBuildDir.toString())
-    }
+    // includeBuild("build-logic") // disabled: using standard plugins in modules
 }
-
 plugins {
     id("de.fayard.refreshVersions")
     id("org.gradle.toolchains.foojay-resolver-convention")
-    id("com.gitlab.grrfe.build-settings-plugin")
 }
 
-configureRepositories(
-    MavenRepository.Google,
-    MavenRepository.MavenCentral,
-    MavenRepository.Jitpack,
-    MavenRepository.Mozilla,
-    MavenRepository("https://oss.sonatype.org/content/repositories/snapshots"),
-    GradlePluginPortalRepository,
-    MavenRepository("https://storage.googleapis.com/r8-releases/raw"),
-    mode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
-)
-
-extra.properties["gradle.build.dir"]
-    ?.let { includeBuild(it.toString()) }
-
-include(":app", ":config")
-includeProject(":test-instrument", "test-lib/instrument")
-includeProject(":test-core", "test-lib/core")
-includeProject(":test-fake", "test-lib/fake")
-includeProject(":scaffold", "lib/scaffold")
-includeProject(":bottom-sheet", "lib/bottom-sheet")
-includeProject(":bottom-sheet-new", "lib/bottom-sheet-new")
-includeProject(":hidden-api", "lib/hidden-api")
-includeProject(":util", "lib/util")
-includeProject(":feature-app", "features/app")
-includeProject(":feature-systeminfo", "features/systeminfo")
-
-buildSettings {
-    substitutes {
-        trySubstitute(Grrfe.std, properties["kotlin-ext.dir"])
-        trySubstitute(Grrfe.httpkt, properties["httpkt.dir"])
-        trySubstitute(Grrfe.gsonExt, properties["gson-ext.dir"])
-        trySubstitute(_1fexd.composeKit, properties["composekit.dir"])
-        trySubstitute(LinkSheet.flavors, properties["flavors.dir"])
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven("https://jitpack.io")
+        maven("https://maven.mozilla.org/maven2")
+        maven("https://s01.oss.sonatype.org/content/repositories/releases/")
+        maven("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+        maven("https://storage.googleapis.com/r8-releases/raw")
     }
 }
+
+include(
+    ":app",
+    ":config",
+    ":test-instrument",
+    ":test-core",
+    ":test-fake",
+    ":scaffold",
+    ":bottom-sheet",
+    ":bottom-sheet-new",
+    ":hidden-api",
+    ":util",
+    ":feature-app",
+    ":feature-systeminfo"
+)
+project(":test-instrument").projectDir = file("test-lib/instrument")
+project(":test-core").projectDir = file("test-lib/core")
+project(":test-fake").projectDir = file("test-lib/fake")
+project(":scaffold").projectDir = file("lib/scaffold")
+project(":bottom-sheet").projectDir = file("lib/bottom-sheet")
+project(":bottom-sheet-new").projectDir = file("lib/bottom-sheet-new")
+project(":hidden-api").projectDir = file("lib/hidden-api")
+project(":util").projectDir = file("lib/util")
+project(":feature-app").projectDir = file("features/app")
+project(":feature-systeminfo").projectDir = file("features/systeminfo")
+ 
+
+
 

@@ -17,16 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
-import app.linksheet.preview.PreviewContainer
-import app.linksheet.testing.asPreferredApp
-import app.linksheet.testing.fake.PackageInfoFakes
-import app.linksheet.testing.fake.toActivityAppInfo
-import app.linksheet.testing.util.listOfFirstActivityResolveInfo
-import app.linksheet.testing.util.packageName
 import coil3.ImageLoader
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.content.success.AppContentRoot
@@ -45,9 +36,7 @@ import fe.linksheet.module.resolver.IntentResolveResult
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.resolver.ResolveModuleStatus
 import fe.linksheet.module.resolver.browser.BrowserMode
-import fe.linksheet.module.resolver.util.AppSorter
 import kotlinx.coroutines.CompletionHandler
-import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
 
 
@@ -200,173 +189,4 @@ object BottomSheetStateControllerStub : BottomSheetStateController {
     override val dispatch: (Interaction) -> Unit = {}
 }
 
-private class PreviewStateProvider() : PreviewParameterProvider<PreviewState> {
-    override val values: Sequence<PreviewState> = sequenceOf(
-        PreviewState(
-            filteredBrowserList = FilteredBrowserList(
-                browserMode = BrowserMode.None,
-                browsers = listOfFirstActivityResolveInfo(PackageInfoFakes.MiBrowser),
-                apps = listOfFirstActivityResolveInfo(
-                    PackageInfoFakes.Youtube,
-                    PackageInfoFakes.NewPipe,
-                    PackageInfoFakes.NewPipeEnhanced
-                ),
-                isSingleOption = false,
-                noBrowsersOnlySingleApp = false
-            ),
-            lastChosen = PreferredApp(
-                _packageName = PackageInfoFakes.MiBrowser.packageInfo.packageName,
-                _component = null,
-                host = "google.com",
-                alwaysPreferred = false
-            ),
-            returnLastChosen = true,
-            hasSingleMatchingOption = false,
-            hideBottomSheetChoiceButtons = true,
-        ),
-        PreviewState(
-            filteredBrowserList = FilteredBrowserList(
-                browserMode = BrowserMode.None,
-                browsers = listOfFirstActivityResolveInfo(PackageInfoFakes.MiBrowser),
-                apps = listOfFirstActivityResolveInfo(
-                    PackageInfoFakes.Youtube,
-                    PackageInfoFakes.NewPipe,
-                    PackageInfoFakes.NewPipeEnhanced
-                ),
-                isSingleOption = false,
-                noBrowsersOnlySingleApp = false
-            ),
-            lastChosen = PreferredApp(
-                _packageName = PackageInfoFakes.MiBrowser.packageName,
-                _component = null,
-                host = "google.com",
-                alwaysPreferred = false
-            ),
-            returnLastChosen = true,
-            hasSingleMatchingOption = false,
-            hideBottomSheetChoiceButtons = false,
-        ),
-        PreviewState(
-            filteredBrowserList = FilteredBrowserList(
-                browserMode = BrowserMode.None,
-                browsers = listOfFirstActivityResolveInfo(PackageInfoFakes.MiBrowser),
-                apps = listOfFirstActivityResolveInfo(
-                    PackageInfoFakes.Youtube,
-                    PackageInfoFakes.NewPipe,
-                    PackageInfoFakes.NewPipeEnhanced
-                ),
-                isSingleOption = false,
-                noBrowsersOnlySingleApp = false
-            ),
-            lastChosen = PreferredApp(
-                _packageName = PackageInfoFakes.MiBrowser.packageName,
-                _component = null,
-                host = "google.com",
-                alwaysPreferred = false
-            ),
-            returnLastChosen = false,
-            hasSingleMatchingOption = false,
-            hideBottomSheetChoiceButtons = false,
-        ),
-        PreviewState(
-            filteredBrowserList = FilteredBrowserList(
-                browserMode = BrowserMode.None,
-                browsers = listOfFirstActivityResolveInfo(PackageInfoFakes.MiBrowser),
-                apps = listOfFirstActivityResolveInfo(
-                    PackageInfoFakes.Youtube,
-                    PackageInfoFakes.NewPipe,
-                    PackageInfoFakes.NewPipeEnhanced,
-                    PackageInfoFakes.Dummy
-                ),
-                isSingleOption = false,
-                noBrowsersOnlySingleApp = false
-            ),
-            lastChosen = PackageInfoFakes.Dummy.asPreferredApp("google.com"),
-            returnLastChosen = true,
-            hasSingleMatchingOption = false,
-            hideBottomSheetChoiceButtons = false,
-        ),
-    )
-}
-
-
-private data class PreviewState(
-    val filteredBrowserList: FilteredBrowserList,
-    val lastChosen: PreferredApp,
-    val returnLastChosen: Boolean,
-    val hasSingleMatchingOption: Boolean,
-    val hideBottomSheetChoiceButtons: Boolean,
-)
-
-@Composable
-@Preview(showBackground = true, group = "List")
-private fun BottomSheetAppsPreview_List(
-    @PreviewParameter(PreviewStateProvider::class) state: PreviewState,
-) {
-    BottomSheetAppsBasePreview(state = state, gridLayout = false)
-}
-
-@Composable
-@Preview(showBackground = true, group = "Grid")
-private fun BottomSheetAppsPreview_Grid(
-    @PreviewParameter(PreviewStateProvider::class) state: PreviewState,
-) {
-    BottomSheetAppsBasePreview(state = state, gridLayout = true)
-}
-
-@OptIn(ExperimentalTime::class)
-@Composable
-private fun BottomSheetAppsBasePreview(state: PreviewState, gridLayout: Boolean) {
-    val appSorter = AppSorter(
-        queryAndAggregateUsageStats = { _, _ -> emptyMap() },
-        toAppInfo = { resolveInfo, browser -> resolveInfo.toActivityAppInfo() },
-        clock = Clock.System
-    )
-
-    val (sorted, filtered) = appSorter.sort(
-        appList = state.filteredBrowserList,
-        lastChosen = state.lastChosen,
-        historyMap = emptyMap(),
-        returnLastChosen = state.returnLastChosen
-    )
-
-    val result = IntentResolveResult.Default(
-        intent = Intent(),
-        uri = Uri.parse("https://google.com"),
-        unfurlResult = null,
-        referringPackageName = null,
-        resolved = sorted,
-        filteredItem = filtered,
-        alwaysPreferred = state.lastChosen.alwaysPreferred,
-        hasSingleMatchingOption = state.hasSingleMatchingOption,
-        resolveModuleStatus = ResolveModuleStatus(),
-        libRedirectResult = null,
-        downloadable = DownloadCheckResult.NonDownloadable
-    )
-
-    PreviewContainer {
-        BottomSheetApps(
-            result = result,
-            enableIgnoreLibRedirectButton = false,
-            enableSwitchProfile = false,
-            profileSwitcher = ProfileSwitcherStub,
-            enableUrlCopiedToast = false,
-            enableDownloadStartedToast = false,
-            enableManualRedirect = false,
-            hideAfterCopying = false,
-            bottomSheetNativeLabel = false,
-            gridLayout = gridLayout,
-            appListSelectedIdx = -1,
-            isPrivateBrowser = { hasUri, info -> null },
-            showToast = { textId, duration, uiThread -> },
-            copyUrl = { label, url -> },
-            startDownload = { uri, downloadable -> },
-            controller = BottomSheetStateControllerStub,
-            showPackage = false,
-            previewUrl = true,
-            hideBottomSheetChoiceButtons = state.hideBottomSheetChoiceButtons,
-            urlCardDoubleTap = false,
-            imageLoader = null
-        )
-    }
-}
+// Previews removed to avoid compiling testing-only utilities

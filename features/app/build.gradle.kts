@@ -1,18 +1,12 @@
-
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies._1fexd
-import fe.buildlogic.Version
-import fe.buildlogic.common.CompilerOption
-import fe.buildlogic.common.PluginOption
-import fe.buildlogic.common.extension.addCompilerOptions
-import fe.buildlogic.common.extension.addPluginOptions
 
 plugins {
     id("com.android.library")
     kotlin("android")
     id("kotlin-parcelize")
-    id("com.gitlab.grrfe.new-build-logic-plugin")
 }
+
 
 android {
     namespace = "fe.linksheet.feature.app"
@@ -22,41 +16,44 @@ android {
         minSdk = 25
     }
 
-    kotlin {
-        jvmToolchain(21)
-        addCompilerOptions(CompilerOption.WhenGuards)
-        addPluginOptions(PluginOption.Parcelize.ExperimentalCodeGeneration to true)
-    }
-
     packaging {
         resources {
             excludes += setOf("META-INF/{AL2.0,LGPL2.1}", "META-INF/atomicfu.kotlin_module", "META-INF/*.md")
         }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
+
+    kotlinOptions {
+        jvmTarget = "21"
     }
 }
 
 dependencies {
     implementation(project(":util"))
     implementation(project(":test-fake"))
-    implementation(AndroidX.compose.ui.graphics)
-    testImplementation(Testing.robolectric)
+    implementation("androidx.compose.ui:ui-graphics:_")
+    testImplementation("org.robolectric:robolectric:_")
     compileOnly(project(":hidden-api"))
 
-    implementation(platform(Grrfe.std.bom))
+    implementation(platform(Grrfe.std.platform))
     implementation(Grrfe.std.core)
     implementation(Grrfe.std.result.core)
 
-    implementation(platform(_1fexd.composeKit.bom))
+    implementation(platform(_1fexd.composeKit.platform))
     implementation(_1fexd.composeKit.core)
     implementation(_1fexd.composeKit.process)
     implementation(_1fexd.composeKit.compose.core)
 
-    implementation(platform(Grrfe.gsonExt.bom))
+    implementation(platform(Grrfe.gsonExt.platform))
     implementation(Grrfe.gsonExt.core)
 
-    implementation(AndroidX.core.ktx)
+    implementation("androidx.core:core-ktx:_")
 
-    testImplementation(AndroidX.test.ext.junit.ktx)
+    testImplementation("androidx.test.ext:junit-ktx:_")
     testImplementation(project(":test-core"))
     testImplementation(Grrfe.std.test)
     testImplementation(Grrfe.std.result.assert)

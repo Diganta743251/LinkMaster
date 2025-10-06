@@ -25,7 +25,7 @@ import fe.android.span.helper.LocalLinkTags
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.activity.BaseComponentActivity
 import fe.linksheet.module.debug.DebugPreferenceProvider
-import fe.linksheet.module.viewmodel.LocalUiDebug
+import fe.linksheet.module.debug.LocalUiDebug
 import fe.linksheet.viewmodel.ThemeSettingsViewModel
 import fe.linksheet.util.LinkSheetLinkTags
 import fe.linksheet.composable.ui.ThemeV2

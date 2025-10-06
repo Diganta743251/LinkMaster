@@ -1,11 +1,9 @@
 
-import fe.buildlogic.Version
 
 plugins {
     id("com.android.library")
     kotlin("android")
     kotlin("plugin.compose")
-    id("com.gitlab.grrfe.new-build-logic-plugin")
 }
 
 group = "fe.linksheet.bottom.sheet"
@@ -20,16 +18,20 @@ android {
 
     buildFeatures {
         buildConfig = true
+        compose = true
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
+    kotlinOptions {
+        jvmTarget = "21"
     }
 }
 
-kotlin {
-    jvmToolchain(21)
-}
-
 dependencies {
-    implementation(platform("androidx.compose:compose-bom-alpha:_"))
-    implementation(AndroidX.compose.ui)
-    implementation(AndroidX.compose.material3)
-    implementation(AndroidX.Lifecycle.viewModelCompose)
+    implementation(platform("androidx.compose:compose-bom:_"))
+    implementation("androidx.compose.ui:ui:_")
+    implementation("androidx.compose.material3:material3-android:_")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:_")
 }

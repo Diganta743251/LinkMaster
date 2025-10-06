@@ -1,6 +1,5 @@
 package fe.linksheet.activity.linkmaster
 
-import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle

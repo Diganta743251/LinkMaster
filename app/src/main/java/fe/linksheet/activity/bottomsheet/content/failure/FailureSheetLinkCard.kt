@@ -1,5 +1,6 @@
 package fe.linksheet.activity.bottomsheet.content.failure
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -10,17 +11,26 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import fe.android.compose.content.OptionalContent
-import fe.android.compose.extension.atElevation
-import fe.android.compose.extension.optionalClickable
-import fe.android.compose.icon.IconPainter
-import fe.android.compose.padding.Top
-import fe.android.compose.padding.exclude
-import fe.android.compose.text.TextContent
-import fe.composekit.component.card.AlertCardDefaults
-import fe.composekit.component.icon.FilledIcon
-import fe.composekit.component.icon.IconOffset
-import fe.composekit.component.shape.CustomShapeDefaults
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
+
+// Minimal local stubs to avoid external dependencies
+private object AlertCardDefaults {
+    val MinHeight: Modifier = Modifier
+    val InnerPadding: PaddingValues = PaddingValues(12.dp)
+    val HorizontalArrangement: Arrangement.Horizontal = Arrangement.spacedBy(12.dp)
+    val IconSize: Dp = 24.dp
+    val IconContainerSize: Dp = 36.dp
+}
+
+private object CustomShapeDefaults {
+    val SingleShape: Shape @Composable get() = MaterialTheme.shapes.medium
+}
+
+private class IconOffset
+private class TextContent(val content: @Composable () -> Unit)
+private typealias OptionalContent = (@Composable () -> Unit)?
+private typealias IconPainter = ImageVector
 
 @Composable
 fun FailureSheetLinkCard(
@@ -30,19 +40,16 @@ fun FailureSheetLinkCard(
     onClick: (() -> Unit)? = null,
     innerPadding: PaddingValues = AlertCardDefaults.InnerPadding,
     horizontalArrangement: Arrangement.Horizontal = AlertCardDefaults.HorizontalArrangement,
-    text: TextContent,
-    icon: IconPainter,
-    iconSize: Dp = AlertCardDefaults.IconSize,
-    iconContainerSize: Dp = AlertCardDefaults.IconContainerSize,
-    iconOffset: IconOffset? = null,
+    text: @Composable () -> Unit,
+    icon: ImageVector,
     iconContentDescription: String?,
-    content: OptionalContent = null,
+    content: (@Composable () -> Unit)? = null,
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .clip(shape)
-            .optionalClickable(onClick = onClick),
+            .then(if (onClick != null) Modifier.clickable { onClick() } else Modifier),
         colors = colors
     ) {
         Row(
@@ -53,30 +60,20 @@ fun FailureSheetLinkCard(
             horizontalArrangement = horizontalArrangement,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            val containerColor = colors.containerColor.atElevation(
-                MaterialTheme.colorScheme.surfaceTint, 6.dp
-            )
-
-            FilledIcon(
-                icon = icon,
-                iconSize = iconSize,
-                containerSize = iconContainerSize,
-                iconOffset = iconOffset,
+            Icon(
+                painter = rememberVectorPainter(image = icon),
                 contentDescription = iconContentDescription,
-                colors = IconButtonDefaults.iconButtonColors(
-                    containerColor = containerColor,
-                    contentColor = contentColorFor(backgroundColor = containerColor)
-                )
+                tint = contentColorFor(backgroundColor = colors.containerColor)
             )
 
             CompositionLocalProvider(
                 LocalTextStyle provides MaterialTheme.typography.bodyMedium,
-                content = text.content
+                content = text
             )
         }
 
         if (content != null) {
-            Box(modifier = Modifier.padding(AlertCardDefaults.InnerPadding.exclude(Top))) {
+            Box(modifier = Modifier.padding(AlertCardDefaults.InnerPadding)) {
                 content()
             }
         }

@@ -18,16 +18,16 @@ enum class LinkHandling {
 
 @Parcelize
 class DomainVerificationAppInfo(
-    packageName: String,
-    label: CharSequence,
-    icon: IconPainter? = null,
+    val pkgName: String,
+    val labelStr: String,
+    @IgnoredOnParcel val iconPainter: IconPainter? = null,
     val flags: Int,
     val installTime: Long? = null,
     val linkHandling: LinkHandling,
     val stateNone: MutableList<String>,
     val stateSelected: MutableList<String>,
     val stateVerified: MutableList<String>,
-) : AppInfo(packageName, label.toString(), icon) {
+) : AppInfo(pkgName, labelStr, iconPainter) {
 
     @IgnoredOnParcel
     val enabled by lazy {
@@ -52,9 +52,9 @@ typealias ActivityAppInfoStatus = Pair<ActivityAppInfo, Boolean>
 @Parcelize
 open class ActivityAppInfo(
     val componentInfo: @RawValue ComponentInfo,
-    label: String,
-    icon: IconPainter? = null,
-) : AppInfo(componentInfo.packageName, label, icon) {
+    val labelStr: String,
+    @IgnoredOnParcel val iconPainter: IconPainter? = null,
+) : AppInfo(componentInfo.packageName, labelStr, iconPainter) {
 
     @IgnoredOnParcel
     val componentName by lazy { componentInfo.componentName }
@@ -92,6 +92,6 @@ open class AppInfo(
 }
 
 fun <T : AppInfo> List<T>.labelSorted(sorted: Boolean = true): List<T> {
-    return applyIf(sorted) { sortedWith(AppInfo.labelComparator) }
+    return if (sorted) this.sortedWith(AppInfo.labelComparator) else this
 }
 

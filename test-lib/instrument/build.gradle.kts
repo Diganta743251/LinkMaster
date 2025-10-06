@@ -1,10 +1,8 @@
 
-import fe.buildlogic.Version
 
 plugins {
     id("com.android.library")
     kotlin("android")
-    id("com.gitlab.grrfe.new-build-logic-plugin")
 }
 
 group = "fe.linksheet.testlib.ui"
@@ -21,8 +19,12 @@ android {
         buildConfig = true
     }
 
-    kotlin {
-        jvmToolchain(21)
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
+    kotlinOptions {
+        jvmTarget = "21"
     }
 
     packaging {
@@ -35,15 +37,15 @@ android {
 dependencies {
     api(project(":test-core"))
 
-    implementation(platform("androidx.compose:compose-bom-alpha:_"))
-    implementation(AndroidX.compose.foundation)
-    implementation(AndroidX.compose.ui)
-    implementation(AndroidX.compose.ui.test)
-    implementation(AndroidX.compose.ui.testJunit4)
+    implementation(platform("androidx.compose:compose-bom:_"))
+    implementation("androidx.compose.foundation:foundation:_")
+    implementation("androidx.compose.ui:ui:_")
+    implementation("androidx.compose.ui:ui-test-junit4:_")
+    implementation("androidx.compose.ui:ui-test-manifest:_")
 
-    implementation(AndroidX.test.ext.junit.ktx)
-    api(AndroidX.test.uiAutomator)
-    implementation(AndroidX.activity.ktx)
-    implementation(AndroidX.activity.compose)
-    implementation(AndroidX.core.ktx)
+    implementation("androidx.test.ext:junit-ktx:_")
+    api("androidx.test.uiautomator:uiautomator:_")
+    implementation("androidx.activity:activity-ktx:_")
+    implementation("androidx.activity:activity-compose:_")
+    implementation("androidx.core:core-ktx:_")
 }

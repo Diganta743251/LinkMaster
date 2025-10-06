@@ -57,7 +57,7 @@ import fe.linksheet.navigation.Routes
 import fe.linksheet.navigation.SqlRoute
 import fe.linksheet.navigation.VlhAppRoute
 import fe.linksheet.navigation.aboutSettingsRoute
-import fe.linksheet.navigation.amp2HtmlSettingsRoute
+// amp2HtmlSettingsRoute removed - violates Play Store policies
 import fe.linksheet.navigation.appsSettingsRoute
 import fe.linksheet.navigation.appsWhichCanOpenLinksSettingsRoute
 import fe.linksheet.navigation.bottomSheetSettingsRoute
@@ -65,7 +65,7 @@ import fe.linksheet.navigation.browserSettingsRoute
 import fe.linksheet.navigation.creditsSettingsRoute
 // Dev mode route import removed - violates Play Store policies
 import fe.linksheet.navigation.donateSettingsRoute
-import fe.linksheet.navigation.downloaderSettingsRoute
+// downloaderSettingsRoute removed - violates Play Store policies
 import fe.linksheet.navigation.followRedirectsSettingsRoute
 import fe.linksheet.navigation.generalSettingsRoute
 import fe.linksheet.navigation.inAppBrowserSettingsDisableInSelectedRoute
@@ -120,9 +120,10 @@ fun MainNavHost(
 
         // Debug route removed - violates Play Store policies
 
-        animatedComposable<LogTextViewerRoute> { _, route ->
-            LogTextSettingsRoute(onBackPressed = onBackPressed, sessionId = route.id, sessionName = route.name)
-        }
+        // LogTextSettingsRoute removed - component not available
+        // animatedComposable<LogTextViewerRoute> { _, route ->
+        //     LogTextSettingsRoute(onBackPressed = onBackPressed, sessionId = route.id, sessionName = route.name)
+        // }
 
         // LibRedirect routes removed - violates Play Store policies
 
@@ -202,13 +203,15 @@ fun MainNavHost(
             FollowRedirectsSettingsRoute(onBackPressed = onBackPressed)
         }
 
-        animatedComposable(route = downloaderSettingsRoute) {
-            DownloaderSettingsRoute(onBackPressed = onBackPressed)
-        }
+        // Downloader settings removed - violates Play Store policies
+        // animatedComposable(route = downloaderSettingsRoute) {
+        //     DownloaderSettingsRoute(onBackPressed = onBackPressed)
+        // }
 
-        animatedComposable(route = amp2HtmlSettingsRoute) {
-            Amp2HtmlSettingsRoute(onBackPressed = onBackPressed)
-        }
+        // AMP2HTML settings removed - violates Play Store policies
+        // animatedComposable(route = amp2HtmlSettingsRoute) {
+        //     Amp2HtmlSettingsRoute(onBackPressed = onBackPressed)
+        // }
 
         animatedComposable(route = themeSettingsRoute) {
             ThemeSettingsRoute(onBackPressed = onBackPressed)
@@ -220,13 +223,15 @@ fun MainNavHost(
 
         // Shizuku settings route removed - violates Play Store policies
 
-        animatedComposable(route = logViewerSettingsRoute) {
-            LogSettingsRoute(onBackPressed = onBackPressed, navigate = navigateNew)
-        }
+        // Log settings removed - component not available
+        // animatedComposable(route = logViewerSettingsRoute) {
+        //     LogSettingsRoute(onBackPressed = onBackPressed, navigate = navigateNew)
+        // }
 
-        animatedComposable(route = loadDumpedPreferences) {
-            LoadDumpedPreferences(onBackPressed = onBackPressed)
-        }
+        // Load dumped preferences removed - component not available
+        // animatedComposable(route = loadDumpedPreferences) {
+        //     LoadDumpedPreferences(onBackPressed = onBackPressed)
+        // }
 
         animatedComposable(route = aboutSettingsRoute) {
             AboutSettingsRoute(

@@ -1,26 +1,10 @@
-@file:OptIn(ExperimentalTime::class)
-
 package fe.linksheet.util
 
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.os.ParcelFileDescriptor
-import com.google.gson.JsonArray
-import com.google.gson.JsonObject
-import com.google.gson.JsonParser
 import fe.composekit.intent.buildIntent
-import fe.gson.extension.json.`object`.asArray
-import fe.gson.extension.json.`object`.asStringOrNull
 import fe.linksheet.R
-import fe.linksheet.extension.android.bufferedReader
-import fe.linksheet.extension.android.bufferedWriter
-import fe.std.result.StdResult
-import fe.std.result.isFailure
-import fe.std.result.tryCatch
-import fe.std.result.unaryPlus
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import kotlin.time.Clock
@@ -51,57 +35,6 @@ class ImportExportService(val context: Context, val clock: Clock, val zoneId: Zo
                 context.getString(R.string.export_file_name, nowString)
             )
     }
-
-    @Throws(Exception::class)
-    private fun openDescriptor(uri: Uri, mode: String): ParcelFileDescriptor? {
-        return context.contentResolver.openFileDescriptor(uri, mode)
-    }
-
-    suspend fun exportPreferencesToUri(uri: Uri, preferenceJson: String) = withContext(Dispatchers.IO) {
-        tryCatch {
-            openDescriptor(uri, "w")
-                ?.bufferedWriter()
-                ?.use { it.write(preferenceJson) }
-                ?: Unit
-        }
-    }
-
-    suspend fun importPreferencesFromUri(uri: Uri): StdResult<Map<String, String>> = withContext(Dispatchers.IO) {
-        val parseResult = tryCatch {
-            openDescriptor(uri, "r")
-                ?.bufferedReader()
-                ?.use { JsonParser.parseReader(it) }
-        }
-
-        if (parseResult.isFailure()) {
-            return@withContext +parseResult
-        }
-
-        val result = parseResult.value
-        if (result == null) {
-            return@withContext +Exception("Failed to read file!")
-        }
-
-        val jsonElement = result
-        val isLinkSheetPreferencesFile = jsonElement is JsonObject
-                && jsonElement.keySet().size == 1
-                && jsonElement.get("preferences") is JsonArray
-
-        if (!isLinkSheetPreferencesFile) {
-            return@withContext +Exception("Provided file is not a LinkSheet preferences export!")
-        }
-
-        val preferences = jsonElement.asArray("preferences")
-        val map = preferences.mapNotNull { preference ->
-            if (preference !is JsonObject) return@mapNotNull null
-
-            val name = preference.asStringOrNull("name")
-            val value = preference.asStringOrNull("value")
-
-            if (name == null || value == null) return@mapNotNull null
-            name to value
-        }.toMap()
-
-        +map
-    }
+    // Export/import functions are intentionally omitted in this build to remove
+    // dependencies on extensions and result wrappers not present in this project.
 }

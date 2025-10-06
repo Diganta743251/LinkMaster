@@ -11,14 +11,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import app.linksheet.testing.fake.PackageInfoFakes
-import app.linksheet.testing.fake.toActivityAppInfo
-import app.linksheet.testing.util.PackageInfoFake
 import fe.linksheet.R
 import fe.linksheet.composable.component.appinfo.AppInfoIcon
 import fe.linksheet.composable.ui.HkGroteskFontFamily
@@ -62,29 +56,4 @@ fun AppListItemRow(
             }
         }
     }
-}
-
-private data class PreviewAppListItemState(
-    val fake: PackageInfoFake,
-    val preferred: Boolean,
-    val showPackage: Boolean
-)
-
-private class ActivityAppInfoPreviewParameter() : PreviewParameterProvider<PreviewAppListItemState> {
-    override val values = sequenceOf(
-        PreviewAppListItemState(PackageInfoFakes.Youtube, false, false),
-        PreviewAppListItemState(PackageInfoFakes.Youtube, false, true),
-        PreviewAppListItemState(PackageInfoFakes.Youtube, true, false),
-        PreviewAppListItemState(PackageInfoFakes.Youtube, true, true),
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun AppListItemRowPreview(@PreviewParameter(ActivityAppInfoPreviewParameter::class) state: PreviewAppListItemState) {
-    AppListItemRow(
-        appInfo = state.fake.toActivityAppInfo(),
-        preferred = state.preferred,
-        showPackage = state.showPackage
-    )
 }

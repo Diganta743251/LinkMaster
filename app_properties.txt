@@ -1,0 +1,26 @@
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:41:29: Not enough information to infer type variable T
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:42:28: Not enough information to infer type variable T
+
+FAILURE: Build failed with an exception.
+
+* Where:
+Build file 'C:\Users\Diganta1\AndroidStudioProjects\LinkSheet\app\build.gradle.kts' line: 41
+
+* What went wrong:
+Script compilation errors:
+
+  Line 41:             java.setSrcDirs(emptyList())
+                                       ^ Not enough information to infer type variable T
+
+  Line 42:             res.setSrcDirs(emptyList())
+                                      ^ Not enough information to infer type variable T
+
+2 errors
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 1m 38s

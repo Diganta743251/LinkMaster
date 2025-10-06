@@ -54,14 +54,13 @@ if (Test-Path $keystorePath) {
         Write-Host "❌ Could not create debug keystore: $($_.Exception.Message)" -ForegroundColor Red
     }
 }
-
 # Try to build with minimal options
 Write-Host "🔨 Attempting to build debug APK..." -ForegroundColor Yellow
 Write-Host "This may take several minutes..." -ForegroundColor Gray
 
 try {
     # Use timeout to prevent hanging
-    $buildProcess = Start-Process -FilePath ".\gradlew.bat" -ArgumentList "assembleFossDebug", "--no-daemon", "--stacktrace", "--info" -PassThru -NoNewWindow -RedirectStandardOutput "build_output.log" -RedirectStandardError "build_error.log"
+    $buildProcess = Start-Process -FilePath ".\gradlew.bat" -ArgumentList "assembleDebug", "--no-daemon", "--stacktrace", "--info" -PassThru -NoNewWindow -RedirectStandardOutput "build_output.log" -RedirectStandardError "build_error.log"
     
     # Wait for up to 10 minutes
     $timeout = 600

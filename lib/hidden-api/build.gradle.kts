@@ -2,7 +2,6 @@
 
 plugins {
     id("com.android.library")
-    id("com.gitlab.grrfe.new-build-logic-plugin")
 }
 group = "fe.linksheet.hiddenapi"
 
@@ -24,5 +23,5 @@ dependencies {
     annotationProcessor("dev.rikka.tools.refine:annotation-processor:_")
     compileOnly("dev.rikka.tools.refine:annotation:_")
     compileOnly("org.jetbrains:annotations:_")
-    compileOnly(AndroidX.annotation)
+    compileOnly("androidx.annotation:annotation:_")
 }

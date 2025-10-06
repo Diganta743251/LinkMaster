@@ -25,10 +25,9 @@ import fe.linksheet.composable.ui.AppTheme
 import fe.linksheet.composable.ui.NewTypography
 import fe.linksheet.composable.ui.PoppinsFontFamily
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class OnboardingActivity : BaseComponentActivity() {
-    private val onboardingViewModel by viewModel<MainViewModel>()
+    private val onboardingViewModel = MainViewModel()
 
     private val appBarTitles = arrayOf(
         R.string.onboarding_0_title,

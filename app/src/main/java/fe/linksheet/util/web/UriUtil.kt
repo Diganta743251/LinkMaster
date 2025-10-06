@@ -4,17 +4,15 @@ import android.content.Intent
 import android.net.Uri
 import android.util.Patterns
 import android.webkit.URLUtil
-import fe.kotlin.extension.iterable.mapToSet
-import mozilla.components.support.ktx.util.URLStringUtils
 import androidx.core.net.toUri
 
 object UriUtil {
     const val HTTP = "http"
 
     private val protocols = setOf(HTTP, "https")
-    private val webSchemeIntents: Set<Intent> = protocols.mapToSet {
-        Intent(Intent.ACTION_VIEW, Uri.fromParts(it, "", "")).addCategory(Intent.CATEGORY_BROWSABLE)
-    }
+    private val webSchemeIntents: Set<Intent> = protocols
+        .map { Intent(Intent.ACTION_VIEW, Uri.fromParts(it, "", "")).addCategory(Intent.CATEGORY_BROWSABLE) }
+        .toSet()
 
     fun parseWebUriStrict(url: String): Uri? {
         if (!isWebStrict(url)) return null
@@ -37,10 +35,7 @@ object UriUtil {
     }
 
     fun declutter(uri: Uri): String {
-        val str = uri.toString()
-        if (isWebStrict(str, allowInsecure = false)) {
-            return URLStringUtils.toDisplayUrl(str).toString()
-        }
-        return str
+        // Keep as-is to avoid bringing in high-minSdk dependencies
+        return uri.toString()
     }
 }

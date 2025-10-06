@@ -2,7 +2,7 @@ package fe.linksheet.navigation
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
-import androidx.navigation.navigation
+import androidx.navigation.compose.navigation
 
 interface PageRoute {
     val startDestination: Any

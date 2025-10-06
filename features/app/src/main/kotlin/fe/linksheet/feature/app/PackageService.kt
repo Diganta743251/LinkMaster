@@ -38,8 +38,8 @@ class PackageService(
 
         return ActivityAppInfo(
             componentInfo = info,
-            label = loadComponentInfoLabel(info) ?: findApplicationLabel(info.applicationInfo),
-            icon = icon
+            labelStr = loadComponentInfoLabel(info) ?: findApplicationLabel(info.applicationInfo),
+            iconPainter = icon
         )
     }
 
@@ -111,8 +111,7 @@ class PackageService(
         }
 
         val linkHandling = when (verificationState) {
-            is VerificationState if verificationState.isLinkHandlingAllowed -> LinkHandling.Allowed
-            is VerificationState -> LinkHandling.Disallowed
+            is VerificationState -> if (verificationState.isLinkHandlingAllowed) LinkHandling.Allowed else LinkHandling.Disallowed
             is VerificationBrowserState -> LinkHandling.Browser
             else -> LinkHandling.Unsupported
         }

@@ -11,7 +11,3 @@ enum class BuildType {
         }
     }
 }
-
-object Build {
-    val IsDebug = BuildConfig.DEBUG
-}

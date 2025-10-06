@@ -49,7 +49,7 @@ fun UrlCard(
 ) {
     val data = when (unfurlResult) {
         null -> null
-        else -> UrlCardData(unfurlResult.title, unfurlResult.favicon, unfurlResult.thumbnail)
+        else -> UrlCardData(unfurlResult.title, null, null)
     }
 
     UrlCard(

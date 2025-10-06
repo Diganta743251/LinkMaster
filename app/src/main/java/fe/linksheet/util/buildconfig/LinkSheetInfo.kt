@@ -1,18 +1,22 @@
 package fe.linksheet.util.buildconfig
 
 import fe.linksheet.BuildConfig
-import fe.linksheet.feature.systeminfo.BuildInfo
-import fe.std.javatime.extension.unixMillisUtc
-import fe.std.javatime.time.ISO8601DateTimeFormatter
 
+data class BuildInfo(
+    val versionName: String,
+    val versionCode: Int,
+    val builtAt: String,
+    val flavor: String,
+    val workflowId: String?,
+)
 
 object LinkSheetInfo {
-    @Deprecated("Switch to SystemInfoService#buildInfo")
+    // Minimal BuildInfo without extra plugins; builtAt and workflowId left blank
     val buildInfo = BuildInfo(
-        BuildConfig.VERSION_NAME,
-        BuildConfig.VERSION_CODE,
-        BuildConfig.BUILT_AT.unixMillisUtc.format(ISO8601DateTimeFormatter.FriendlyFormat),
-        "${BuildConfig.FLAVOR}-${BuildConfig.BUILD_TYPE}",
-        BuildConfig.GITHUB_WORKFLOW_RUN_ID
+        versionName = BuildConfig.VERSION_NAME,
+        versionCode = BuildConfig.VERSION_CODE,
+        builtAt = "",
+        flavor = BuildConfig.BUILD_TYPE,
+        workflowId = null
     )
 }

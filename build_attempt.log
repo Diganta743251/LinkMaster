@@ -1,0 +1,98 @@
+> Task :buildSrc:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :buildSrc:compileKotlin UP-TO-DATE
+> Task :buildSrc:compileJava NO-SOURCE
+> Task :buildSrc:compileGroovy NO-SOURCE
+> Task :buildSrc:pluginDescriptors UP-TO-DATE
+> Task :buildSrc:processResources NO-SOURCE
+> Task :buildSrc:classes UP-TO-DATE
+> Task :buildSrc:jar UP-TO-DATE
+
+> Configure project :app
+w: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:111:9: 'jvmTarget: String' is deprecated. Please migrate to the compilerOptions DSL. More details are here: https://kotl.in/u1r8ln
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:120:18: Function invocation 'filter(...)' expected
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:120:18: Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+public inline fun <T> Array<out TypeVariable(T)>.filter(predicate: (TypeVariable(T)) -> Boolean): List<TypeVariable(T)> defined in kotlin.collections
+public inline fun BooleanArray.filter(predicate: (Boolean) -> Boolean): List<Boolean> defined in kotlin.collections
+public inline fun ByteArray.filter(predicate: (Byte) -> Boolean): List<Byte> defined in kotlin.collections
+public inline fun CharArray.filter(predicate: (Char) -> Boolean): List<Char> defined in kotlin.collections
+public inline fun CharSequence.filter(predicate: (Char) -> Boolean): CharSequence defined in kotlin.text
+public inline fun DoubleArray.filter(predicate: (Double) -> Boolean): List<Double> defined in kotlin.collections
+public inline fun FloatArray.filter(predicate: (Float) -> Boolean): List<Float> defined in kotlin.collections
+public inline fun IntArray.filter(predicate: (Int) -> Boolean): List<Int> defined in kotlin.collections
+public inline fun LongArray.filter(predicate: (Long) -> Boolean): List<Long> defined in kotlin.collections
+public inline fun ShortArray.filter(predicate: (Short) -> Boolean): List<Short> defined in kotlin.collections
+public inline fun String.filter(predicate: (Char) -> Boolean): String defined in kotlin.text
+public inline fun UByteArray.filter(predicate: (UByte) -> Boolean): List<UByte> defined in kotlin.collections
+public inline fun UIntArray.filter(predicate: (UInt) -> Boolean): List<UInt> defined in kotlin.collections
+public inline fun ULongArray.filter(predicate: (ULong) -> Boolean): List<ULong> defined in kotlin.collections
+public inline fun UShortArray.filter(predicate: (UShort) -> Boolean): List<UShort> defined in kotlin.collections
+public inline fun <T> Iterable<TypeVariable(T)>.filter(predicate: (TypeVariable(T)) -> Boolean): List<TypeVariable(T)> defined in kotlin.collections
+public inline fun <K, V> Map<out TypeVariable(K), TypeVariable(V)>.filter(predicate: (Map.Entry<TypeVariable(K), TypeVariable(V)>) -> Boolean): Map<TypeVariable(K), TypeVariable(V)> defined in kotlin.collections
+public fun <T> Sequence<TypeVariable(T)>.filter(predicate: (TypeVariable(T)) -> Boolean): Sequence<TypeVariable(T)> defined in kotlin.sequences
+public inline fun <reified T : FilterReader> ContentFilterable.filter(vararg properties: Pair<String, Any?>): ContentFilterable defined in org.gradle.kotlin.dsl
+public inline fun <reified T : FilterReader> ContentFilterable.filter(properties: Map<String, Any?>): ContentFilterable defined in org.gradle.kotlin.dsl
+public fun <T : FilterReader> ContentFilterable.filter(filterType: KClass<TypeVariable(T)>, vararg properties: Pair<String, Any?>): ContentFilterable defined in org.gradle.kotlin.dsl
+public fun <T : FilterReader> ContentFilterable.filter(filterType: KClass<TypeVariable(T)>, properties: Map<String, Any?>): ContentFilterable defined in org.gradle.kotlin.dsl
+public inline fun ContentFilterable.filter(filterType: KClass<out FilterReader>): ContentFilterable defined in org.gradle.kotlin.dsl
+public inline fun ContentFilterable.filter(filterType: KClass<out FilterReader>, vararg properties: Pair<String, Any?>): ContentFilterable defined in org.gradle.kotlin.dsl
+public inline fun <reified T : FilterReader> CopySpec.filter(vararg properties: Pair<String, Any?>): CopySpec defined in org.gradle.kotlin.dsl
+public inline fun <reified T : FilterReader> CopySpec.filter(properties: Map<String, Any?>): CopySpec defined in org.gradle.kotlin.dsl
+public inline fun CopySpec.filter(filterType: KClass<out FilterReader>): CopySpec defined in org.gradle.kotlin.dsl
+public inline fun CopySpec.filter(filterType: KClass<out FilterReader>, vararg properties: Pair<String, Any?>): CopySpec defined in org.gradle.kotlin.dsl
+public inline fun AbstractCopyTask.filter(filterType: KClass<out FilterReader>): AbstractCopyTask defined in org.gradle.kotlin.dsl
+public inline fun AbstractCopyTask.filter(filterType: KClass<out FilterReader>, vararg properties: Pair<String, Any?>): AbstractCopyTask defined in org.gradle.kotlin.dsl
+
+FAILURE: Build failed with an exception.
+
+* Where:
+Build file 'C:\Users\Diganta1\AndroidStudioProjects\LinkSheet\app\build.gradle.kts' line: 120
+
+* What went wrong:
+Script compilation errors:
+
+  Line 120:             java.filter.exclude(
+                             ^ Function invocation 'filter(...)' expected
+
+  Line 120:             java.filter.exclude(
+                             ^ Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+                                 public inline fun <T> Array<out TypeVariable(T)>.filter(predicate: (TypeVariable(T)) -> Boolean): List<TypeVariable(T)> defined in kotlin.collections
+                                 public inline fun BooleanArray.filter(predicate: (Boolean) -> Boolean): List<Boolean> defined in kotlin.collections
+                                 public inline fun ByteArray.filter(predicate: (Byte) -> Boolean): List<Byte> defined in kotlin.collections
+                                 public inline fun CharArray.filter(predicate: (Char) -> Boolean): List<Char> defined in kotlin.collections
+                                 public inline fun CharSequence.filter(predicate: (Char) -> Boolean): CharSequence defined in kotlin.text
+                                 public inline fun DoubleArray.filter(predicate: (Double) -> Boolean): List<Double> defined in kotlin.collections
+                                 public inline fun FloatArray.filter(predicate: (Float) -> Boolean): List<Float> defined in kotlin.collections
+                                 public inline fun IntArray.filter(predicate: (Int) -> Boolean): List<Int> defined in kotlin.collections
+                                 public inline fun LongArray.filter(predicate: (Long) -> Boolean): List<Long> defined in kotlin.collections
+                                 public inline fun ShortArray.filter(predicate: (Short) -> Boolean): List<Short> defined in kotlin.collections
+                                 public inline fun String.filter(predicate: (Char) -> Boolean): String defined in kotlin.text
+                                 public inline fun UByteArray.filter(predicate: (UByte) -> Boolean): List<UByte> defined in kotlin.collections
+                                 public inline fun UIntArray.filter(predicate: (UInt) -> Boolean): List<UInt> defined in kotlin.collections
+                                 public inline fun ULongArray.filter(predicate: (ULong) -> Boolean): List<ULong> defined in kotlin.collections
+                                 public inline fun UShortArray.filter(predicate: (UShort) -> Boolean): List<UShort> defined in kotlin.collections
+                                 public inline fun <T> Iterable<TypeVariable(T)>.filter(predicate: (TypeVariable(T)) -> Boolean): List<TypeVariable(T)> defined in kotlin.collections
+                                 public inline fun <K, V> Map<out TypeVariable(K), TypeVariable(V)>.filter(predicate: (Map.Entry<TypeVariable(K), TypeVariable(V)>) -> Boolean): Map<TypeVariable(K), TypeVariable(V)> defined in kotlin.collections
+                                 public fun <T> Sequence<TypeVariable(T)>.filter(predicate: (TypeVariable(T)) -> Boolean): Sequence<TypeVariable(T)> defined in kotlin.sequences
+                                 public inline fun <reified T : FilterReader> ContentFilterable.filter(vararg properties: Pair<String, Any?>): ContentFilterable defined in org.gradle.kotlin.dsl
+                                 public inline fun <reified T : FilterReader> ContentFilterable.filter(properties: Map<String, Any?>): ContentFilterable defined in org.gradle.kotlin.dsl
+                                 public fun <T : FilterReader> ContentFilterable.filter(filterType: KClass<TypeVariable(T)>, vararg properties: Pair<String, Any?>): ContentFilterable defined in org.gradle.kotlin.dsl
+                                 public fun <T : FilterReader> ContentFilterable.filter(filterType: KClass<TypeVariable(T)>, properties: Map<String, Any?>): ContentFilterable defined in org.gradle.kotlin.dsl
+                                 public inline fun ContentFilterable.filter(filterType: KClass<out FilterReader>): ContentFilterable defined in org.gradle.kotlin.dsl
+                                 public inline fun ContentFilterable.filter(filterType: KClass<out FilterReader>, vararg properties: Pair<String, Any?>): ContentFilterable defined in org.gradle.kotlin.dsl
+                                 public inline fun <reified T : FilterReader> CopySpec.filter(vararg properties: Pair<String, Any?>): CopySpec defined in org.gradle.kotlin.dsl
+                                 public inline fun <reified T : FilterReader> CopySpec.filter(properties: Map<String, Any?>): CopySpec defined in org.gradle.kotlin.dsl
+                                 public inline fun CopySpec.filter(filterType: KClass<out FilterReader>): CopySpec defined in org.gradle.kotlin.dsl
+                                 public inline fun CopySpec.filter(filterType: KClass<out FilterReader>, vararg properties: Pair<String, Any?>): CopySpec defined in org.gradle.kotlin.dsl
+                                 public inline fun AbstractCopyTask.filter(filterType: KClass<out FilterReader>): AbstractCopyTask defined in org.gradle.kotlin.dsl
+                                 public inline fun AbstractCopyTask.filter(filterType: KClass<out FilterReader>, vararg properties: Pair<String, Any?>): AbstractCopyTask defined in org.gradle.kotlin.dsl
+
+2 errors
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 3s
+3 actionable tasks: 3 up-to-date

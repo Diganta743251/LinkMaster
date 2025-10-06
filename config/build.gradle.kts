@@ -1,9 +1,8 @@
-import fe.buildlogic.Version
+ 
 
 plugins {
     id("com.android.library")
     kotlin("android")
-    id("com.gitlab.grrfe.new-build-logic-plugin")
 }
 
 group = "fe.linksheet.config"
@@ -15,8 +14,14 @@ android {
     defaultConfig {
         minSdk = 25
     }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
+
+    kotlinOptions {
+        jvmTarget = "21"
+    }
 }
 
-kotlin {
-    jvmToolchain(21)
-}

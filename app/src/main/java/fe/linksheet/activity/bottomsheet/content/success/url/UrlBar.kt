@@ -2,7 +2,7 @@ package fe.linksheet.activity.bottomsheet.content.success.url
 
 import android.content.ClipboardManager
 import android.content.Intent
-import androidx.activity.compose.LocalActivity
+import android.app.Activity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -47,6 +47,7 @@ import fe.linksheet.feature.profile.ProfileSwitcher
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.DownloadCheckResult
 import fe.linksheet.module.resolver.ImprovedIntentResolver
+import fe.linksheet.module.downloader.isDownloadable
 import fe.linksheet.module.resolver.IntentResolveResult
 import fe.linksheet.module.resolver.LibRedirectResult
 import fe.linksheet.util.intent.Intents
@@ -73,7 +74,7 @@ fun UrlBarWrapper(
     val uriString = result.uri.toString()
     val clipboardLabel = stringResource(id = R.string.generic__text_url)
     val context = LocalContext.current
-    val activity = LocalActivity.current
+    val activity = context as? Activity
 
     UrlBar(
         uri = uriString,

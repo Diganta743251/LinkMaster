@@ -23,7 +23,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import fe.kotlin.extension.iterable.getOrFirstOrNull
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.AppClickInteraction
 import fe.linksheet.activity.bottomsheet.ClickModifier
@@ -78,7 +77,7 @@ fun AppContentGrid(
     }
 
     AppContent(
-        info = apps.getOrFirstOrNull(appListSelectedIdx),
+        info = apps.getOrNull(appListSelectedIdx) ?: apps.firstOrNull(),
         appListSelectedIdx = appListSelectedIdx,
         hasPreferredApp = hasPreferredApp,
         hideChoiceButtons = hideChoiceButtons,

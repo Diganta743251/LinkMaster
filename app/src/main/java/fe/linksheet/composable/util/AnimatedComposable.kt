@@ -11,9 +11,9 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.toRoute
-import fe.android.compose.route.util.ArgumentRoute
-import fe.android.compose.route.util.Route
-import fe.android.compose.route.util.RouteData
+import fe.composekit.route.ArgumentRoute
+import fe.composekit.route.Route
+import fe.composekit.route.RouteData
 import androidx.navigation.compose.composable as navigationComposable
 
 val easing = Easing { f ->

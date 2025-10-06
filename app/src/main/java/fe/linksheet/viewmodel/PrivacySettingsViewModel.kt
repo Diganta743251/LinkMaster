@@ -8,31 +8,31 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class PrivacySettingsViewModel : ViewModel() {
-    private val _linkHistoryDuration = MutableStateFlow(LinkHistoryDuration.THIRTY_DAYS)
+    private val _linkHistoryDuration: MutableStateFlow<LinkHistoryDuration> = MutableStateFlow(LinkHistoryDuration.THIRTY_DAYS)
     val linkHistoryDuration: StateFlow<LinkHistoryDuration> = _linkHistoryDuration
     
-    private val _linkHistoryLimit = MutableStateFlow(LinkHistoryLimit.ONE_THOUSAND)
+    private val _linkHistoryLimit: MutableStateFlow<LinkHistoryLimit> = MutableStateFlow(LinkHistoryLimit.ONE_THOUSAND)
     val linkHistoryLimit: StateFlow<LinkHistoryLimit> = _linkHistoryLimit
     
-    private val _enableLinkHistory = MutableStateFlow(true)
+    private val _enableLinkHistory: MutableStateFlow<Boolean> = MutableStateFlow(true)
     val enableLinkHistory: StateFlow<Boolean> = _enableLinkHistory
     
-    private val _showAsReferrer = MutableStateFlow(false)
+    private val _showAsReferrer: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val showAsReferrer: StateFlow<Boolean> = _showAsReferrer
     
-    private val _showLinkHistoryDurationDialog = MutableStateFlow(false)
+    private val _showLinkHistoryDurationDialog: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val showLinkHistoryDurationDialog: StateFlow<Boolean> = _showLinkHistoryDurationDialog
     
-    private val _showLinkHistoryLimitDialog = MutableStateFlow(false)
+    private val _showLinkHistoryLimitDialog: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val showLinkHistoryLimitDialog: StateFlow<Boolean> = _showLinkHistoryLimitDialog
     
-    private val _showClearHistoryDialog = MutableStateFlow(false)
+    private val _showClearHistoryDialog: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val showClearHistoryDialog: StateFlow<Boolean> = _showClearHistoryDialog
     
-    private val _telemetryLevel = MutableStateFlow(TelemetryLevel.BASIC)
+    private val _telemetryLevel: MutableStateFlow<TelemetryLevel> = MutableStateFlow(TelemetryLevel.BASIC)
     val telemetryLevel: StateFlow<TelemetryLevel> = _telemetryLevel
     
-    private val _enableAnalytics = MutableStateFlow(true)
+    private val _enableAnalytics: MutableStateFlow<Boolean> = MutableStateFlow(true)
     val enableAnalytics: StateFlow<Boolean> = _enableAnalytics
     
     fun updateLinkHistoryDuration(duration: LinkHistoryDuration) {
@@ -80,6 +80,7 @@ class PrivacySettingsViewModel : ViewModel() {
             LinkHistoryDuration.FOURTEEN_DAYS -> "14 days"
             LinkHistoryDuration.THIRTY_DAYS -> "30 days"
             is LinkHistoryDuration.CUSTOM_DAYS -> "${duration.days} days"
+            else -> "Custom"
         }
     }
     
@@ -92,6 +93,7 @@ class PrivacySettingsViewModel : ViewModel() {
             LinkHistoryLimit.FIVE_THOUSAND -> "5,000"
             LinkHistoryLimit.TEN_THOUSAND -> "10,000"
             is LinkHistoryLimit.CUSTOM_COUNT -> "${limit.count}"
+            else -> "Custom"
         }
     }
     

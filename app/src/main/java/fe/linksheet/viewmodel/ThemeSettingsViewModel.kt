@@ -10,13 +10,13 @@ class ThemeSettingsViewModel : ViewModel() {
     private val _themeMaterialYou = MutableStateFlow(false)
     val themeMaterialYou: StateFlow<Boolean> = _themeMaterialYou
     
-    private val _themeV2 = MutableStateFlow(ThemeV2.System)
+    private val _themeV2: MutableStateFlow<ThemeV2> = MutableStateFlow(ThemeV2.System)
     val themeV2: StateFlow<ThemeV2> = _themeV2
     
     private val _themeAmoled = MutableStateFlow(false)
     val themeAmoled: StateFlow<Boolean> = _themeAmoled
     
-    private val _linkAssets = MutableStateFlow(LinkSheetLinkTags(urlIds = emptyMap()))
+    private val _linkAssets: MutableStateFlow<LinkSheetLinkTags> = MutableStateFlow(LinkSheetLinkTags(urlIds = emptyMap()))
     val linkAssets: StateFlow<LinkSheetLinkTags> = _linkAssets
     
     fun updateThemeMaterialYou(enabled: Boolean) {

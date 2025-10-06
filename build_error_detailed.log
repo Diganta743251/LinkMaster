@@ -1,0 +1,162 @@
+> Task :buildSrc:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :buildSrc:compileKotlin UP-TO-DATE
+> Task :buildSrc:compileJava NO-SOURCE
+> Task :buildSrc:compileGroovy NO-SOURCE
+> Task :buildSrc:pluginDescriptors UP-TO-DATE
+> Task :buildSrc:processResources NO-SOURCE
+> Task :buildSrc:classes UP-TO-DATE
+> Task :buildSrc:jar UP-TO-DATE
+
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:123:18: Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:124:18: Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+> Configure project :app
+w: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:111:9: 'jvmTarget: String' is deprecated. Please migrate to the compilerOptions DSL. More details are here: https://kotl.in/u1r8ln
+public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:125:18: Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:128:18: Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:131:18: Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:132:18: Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:133:18: Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:134:18: Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:135:18: Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:136:18: Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:139:18: Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:140:18: Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:141:18: Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:142:18: Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:144:18: Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:147:18: Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:148:18: Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:149:18: Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:152:18: Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:153:18: Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:154:18: Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+e: file:///C:/Users/Diganta1/AndroidStudioProjects/LinkSheet/app/build.gradle.kts:157:18: Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+
+FAILURE: Build failed with an exception.
+
+* Where:
+Build file 'C:\Users\Diganta1\AndroidStudioProjects\LinkSheet\app\build.gradle.kts' line: 123
+
+* What went wrong:
+Script compilation errors:
+
+  Line 123:             java.exclude("fe/linksheet/activity/bottomsheet/**")
+                             ^ Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+                                 public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+
+  Line 124:             java.exclude("fe/linksheet/experiment/**")
+                             ^ Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+                                 public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+
+  Line 125:             java.exclude("fe/linksheet/debug/**")
+                             ^ Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+                                 public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+
+  Line 128:             java.exclude("fe/kotlin/util/ApplyIf.kt")
+                             ^ Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+                                 public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+
+  Line 131:             java.exclude("fe/linksheet/util/serialization/**")
+                             ^ Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+                                 public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+
+  Line 132:             java.exclude("fe/linksheet/util/web/**")
+                             ^ Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+                                 public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+
+  Line 133:             java.exclude("fe/linksheet/util/intent/**")
+                             ^ Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+                                 public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+
+  Line 134:             java.exclude("fe/linksheet/util/LinkConstants.kt")
+                             ^ Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+                                 public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+
+  Line 135:             java.exclude("fe/linksheet/util/buildconfig/**")
+                             ^ Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+                                 public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+
+  Line 136:             java.exclude("fe/linksheet/util/AppSignature.kt")
+                             ^ Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+                                 public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+
+  Line 139:             java.exclude("fe/linksheet/feature/libredirect/**")
+                             ^ Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+                                 public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+
+  Line 140:             java.exclude("fe/linksheet/feature/qr/**")
+                             ^ Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+                                 public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+
+  Line 141:             java.exclude("fe/linksheet/feature/sql/**")
+                             ^ Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+                                 public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+
+  Line 142:             java.exclude("fe/linksheet/feature/profile/**")
+                             ^ Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+                                 public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+
+  Line 144:             java.exclude("fe/linksheet/database/**")
+                             ^ Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+                                 public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+
+  Line 147:             java.exclude("fe/linksheet/extension/okhttp/**")
+                             ^ Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+                                 public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+
+  Line 148:             java.exclude("fe/linksheet/extension/std/**")
+                             ^ Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+                                 public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+
+  Line 149:             java.exclude("fe/linksheet/extension/kotlin/ThrowableExt.kt")
+                             ^ Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+                                 public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+
+  Line 152:             java.exclude("fe/linksheet/log/**")
+                             ^ Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+                                 public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+
+  Line 153:             java.exclude("fe/linksheet/module/resolver/**")
+                             ^ Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+                                 public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+
+  Line 154:             java.exclude("fe/linksheet/module/viewmodel/LocalUiDebug.kt")
+                             ^ Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+                                 public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+
+  Line 157:             java.exclude("mozilla/components/**")
+                             ^ Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+                                 public fun Configuration.exclude(group: String? = ..., module: String? = ...): Configuration defined in org.gradle.kotlin.dsl
+
+22 errors
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 3s
+3 actionable tasks: 3 up-to-date

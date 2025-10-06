@@ -1,11 +1,9 @@
 
-import fe.buildlogic.Version
 
 plugins {
     id("com.android.library")
     kotlin("android")
     kotlin("plugin.compose")
-    id("com.gitlab.grrfe.new-build-logic-plugin")
 }
 
 group = "fe.linksheet.scaffold"
@@ -21,22 +19,27 @@ android {
     buildFeatures {
         compose = true
     }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
+    kotlinOptions {
+        jvmTarget = "21"
+    }
 }
 
-kotlin {
-    jvmToolchain(21)
-}
 
 dependencies {
-    implementation(platform("androidx.compose:compose-bom-alpha:_"))
+    implementation(platform("androidx.compose:compose-bom:_"))
 
-    implementation(AndroidX.compose.ui.toolingPreview)
-    implementation(AndroidX.compose.ui)
-    implementation(AndroidX.compose.material3)
-    implementation(AndroidX.compose.foundation)
+    implementation("androidx.compose.ui:ui-tooling-preview:_")
+    implementation("androidx.compose.ui:ui:_")
+    implementation("androidx.compose.material3:material3-android:_")
+    implementation("androidx.compose.foundation:foundation:_")
 
-    implementation(AndroidX.compose.material.icons.core)
-    implementation(AndroidX.compose.material.icons.extended)
-    implementation(AndroidX.activity.compose)
+    implementation("androidx.compose.material:material-icons-core:_")
+    implementation("androidx.compose.material:material-icons-extended:_")
+    implementation("androidx.activity:activity-compose:_")
     implementation("androidx.compose.material3:material3-android:_")
 }
