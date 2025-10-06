@@ -1,10 +1,15 @@
 package fe.linksheet.intent.engine
 
 import android.content.Context
+<<<<<<< HEAD
 import fe.linksheet.module.network.StubNetworkStateService
 import fe.linksheet.experiment.engine.EngineTrack
+=======
+import fe.composekit.lifecycle.network.core.NetworkStateService
+import fe.linksheet.experiment.engine.EngineScenario
+>>>>>>> 77b99c2077b8dfa56f994c5d1087e74867e7da51
 import fe.linksheet.experiment.engine.LinkEngine
-import fe.linksheet.experiment.engine.TrackSelector
+import fe.linksheet.experiment.engine.ScenarioSelector
 import fe.linksheet.experiment.engine.fetcher.DownloadLinkFetcher
 import fe.linksheet.experiment.engine.fetcher.preview.PreviewLinkFetcher
 import fe.linksheet.experiment.engine.fetcher.preview.PreviewLocalSource
@@ -58,15 +63,21 @@ fun DefaultLinkEngineIntentResolver(
     val pipeline = LinkEngine(
         steps = listOf(
             EmbedLinkModifier(
+                enabled = settings.resolveEmbeds,
                 ioDispatcher = dispatcher
             ),
             LibRedirectLinkModifier(
+                enabled = settings.libRedirectSettings.enableLibRedirect,
                 ioDispatcher = dispatcher,
                 resolver = libRedirectResolver,
                 useJsEngine = settings.libRedirectSettings.libRedirectJsEngine
             ),
-            ClearURLsLinkModifier(ioDispatcher = dispatcher),
+            ClearURLsLinkModifier(
+                enabled = settings.useClearUrls,
+                ioDispatcher = dispatcher
+            ),
             FollowRedirectsLinkResolver(
+                enabled = settings.followRedirectsSettings.followRedirects,
                 ioDispatcher = dispatcher,
                 source = FollowRedirectsLocalSource(client = client),
                 cacheRepository = cacheRepository,
@@ -76,6 +87,7 @@ fun DefaultLinkEngineIntentResolver(
                 useLocalCache = settings.followRedirectsSettings.followRedirectsLocalCache
             ),
             Amp2HtmlLinkResolver(
+                enabled = settings.amp2HtmlSettings.enableAmp2Html,
                 ioDispatcher = dispatcher,
                 source = Amp2HtmlLocalSource(client = client),
                 cacheRepository = cacheRepository,
@@ -96,12 +108,14 @@ fun DefaultLinkEngineIntentResolver(
 //        ),
         fetchers = listOf(
             DownloadLinkFetcher(
+                enabled = settings.downloaderSettings.enableDownloader,
                 ioDispatcher = dispatcher,
                 downloader = downloader,
                 checkUrlMimeType = settings.downloaderSettings.downloaderCheckUrlMimeType,
                 requestTimeout = settings.requestTimeout,
             ),
             PreviewLinkFetcher(
+                enabled = settings.previewSettings.previewUrl,
                 ioDispatcher = dispatcher,
                 source = PreviewLocalSource(client = client),
                 cacheRepository = cacheRepository,
@@ -111,13 +125,13 @@ fun DefaultLinkEngineIntentResolver(
         dispatcher = dispatcher
     )
 
-    val track = EngineTrack(
+    val scenario = EngineScenario(
         id = Uuid.NIL,
         position = 0,
         predicate = { true },
         engine = pipeline
     )
-    val selector = TrackSelector(tracks = listOf(track))
+    val selector = ScenarioSelector(scenarios = listOf(scenario))
 
     return LinkEngineIntentResolver(
         context = context,

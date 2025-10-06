@@ -39,15 +39,22 @@ import fe.linksheet.composable.page.settings.theme.ThemeSettingsRoute
 import fe.linksheet.composable.page.settings.linkmaster.LinkMasterSettingsRoute
 import fe.linksheet.composable.page.history.HistoryNavigationHost
 import fe.linksheet.composable.util.*
-import fe.linksheet.navigation.addPageRoute
+import fe.linksheet.navigation.attachSubGraph
 import fe.composekit.core.AndroidVersion
 import fe.composekit.route.Route
 import fe.linksheet.composable.page.mdviewer.MarkdownViewerWrapper
 import fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers.VlhAppRoute
 // SQL debug import removed - violates Play Store policies
 import fe.linksheet.composable.page.settings.link.preview.PreviewSettingsRoute
+import fe.linksheet.composable.page.settings.scenario.ScenarioNavSubGraph
 import fe.linksheet.navigation.AdvancedRoute
+<<<<<<< HEAD
 // Debug and experiment navigation imports removed - violates Play Store policies
+=======
+import fe.linksheet.navigation.AppsWhichCanOpenLinksSettingsRoute
+import fe.linksheet.navigation.DebugRoute
+import fe.linksheet.navigation.ExperimentRoute
+>>>>>>> 77b99c2077b8dfa56f994c5d1087e74867e7da51
 import fe.linksheet.navigation.ExportImportRoute
 // LibRedirect navigation imports removed - violates Play Store policies
 import fe.linksheet.navigation.LogTextViewerRoute
@@ -59,7 +66,6 @@ import fe.linksheet.navigation.VlhAppRoute
 import fe.linksheet.navigation.aboutSettingsRoute
 // amp2HtmlSettingsRoute removed - violates Play Store policies
 import fe.linksheet.navigation.appsSettingsRoute
-import fe.linksheet.navigation.appsWhichCanOpenLinksSettingsRoute
 import fe.linksheet.navigation.bottomSheetSettingsRoute
 import fe.linksheet.navigation.browserSettingsRoute
 import fe.linksheet.navigation.creditsSettingsRoute
@@ -96,7 +102,8 @@ fun MainNavHost(
         navController = navController,
         startDestination = HomePageRoute
     ) {
-        addPageRoute(HomePageRoute, navController)
+        attachSubGraph(HomePageRoute, navController)
+        attachSubGraph(ScenarioNavSubGraph, navController)
 
         animatedComposable<MarkdownViewerRoute> { _, route ->
             val titleStr = route.customTitle?.let { stringResource(id = it) } ?: route.title
@@ -154,9 +161,7 @@ fun MainNavHost(
         }
 
         animatedComposable(route = appsSettingsRoute) {
-            AppsSettingsRoute(
-                navController = navController, onBackPressed = onBackPressed
-            )
+            AppsSettingsRoute(onBackPressed = onBackPressed, navigateNew = navigateNew)
         }
 
         animatedComposable(route = browserSettingsRoute) {
@@ -271,7 +276,7 @@ fun MainNavHost(
 //            PreferredAppSettingsRoute(onBackPressed = onBackPressed)
 //        }
 
-        animatedComposable(route = appsWhichCanOpenLinksSettingsRoute) {
+        animatedComposable<AppsWhichCanOpenLinksSettingsRoute> { _, _ ->
             VerifiedLinkHandlersRoute(onBackPressed = onBackPressed, navigateNew = navigateNew)
         }
 

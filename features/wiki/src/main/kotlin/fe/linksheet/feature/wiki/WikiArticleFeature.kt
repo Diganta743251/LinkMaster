@@ -1,6 +1,12 @@
 package fe.linksheet.feature.wiki
 
+<<<<<<< HEAD:app/src/main/java/fe/linksheet/feature/wiki/WikiArticleFeature.kt
 import fe.linksheet.repository.WikiCacheRepository
+=======
+import fe.httpkt.Request
+import fe.httpkt.ext.isHttpSuccess
+import fe.httpkt.ext.readToString
+>>>>>>> 77b99c2077b8dfa56f994c5d1087e74867e7da51:features/wiki/src/main/kotlin/fe/linksheet/feature/wiki/WikiArticleFeature.kt
 import fe.linksheet.util.CacheResult
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers

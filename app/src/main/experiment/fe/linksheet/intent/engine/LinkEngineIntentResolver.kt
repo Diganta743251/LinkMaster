@@ -5,10 +5,10 @@ import android.content.Intent
 import android.net.Uri
 import fe.linksheet.module.network.StubNetworkStateService
 import fe.kotlin.extension.iterable.mapToSet
-import fe.linksheet.experiment.engine.EngineTrackInput
+import fe.linksheet.experiment.engine.EngineScenarioInput
 import fe.linksheet.experiment.engine.ForwardOtherProfileResult
 import fe.linksheet.experiment.engine.IntentEngineResult
-import fe.linksheet.experiment.engine.TrackSelector
+import fe.linksheet.experiment.engine.ScenarioSelector
 import fe.linksheet.experiment.engine.UrlEngineResult
 import fe.linksheet.experiment.engine.context.DefaultEngineRunContext
 import fe.linksheet.experiment.engine.context.IgnoreLibRedirectExtra
@@ -71,8 +71,13 @@ class LinkEngineIntentResolver(
     private val appSorter: AppSorter,
     private val browserHandler: ImprovedBrowserHandler,
     private val inAppBrowserHandler: InAppBrowserHandler,
+<<<<<<< HEAD
     private val networkStateService: StubNetworkStateService,
     private val selector: TrackSelector,
+=======
+    private val networkStateService: NetworkStateService,
+    private val selector: ScenarioSelector,
+>>>>>>> 77b99c2077b8dfa56f994c5d1087e74867e7da51
     private val settings: IntentResolverSettings,
 ) : IntentResolver {
     private val browserSettings = settings.browserSettings
@@ -166,14 +171,14 @@ class LinkEngineIntentResolver(
             knownBrowser?.toExtra()?.let (::add)
         }
 
-        val input = EngineTrackInput(startUrl, referringPackage)
-        val track = selector.findTrack(input)
-        if (track == null) {
+        val input = EngineScenarioInput(startUrl, referringPackage)
+        val scenario = selector.findScenario(input)
+        if (scenario == null) {
             // TODO: What do we do in this situation?
-            return@scope IntentResolveResult.NoTrackFound
+            return@scope IntentResolveResult.NoScenarioFound
         }
 
-        val (sealedContext, result) = track.run(startUrl, context)
+        val (sealedContext, result) = scenario.run(startUrl, context)
         if (result is IntentEngineResult) {
             return@scope IntentResolveResult.IntentResult(result.intent)
         }

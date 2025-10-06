@@ -27,12 +27,18 @@ class NewDefaults20250729(private val preferenceRepository: AppPreferenceReposit
     override fun execute(experimentsRepository: ExperimentRepository) {
         if (experimentsRepository.hasStoredValue(urlBarPreview)) {
             val value = experimentsRepository.raw.unsafeGetBoolean(urlBarPreview, false)
-            preferenceRepository.put(AppPreferences.urlPreview, value)
+            preferenceRepository.put(AppPreferences.openGraphPreview.enable, value)
         }
 
         if (experimentsRepository.hasStoredValue(urlBarPreviewSkipBrowser)) {
             val value = experimentsRepository.raw.unsafeGetBoolean(urlBarPreviewSkipBrowser, false)
-            preferenceRepository.put(AppPreferences.urlPreviewSkipBrowser, value)
+            preferenceRepository.put(AppPreferences.openGraphPreview.skipBrowser, value)
         }
+    }
+}
+
+object NewDefaults20250803 : AppStateUpdate {
+    override fun execute(experimentsRepository: ExperimentRepository) {
+        experimentsRepository.put(Experiments.expressiveLoadingSheet, true)
     }
 }

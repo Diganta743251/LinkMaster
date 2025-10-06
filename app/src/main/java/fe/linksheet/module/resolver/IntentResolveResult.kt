@@ -40,7 +40,7 @@ sealed interface IntentResolveResult {
     data class IntentParseFailed(val exception: fe.linksheet.util.intent.parser.UriException) : IntentResolveResult
     data object UrlModificationFailed : IntentResolveResult
     data object ResolveUrlFailed : IntentResolveResult
-    data object NoTrackFound : IntentResolveResult
+    data object NoScenarioFound : IntentResolveResult
 }
 
 class ResolveModuleStatus
