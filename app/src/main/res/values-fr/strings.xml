@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Name -->
+    <string name="app_name">LinkVault</string>
+    
+    <!-- Navigation -->
+    <string name="nav_dashboard">Tableau de bord</string>
+    <string name="nav_analytics">Analyses</string>
+    <string name="nav_settings">Paramètres</string>
+    <string name="nav_add_link">Ajouter un lien</string>
+    <string name="nav_edit_link">Modifier le lien</string>
+    <string name="nav_link_detail">Détails du lien</string>
+    <string name="nav_tag_browser">Explorateur d\'étiquettes</string>
+    
+    <!-- Common Actions -->
+    <string name="action_add">Ajouter</string>
+    <string name="action_edit">Modifier</string>
+    <string name="action_delete">Supprimer</string>
+    <string name="action_save">Enregistrer</string>
+    <string name="action_cancel">Annuler</string>
+    <string name="action_share">Partager</string>
+    <string name="action_copy">Copier</string>
+    <string name="action_open">Ouvrir</string>
+    <string name="action_search">Rechercher</string>
+    <string name="action_select">Sélectionner</string>
+    <string name="action_back">Retour</string>
+    <string name="action_authenticate">Authentifier</string>
+    
+    <!-- Link Management -->
+    <string name="link_url">URL</string>
+    <string name="link_title">Titre</string>
+    <string name="link_slug">Slug (pour lv://slug)</string>
+    <string name="link_tags">Étiquettes</string>
+    <string name="link_description">Description</string>
+    <string name="link_notes">Notes</string>
+    <string name="link_favorite">Favori</string>
+    <string name="link_clicks">Clics</string>
+    <string name="link_last_clicked">Dernier clic</string>
+    <string name="link_created">Créé</string>
+    
+    <!-- Messages -->
+    <string name="msg_url_required">L\'URL est requise</string>
+    <string name="msg_link_added">Lien ajouté avec succès</string>
+    <string name="msg_link_updated">Lien mis à jour avec succès</string>
+    <string name="msg_link_deleted">Lien supprimé avec succès</string>
+    <string name="msg_url_copied">URL copiée dans le presse-papiers</string>
+    <string name="msg_fetching_metadata">Récupération des métadonnées...</string>
+    <string name="msg_metadata_fetch_error">Erreur lors de la récupération des métadonnées</string>
+    <string name="msg_theme_change_restart">Le changement de thème s\'appliquera au redémarrage</string>
+    <string name="msg_biometric_enabled">Authentification biométrique activée</string>
+    <string name="msg_biometric_disabled">Authentification biométrique désactivée</string>
+    
+    <!-- Authentication -->
+    <string name="auth_title">S\'authentifier sur LinkVault</string>
+    <string name="auth_subtitle">Confirmez votre identité pour accéder à vos liens</string>
+    <string name="auth_error">Erreur d\'authentification</string>
+    <string name="auth_locked_message">Authentifiez-vous pour accéder à vos liens</string>
+    
+    <!-- Settings -->
+    <string name="settings_appearance">Apparence</string>
+    <string name="settings_privacy_security">Confidentialité et Sécurité</string>
+    <string name="settings_about">À propos</string>
+    <string name="settings_dark_mode">Mode sombre</string>
+    <string name="settings_dark_mode_desc">Activer le thème sombre</string>
+    <string name="settings_biometric_auth">Authentification biométrique</string>
+    <string name="settings_biometric_auth_desc">Exiger le déverrouillage par empreinte/visage</string>
+    <string name="settings_language">Langue</string>
+    <string name="settings_language_desc">Choisir la langue de l\'application</string>
+    
+    <!-- Languages -->
+    <string name="lang_english">English</string>
+    <string name="lang_spanish">Español</string>
+    <string name="lang_french">Français</string>
+    <string name="lang_german">Deutsch</string>
+    <string name="lang_hindi">हिन्दी</string>
+    <string name="lang_system">Par défaut du système</string>
+</resources>

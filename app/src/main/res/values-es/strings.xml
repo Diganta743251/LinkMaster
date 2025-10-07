@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Name -->
+    <string name="app_name">LinkVault</string>
+    
+    <!-- Navigation -->
+    <string name="nav_dashboard">Panel</string>
+    <string name="nav_analytics">Análisis</string>
+    <string name="nav_settings">Configuración</string>
+    <string name="nav_add_link">Agregar Enlace</string>
+    <string name="nav_edit_link">Editar Enlace</string>
+    <string name="nav_link_detail">Detalles del Enlace</string>
+    <string name="nav_tag_browser">Explorar Etiquetas</string>
+    
+    <!-- Common Actions -->
+    <string name="action_add">Agregar</string>
+    <string name="action_edit">Editar</string>
+    <string name="action_delete">Eliminar</string>
+    <string name="action_save">Guardar</string>
+    <string name="action_cancel">Cancelar</string>
+    <string name="action_share">Compartir</string>
+    <string name="action_copy">Copiar</string>
+    <string name="action_open">Abrir</string>
+    <string name="action_search">Buscar</string>
+    <string name="action_select">Seleccionar</string>
+    <string name="action_back">Atrás</string>
+    <string name="action_authenticate">Autenticar</string>
+    
+    <!-- Link Management -->
+    <string name="link_url">URL</string>
+    <string name="link_title">Título</string>
+    <string name="link_slug">Slug (para lv://slug)</string>
+    <string name="link_tags">Etiquetas</string>
+    <string name="link_description">Descripción</string>
+    <string name="link_notes">Notas</string>
+    <string name="link_favorite">Favorito</string>
+    <string name="link_clicks">Clics</string>
+    <string name="link_last_clicked">Último clic</string>
+    <string name="link_created">Creado</string>
+    
+    <!-- Placeholders -->
+    <string name="placeholder_url">Ingrese la URL del enlace</string>
+    <string name="placeholder_title">Ingrese el título</string>
+    <string name="placeholder_slug">Ingrese el slug</string>
+    <string name="placeholder_description">Ingrese la descripción</string>
+    <string name="placeholder_notes">Ingrese notas</string>
+    <string name="placeholder_search">Buscar enlaces</string>
+    <string name="placeholder_tag_name">Nombre de etiqueta</string>
+    
+    <!-- Messages -->
+    <string name="msg_url_required">La URL es requerida</string>
+    <string name="msg_link_added">Enlace agregado exitosamente</string>
+    <string name="msg_link_updated">Enlace actualizado exitosamente</string>
+    <string name="msg_link_deleted">Enlace eliminado exitosamente</string>
+    <string name="msg_url_copied">URL copiada al portapapeles</string>
+    <string name="msg_fetching_metadata">Obteniendo metadatos...</string>
+    <string name="msg_metadata_fetch_error">Error al obtener metadatos</string>
+    <string name="msg_theme_change_restart">El cambio de tema se aplicará al reiniciar</string>
+    <string name="msg_biometric_enabled">Autenticación biométrica habilitada</string>
+    <string name="msg_biometric_disabled">Autenticación biométrica deshabilitada</string>
+    <string name="msg_metadata_fetch_enabled">Obtención de metadatos habilitada</string>
+    <string name="msg_metadata_fetch_disabled">Obtención de metadatos deshabilitada</string>
+    
+    <!-- Authentication -->
+    <string name="auth_title">Autenticar en LinkVault</string>
+    <string name="auth_subtitle">Confirme su identidad para acceder a sus enlaces</string>
+    <string name="auth_error">Error de autenticación</string>
+    <string name="auth_locked_message">Autentíquese para acceder a sus enlaces</string>
+    
+    <!-- Settings -->
+    <string name="settings_appearance">Apariencia</string>
+    <string name="settings_privacy_security">Privacidad y Seguridad</string>
+    <string name="settings_about">Acerca de</string>
+    <string name="settings_dark_mode">Modo Oscuro</string>
+    <string name="settings_dark_mode_desc">Habilitar tema oscuro</string>
+    <string name="settings_biometric_auth">Autenticación Biométrica</string>
+    <string name="settings_biometric_auth_desc">Requerir huella dactilar/desbloqueo facial</string>
+    <string name="settings_metadata_fetch">Obtención de Metadatos</string>
+    <string name="settings_metadata_fetch_desc">Obtener automáticamente títulos y descripciones de páginas</string>
+    <string name="settings_language">Idioma</string>
+    <string name="settings_language_desc">Elegir idioma de la aplicación</string>
+    <string name="settings_export_import">Exportar/Importar</string>
+    <string name="settings_backup">Copia de Seguridad y Restauración</string>
+    
+    <!-- Analytics -->
+    <string name="analytics_total_links">Enlaces Totales</string>
+    <string name="analytics_total_clicks">Clics Totales</string>
+    <string name="analytics_most_clicked">Enlaces Más Clickeados</string>
+    <string name="analytics_recent_activity">Actividad Reciente</string>
+    <string name="analytics_tag_statistics">Estadísticas de Etiquetas</string>
+    <string name="analytics_usage_patterns">Patrones de Uso</string>
+    <string name="analytics_click_history">Historial de Clics</string>
+    
+    <!-- Tags -->
+    <string name="tags_add_tag">Agregar Etiqueta</string>
+    <string name="tags_existing_tags">Etiquetas existentes (toque para usar)</string>
+    <string name="tags_remove_tag">Eliminar Etiqueta</string>
+    <string name="tags_browse_tags">Explorar Etiquetas</string>
+    <string name="tags_tagged_with">Enlaces etiquetados con: %1$s</string>
+    <string name="tags_hierarchical_desc">Use barras diagonales para jerarquía (ej., trabajo/proyectos)</string>
+    
+    <!-- Sorting -->
+    <string name="sort_by_date">Por Fecha</string>
+    <string name="sort_by_name">Por Nombre</string>
+    <string name="sort_by_clicks">Por Clics</string>
+    <string name="sort_by_favorites">Por Favoritos</string>
+    
+    <!-- QR Code -->
+    <string name="qr_code">Código QR</string>
+    <string name="qr_code_desc">Escanear para abrir enlace</string>
+    
+    <!-- Statistics -->
+    <string name="stats_clicks_count">%1$d clics</string>
+    <string name="stats_links_count">%1$d enlaces</string>
+    <string name="stats_no_clicks">Sin clics aún</string>
+    
+    <!-- Errors -->
+    <string name="error_generic">Ocurrió un error</string>
+    <string name="error_network">Error de red</string>
+    <string name="error_invalid_url">URL inválida</string>
+    <string name="error_link_not_found">Enlace no encontrado</string>
+    
+    <!-- About -->
+    <string name="about_version">Versión 1.0</string>
+    <string name="about_description">Una poderosa aplicación de gestión de enlaces con etiquetado, análisis y seguridad biométrica.</string>
+    <string name="about_developer">Desarrollado con ❤️ usando Kotlin y Jetpack Compose</string>
+    
+    <!-- Browser Extension -->
+    <string name="extension_title">Extensión del Navegador</string>
+    <string name="extension_desc">Instalar extensión del navegador para guardar enlaces fácilmente</string>
+    <string name="extension_chrome">Extensión de Chrome</string>
+    <string name="extension_firefox">Extensión de Firefox</string>
+    <string name="extension_edge">Extensión de Edge</string>
+    <string name="extension_install">Instalar Extensión</string>
+    
+    <!-- Import/Export -->
+    <string name="import_export_title">Importar/Exportar</string>
+    <string name="import_links">Importar Enlaces</string>
+    <string name="export_links">Exportar Enlaces</string>
+    <string name="import_from_browser">Importar desde Navegador</string>
+    <string name="export_format">Formato de Exportación</string>
+    <string name="format_json">JSON</string>
+    <string name="format_csv">CSV</string>
+    <string name="format_html">HTML</string>
+    
+    <!-- Languages -->
+    <string name="lang_english">English</string>
+    <string name="lang_spanish">Español</string>
+    <string name="lang_french">Français</string>
+    <string name="lang_german">Deutsch</string>
+    <string name="lang_hindi">हिन्दी</string>
+    <string name="lang_system">Predeterminado del Sistema</string>
+    
+    <!-- Advanced Features -->
+    <string name="advanced_features">Características Avanzadas</string>
+    <string name="bulk_operations">Operaciones en Lote</string>
+    <string name="delete_selected">Eliminar Seleccionados</string>
+    <string name="select_all">Seleccionar Todo</string>
+    <string name="deselect_all">Deseleccionar Todo</string>
+    <string name="selected_count">%1$d seleccionados</string>
+    
+    <!-- Fetch Metadata -->
+    <string name="fetch_metadata">Obtener Metadatos</string>
+    <string name="metadata_fetched">Metadatos obtenidos exitosamente</string>
+    <string name="auto_fetch_metadata">Obtener metadatos automáticamente</string>
+    
+    <!-- Shortcuts -->
+    <string name="shortcuts_title">Atajos</string>
+    <string name="shortcut_add_link">Agregar Enlace</string>
+    <string name="shortcut_search">Buscar Enlaces</string>
+    <string name="shortcut_favorites">Favoritos</string>
+    
+    <!-- Notifications -->
+    <string name="notification_channel_name">LinkVault</string>
+    <string name="notification_channel_desc">Notificaciones de LinkVault</string>
+    <string name="notification_backup_complete">Copia de seguridad completada</string>
+    <string name="notification_sync_complete">Sincronización completada</string>
+</resources>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Name -->
+    <string name="app_name">LinkVault</string>
+    
+    <!-- Navigation -->
+    <string name="nav_dashboard">डैशबोर्ड</string>
+    <string name="nav_analytics">विश्लेषण</string>
+    <string name="nav_settings">सेटिंग्स</string>
+    <string name="nav_add_link">लिंक जोड़ें</string>
+    <string name="nav_edit_link">लिंक संपादित करें</string>
+    <string name="nav_link_detail">लिंक विवरण</string>
+    <string name="nav_tag_browser">टैग ब्राउज़र</string>
+    
+    <!-- Common Actions -->
+    <string name="action_add">जोड़ें</string>
+    <string name="action_edit">संपादित करें</string>
+    <string name="action_delete">हटाएं</string>
+    <string name="action_save">सहेजें</string>
+    <string name="action_cancel">रद्द करें</string>
+    <string name="action_share">साझा करें</string>
+    <string name="action_copy">कॉपी करें</string>
+    <string name="action_open">खोलें</string>
+    <string name="action_search">खोजें</string>
+    <string name="action_select">चुनें</string>
+    <string name="action_back">वापस</string>
+    <string name="action_authenticate">प्रमाणित करें</string>
+    
+    <!-- Link Management -->
+    <string name="link_url">URL</string>
+    <string name="link_title">शीर्षक</string>
+    <string name="link_slug">स्लग (lv://slug के लिए)</string>
+    <string name="link_tags">टैग</string>
+    <string name="link_description">विवरण</string>
+    <string name="link_notes">नोट्स</string>
+    <string name="link_favorite">पसंदीदा</string>
+    <string name="link_clicks">क्लिक</string>
+    <string name="link_last_clicked">अंतिम क्लिक</string>
+    <string name="link_created">बनाया गया</string>
+    
+    <!-- Messages -->
+    <string name="msg_url_required">URL आवश्यक है</string>
+    <string name="msg_link_added">लिंक सफलतापूर्वक जोड़ा गया</string>
+    <string name="msg_link_updated">लिंक सफलतापूर्वक अपडेट किया गया</string>
+    <string name="msg_link_deleted">लिंक सफलतापूर्वक हटाया गया</string>
+    <string name="msg_url_copied">URL क्लिपबोर्ड में कॉपी किया गया</string>
+    <string name="msg_fetching_metadata">मेटाडेटा प्राप्त कर रहे हैं...</string>
+    <string name="msg_metadata_fetch_error">मेटाडेटा प्राप्त करने में त्रुटि</string>
+    <string name="msg_theme_change_restart">थीम परिवर्तन पुनः आरंभ पर लागू होगा</string>
+    <string name="msg_biometric_enabled">बायोमेट्रिक प्रमाणीकरण सक्षम</string>
+    <string name="msg_biometric_disabled">बायोमेट्रिक प्रमाणीकरण अक्षम</string>
+    
+    <!-- Authentication -->
+    <string name="auth_title">LinkVault में प्रमाणित करें</string>
+    <string name="auth_subtitle">अपने लिंक तक पहुंचने के लिए अपनी पहचान की पुष्टि करें</string>
+    <string name="auth_error">प्रमाणीकरण त्रुटि</string>
+    <string name="auth_locked_message">अपने लिंक तक पहुंचने के लिए प्रमाणित करें</string>
+    
+    <!-- Settings -->
+    <string name="settings_appearance">दिखावट</string>
+    <string name="settings_privacy_security">गोपनीयता और सुरक्षा</string>
+    <string name="settings_about">के बारे में</string>
+    <string name="settings_dark_mode">डार्क मोड</string>
+    <string name="settings_dark_mode_desc">डार्क थीम सक्षम करें</string>
+    <string name="settings_biometric_auth">बायोमेट्रिक प्रमाणीकरण</string>
+    <string name="settings_biometric_auth_desc">फिंगरप्रिंट/फेस अनलॉक आवश्यक</string>
+    <string name="settings_language">भाषा</string>
+    <string name="settings_language_desc">ऐप भाषा चुनें</string>
+    
+    <!-- Languages -->
+    <string name="lang_english">English</string>
+    <string name="lang_spanish">Español</string>
+    <string name="lang_french">Français</string>
+    <string name="lang_german">Deutsch</string>
+    <string name="lang_hindi">हिन्दी</string>
+    <string name="lang_system">सिस्टम डिफ़ॉल्ट</string>
+</resources>

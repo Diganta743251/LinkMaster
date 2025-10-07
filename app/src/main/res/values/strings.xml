@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Name -->
+    <string name="app_name">LinkVault</string>
+    
+    <!-- Navigation -->
+    <string name="nav_dashboard">Dashboard</string>
+    <string name="nav_analytics">Analytics</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_add_link">Add Link</string>
+    <string name="nav_edit_link">Edit Link</string>
+    <string name="nav_link_detail">Link Details</string>
+    <string name="nav_tag_browser">Tag Browser</string>
+    
+    <!-- Common Actions -->
+    <string name="action_add">Add</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_save">Save</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_share">Share</string>
+    <string name="action_copy">Copy</string>
+    <string name="action_open">Open</string>
+    <string name="action_search">Search</string>
+    <string name="action_select">Select</string>
+    <string name="action_back">Back</string>
+    <string name="action_authenticate">Authenticate</string>
+    
+    <!-- Link Management -->
+    <string name="link_url">URL</string>
+    <string name="link_title">Title</string>
+    <string name="link_slug">Slug (for lv://slug)</string>
+    <string name="link_tags">Tags</string>
+    <string name="link_description">Description</string>
+    <string name="link_notes">Notes</string>
+    <string name="link_favorite">Favorite</string>
+    <string name="link_clicks">Clicks</string>
+    <string name="link_last_clicked">Last clicked</string>
+    <string name="link_created">Created</string>
+    
+    <!-- Placeholders -->
+    <string name="placeholder_url">Enter link URL</string>
+    <string name="placeholder_title">Enter title</string>
+    <string name="placeholder_slug">Enter slug</string>
+    <string name="placeholder_description">Enter description</string>
+    <string name="placeholder_notes">Enter notes</string>
+    <string name="placeholder_search">Search links</string>
+    <string name="placeholder_tag_name">Tag name</string>
+    
+    <!-- Messages -->
+    <string name="msg_url_required">URL is required</string>
+    <string name="msg_link_added">Link added successfully</string>
+    <string name="msg_link_updated">Link updated successfully</string>
+    <string name="msg_link_deleted">Link deleted successfully</string>
+    <string name="msg_url_copied">URL copied to clipboard</string>
+    <string name="msg_fetching_metadata">Fetching metadata...</string>
+    <string name="msg_metadata_fetch_error">Error fetching metadata</string>
+    <string name="msg_theme_change_restart">Theme change will apply on restart</string>
+    <string name="msg_biometric_enabled">Biometric authentication enabled</string>
+    <string name="msg_biometric_disabled">Biometric authentication disabled</string>
+    <string name="msg_metadata_fetch_enabled">Metadata fetching enabled</string>
+    <string name="msg_metadata_fetch_disabled">Metadata fetching disabled</string>
+    
+    <!-- Authentication -->
+    <string name="auth_title">Authenticate to LinkVault</string>
+    <string name="auth_subtitle">Confirm your identity to access your links</string>
+    <string name="auth_error">Authentication error</string>
+    <string name="auth_locked_message">Authenticate to access your links</string>
+    
+    <!-- Settings -->
+    <string name="settings_appearance">Appearance</string>
+    <string name="settings_privacy_security">Privacy &amp; Security</string>
+    <string name="settings_about">About</string>
+    <string name="settings_dark_mode">Dark Mode</string>
+    <string name="settings_dark_mode_desc">Enable dark theme</string>
+    <string name="settings_biometric_auth">Biometric Authentication</string>
+    <string name="settings_biometric_auth_desc">Require fingerprint/face unlock</string>
+    <string name="settings_metadata_fetch">Metadata Fetching</string>
+    <string name="settings_metadata_fetch_desc">Automatically fetch page titles and descriptions</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_language_desc">Choose app language</string>
+    <string name="settings_export_import">Export/Import</string>
+    <string name="settings_backup">Backup &amp; Restore</string>
+    
+    <!-- Analytics -->
+    <string name="analytics_total_links">Total Links</string>
+    <string name="analytics_total_clicks">Total Clicks</string>
+    <string name="analytics_most_clicked">Most Clicked Links</string>
+    <string name="analytics_recent_activity">Recent Activity</string>
+    <string name="analytics_tag_statistics">Tag Statistics</string>
+    <string name="analytics_usage_patterns">Usage Patterns</string>
+    <string name="analytics_click_history">Click History</string>
+    
+    <!-- Tags -->
+    <string name="tags_add_tag">Add Tag</string>
+    <string name="tags_existing_tags">Existing tags (tap to use)</string>
+    <string name="tags_remove_tag">Remove Tag</string>
+    <string name="tags_browse_tags">Browse Tags</string>
+    <string name="tags_tagged_with">Links tagged with: %1$s</string>
+    <string name="tags_hierarchical_desc">Use forward slashes for hierarchy (e.g., work/projects)</string>
+    
+    <!-- Sorting -->
+    <string name="sort_by_date">By Date</string>
+    <string name="sort_by_name">By Name</string>
+    <string name="sort_by_clicks">By Clicks</string>
+    <string name="sort_by_favorites">By Favorites</string>
+    
+    <!-- QR Code -->
+    <string name="qr_code">QR Code</string>
+    <string name="qr_code_desc">Scan to open link</string>
+    
+    <!-- Statistics -->
+    <string name="stats_clicks_count">%1$d clicks</string>
+    <string name="stats_links_count">%1$d links</string>
+    <string name="stats_no_clicks">No clicks yet</string>
+    
+    <!-- Errors -->
+    <string name="error_generic">An error occurred</string>
+    <string name="error_network">Network error</string>
+    <string name="error_invalid_url">Invalid URL</string>
+    <string name="error_link_not_found">Link not found</string>
+    
+    <!-- About -->
+    <string name="about_version">Version 1.0</string>
+    <string name="about_description">A powerful link management app with tagging, analytics, and biometric security.</string>
+    <string name="about_developer">Developed with ❤️ using Kotlin &amp; Jetpack Compose</string>
+    
+    <!-- Browser Extension -->
+    <string name="extension_title">Browser Extension</string>
+    <string name="extension_desc">Install browser extension for easy link saving</string>
+    <string name="extension_chrome">Chrome Extension</string>
+    <string name="extension_firefox">Firefox Extension</string>
+    <string name="extension_edge">Edge Extension</string>
+    <string name="extension_install">Install Extension</string>
+    
+    <!-- Import/Export -->
+    <string name="import_export_title">Import/Export</string>
+    <string name="import_links">Import Links</string>
+    <string name="export_links">Export Links</string>
+    <string name="import_from_browser">Import from Browser</string>
+    <string name="export_format">Export Format</string>
+    <string name="format_json">JSON</string>
+    <string name="format_csv">CSV</string>
+    <string name="format_html">HTML</string>
+    
+    <!-- Languages -->
+    <string name="lang_english">English</string>
+    <string name="lang_spanish">Español</string>
+    <string name="lang_french">Français</string>
+    <string name="lang_german">Deutsch</string>
+    <string name="lang_hindi">हिन्दी</string>
+    <string name="lang_system">System Default</string>
+    
+    <!-- Advanced Features -->
+    <string name="advanced_features">Advanced Features</string>
+    <string name="bulk_operations">Bulk Operations</string>
+    <string name="delete_selected">Delete Selected</string>
+    <string name="select_all">Select All</string>
+    <string name="deselect_all">Deselect All</string>
+    <string name="selected_count">%1$d selected</string>
+    
+    <!-- Fetch Metadata -->
+    <string name="fetch_metadata">Fetch Metadata</string>
+    <string name="metadata_fetched">Metadata fetched successfully</string>
+    <string name="auto_fetch_metadata">Auto-fetch metadata</string>
+    
+    <!-- Shortcuts -->
+    <string name="shortcuts_title">Shortcuts</string>
+    <string name="shortcut_add_link">Add Link</string>
+    <string name="shortcut_search">Search Links</string>
+    <string name="shortcut_favorites">Favorites</string>
+    
+    <!-- Notifications -->
+    <string name="notification_channel_name">LinkVault</string>
+    <string name="notification_channel_desc">LinkVault notifications</string>
+    <string name="notification_backup_complete">Backup completed</string>
+    <string name="notification_sync_complete">Sync completed</string>
+    
+    <!-- Smart Categorization -->
+    <string name="smart_category_social">Social Media</string>
+    <string name="smart_category_video">Video Streaming</string>
+    <string name="smart_category_music">Music</string>
+    <string name="smart_category_news">News &amp; Media</string>
+    <string name="smart_category_shopping">Shopping</string>
+    <string name="smart_category_development">Development</string>
+    <string name="smart_category_documentation">Documentation</string>
+    <string name="smart_category_education">Education</string>
+    <string name="smart_category_productivity">Productivity</string>
+    <string name="smart_category_design">Design</string>
+    <string name="smart_category_general">General</string>
+    
+    <!-- LinkSheet -->
+    <string name="linksheet_title">Open Link</string>
+    <string name="linksheet_save_options">Save Options</string>
+    <string name="linksheet_save_only">Save Only</string>
+    <string name="linksheet_save_and_open">Save &amp; Open</string>
+    <string name="linksheet_recommended">Recommended</string>
+    <string name="linksheet_confidence">%1$d%% match</string>
+    <string name="linksheet_settings">LinkSheet Settings</string>
+    <string name="linksheet_always_ask">Always Ask</string>
+    <string name="linksheet_always_ask_desc">Show app chooser for every link</string>
+    <string name="linksheet_save_before_open">Save Before Opening</string>
+    <string name="linksheet_save_before_open_desc">Automatically save links to LinkVault before opening</string>
+    <string name="linksheet_set_default_browser">Set as Default Browser</string>
+    <string name="linksheet_set_default_browser_desc">Make LinkVault your default browser</string>
+    <string name="linksheet_usage_stats">Usage Statistics</string>
+    <string name="linksheet_usage_stats_desc">See which apps you use most for different domains</string>
+    <string name="linksheet_clear_usage">Clear Usage Data</string>
+    <string name="linksheet_clear_usage_desc">Reset all usage statistics and preferences</string>
+    
+    <!-- App Categories -->
+    <string name="app_category_browser">Browser</string>
+    <string name="app_category_social">Social</string>
+    <string name="app_category_video">Video</string>
+    <string name="app_category_music">Music</string>
+    <string name="app_category_shopping">Shopping</string>
+    <string name="app_category_development">Development</string>
+    <string name="app_category_navigation">Navigation</string>
+    <string name="app_category_news">News</string>
+    <string name="app_category_other">Other</string>
+    
+    <!-- Smart Features -->
+    <string name="smart_categorization">Smart Categorization</string>
+    <string name="smart_categorization_desc">Automatically categorize links based on content</string>
+    <string name="auto_tagging">Auto Tagging</string>
+    <string name="auto_tagging_desc">Suggest tags based on link content</string>
+    <string name="link_suggestions">Link Suggestions</string>
+    <string name="link_suggestions_desc">Get app recommendations for opening links</string>
+    
+    <!-- Messages -->
+    <string name="msg_link_categorized">Link categorized as %1$s</string>
+    <string name="msg_smart_tags_added">Smart tags added: %1$s</string>
+    <string name="msg_app_recommendation">Recommended app: %1$s</string>
+    <string name="msg_link_already_exists">Link already exists in LinkVault</string>
+    <string name="msg_link_saved_from_share">Link saved from share</string>
+    <string name="msg_link_saved_from_extension">Link saved from browser extension</string>
+    <string name="msg_failed_to_open_app">Failed to open with %1$s</string>
+    <string name="msg_link_saved_and_opened">Link saved and opened</string>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    
+    <!-- This layout is not used since we're using Jetpack Compose -->
+    <!-- Kept for compatibility -->
+    
+</FrameLayout>
