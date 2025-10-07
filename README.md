@@ -1,12 +1,15 @@
 # LinkVault - Advanced Link Management App
 
-LinkVault is a comprehensive Android application built with Kotlin and Jetpack Compose for managing, organizing, and analyzing your links with advanced features.
+LinkVault is a comprehensive Android application built with Kotlin and Jetpack Compose for managing, organising, and analysing your links with advanced features.
+
+## Repository
+- **GitHub**: [https://github.com/Diganta743251/LinkMaster](https://github.com/Diganta743251/LinkMaster)
+- **Clone**: `git clone https://github.com/Diganta743251/LinkMaster.git`
 
 ## Features
 
 ### 🔗 Link Management
 - **Add Links**: Easily add links with automatic metadata fetching
-- **Smart Tagging**: Hierarchical tag system (e.g., `work/projects`, `personal/bookmarks`)
 - **Custom Slugs**: Create short aliases like `lv://mylink`
 - **Rich Metadata**: Title, description, notes, and custom fields
 - **Favorites**: Mark important links for quick access
